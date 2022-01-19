@@ -6,6 +6,7 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
 import { DashboardComponent } from '../../dashboard/dashboard.component';
 import { UserProfileComponent } from '../../user-profile/user-profile.component';
 import { TableListComponent } from '../../table-list/table-list.component';
+import { UserComponent } from '../../user/user.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
@@ -19,6 +20,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -34,11 +36,13 @@ import { MatRadioModule } from '@angular/material/radio';
     MatTooltipModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatIconModule
   ],
   declarations: [
     DashboardComponent,
     UserProfileComponent,
     TableListComponent,
+    UserComponent,
     TypographyComponent,
     IconsComponent,
     MapsComponent,

@@ -32,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+// import { UserComponent } from './user/user.component';
 
 
 const materialModules = [
@@ -66,6 +67,7 @@ const materialModules = [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    // UserComponent,
 
   ],
   providers: [],

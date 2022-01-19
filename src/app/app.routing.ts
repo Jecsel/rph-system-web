@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
 
 const routes: Routes =[
   {
@@ -13,6 +14,7 @@ const routes: Routes =[
     pathMatch: 'full',
   },
   { path: 'login', component: LoginComponent },
+  {path: 'user', component: UserComponent},
   {
     path: '',
     component: AdminLayoutComponent,

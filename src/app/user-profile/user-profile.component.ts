@@ -38,6 +38,8 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res);
+          this.user_profile = res.profiles[0];
+          this.setProfileDate();
         },
         err => {
           alert(err.data.message);
@@ -45,9 +47,33 @@ export class UserProfileComponent implements OnInit {
       )
   }
 
+  setProfileDate(): void{
+    console.log(this.user_profile);
+    this.profileFormGroup.setValue({
+      user_id: this.user_profile.user_id,
+      surname: this.user_profile.surname,
+      first_name: this.user_profile.first_name,
+      middle_name: this.user_profile.middle_name,
+      dob: this.user_profile.dob,
+      age: this.user_profile.age,
+      birth_place: this.user_profile.birth_place,
+      gender_id: this.user_profile.gender_id,
+      civil_status_id: this.user_profile.civil_status_id,
+      occupation: this.user_profile.occupation,
+      religion: this.user_profile.religion,
+      nationality: this.user_profile.nationality,
+      cp_no: this.user_profile.cp_no,
+      employed_by: this.user_profile.employed_by,
+      person_to_notify: this.user_profile.person_to_notify,
+      person_to_notify_address: this.user_profile.person_to_notify_address,
+      person_to_notify_no: this.user_profile.person_to_notify_no,
+      person_to_notify_cp_relationship: this.user_profile.person_to_notify_cp_relationship
+    });
+  }
+
   declareFormBuilder(): void{
     this.profileFormGroup = this.formBuilder.group({
-      user_id:[this.user_id],
+      user_id:[ this.user_id ],
       surname: ['', Validators.required],
       first_name: ['', Validators.required],
       middle_name: ['', Validators.required],
