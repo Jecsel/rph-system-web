@@ -13,17 +13,23 @@ export class ApiServiceService {
   baseUrl = environment.apiUrl;
 
   constructor(private httpClient: HttpClient) { }
-
   httpOptions = {
     headers: new HttpHeaders({
       'Accept': '*/*',
-      'Content-Type': 'application/json',
-      'x-rph-token': localStorage.getItem('token')
+      'Content-Type': 'application/json'
     }),
   };
 
   // ----------- GET REQUEST --------------//
   getList(): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+    
     return this.httpClient
       .get(this.baseUrl + 'list', this.httpOptions)
       .pipe(map((response: any) => {
@@ -32,6 +38,14 @@ export class ApiServiceService {
   }
 
   showAllProfile(id: any): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
     return this.httpClient
       .get(this.baseUrl + 'profile', this.httpOptions)
       .pipe(map((response: any) => {
@@ -40,6 +54,14 @@ export class ApiServiceService {
   }
 
   showProfile(id: any): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
     return this.httpClient
       .get(this.baseUrl + 'profile/' + id, this.httpOptions)
       .pipe(map((response: any) => {
@@ -61,9 +83,17 @@ export class ApiServiceService {
   }
 
   createProfile(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
     return this.httpClient
-      .post(this.baseUrl + 'profile', data)
+      .post(this.baseUrl + 'profile', data, this.httpOptions)
       .pipe(map((response: any) => {
+        localStorage.setItem('has_profile', 'true');
         return response;
       }));
   }

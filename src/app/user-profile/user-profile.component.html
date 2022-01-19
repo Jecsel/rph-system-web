@@ -8,101 +8,99 @@
                       <p class="card-category">Complete your profile</p>
                   </div>
                   <div class="card-body">
-                      <form>
+                      <form [formGroup]="profileFormGroup" (ngSubmit)="onSubmit()">
                           <div class="row">
                               <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Surname">
-                                  </mat-form-field>
+                                    <input matInput placeholder="Surname" formControlName="surname">
+                                </mat-form-field>
                               </div>
                               <div class="col-md-4">
                                   <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="First Name">
+                                    <input matInput placeholder="First Name" formControlName="first_name">
                                   </mat-form-field>
                               </div>
                               <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Middle Name">
+                                  <input matInput placeholder="Middle Name" formControlName="middle_name">
                                 </mat-form-field>
                             </div>
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Date of Birth">
+                                <input matInput placeholder="Date of Birth" formControlName="dob">
                               </mat-form-field>
                             </div>
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Age">
+                                <input matInput placeholder="Age" formControlName="age">
                               </mat-form-field>
                             </div>
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Birth Place">
-                              </mat-form-field>
-                            </div>
-
-                            <!-- <div class="col-md-4">
-                              <mat-form-field class="example-full-width">
-                                <mat-label>Favorite food</mat-label>
-                              </mat-form-field>
-                              <mat-form-field appearance="fill">
-                                <mat-label>Favorite food</mat-label>
-                                <mat-select>
-                                  <mat-option *ngFor="let food of foods" [value]="food.value">
-                                    {{food.viewValue}}
-                                  </mat-option>
-                                </mat-select>
-                              </mat-form-field>
-                            </div> -->
-
-                            <div class="col-md-4">
-                              <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Civil Status">
+                                <input matInput placeholder="Birth Place" formControlName="birth_place">
                               </mat-form-field>
                             </div>
                             <div class="col-md-4">
+                              <mat-label>Gender</mat-label>
+                              <section class="example-section">
+                                <mat-radio-group formControlName="gender_id" [(ngModel)]="gender_id">
+                                  <mat-radio-button class="example-margin" value=1>Male</mat-radio-button>
+                                  <mat-radio-button class="example-margin" value=2>Female</mat-radio-button>
+                                </mat-radio-group>
+                              </section>
+                            </div>
+                            <div class="col-md-4">
+                              <mat-label>Civil Status</mat-label>
+                              <section class="example-section">
+                                <mat-radio-group formControlName="civil_status_id" [(ngModel)]="civil_status_id">
+                                  <mat-radio-button class="example-margin" value=1>Single</mat-radio-button>
+                                  <mat-radio-button class="example-margin" value=2>Married</mat-radio-button>
+                                </mat-radio-group>
+                              </section>
+                            </div>
+                            <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Occupation">
+                                <input matInput placeholder="Occupation" formControlName="occupation">
                               </mat-form-field>
                             </div>
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Religion">
+                                <input matInput placeholder="Religion" formControlName="religion">
                               </mat-form-field>
                             </div>
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Nationality">
+                                <input matInput placeholder="Nationality" formControlName="nationality">
                               </mat-form-field>
                             </div>
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="CP Number">
+                                <input matInput placeholder="CP Number" formControlName="cp_no">
                               </mat-form-field>
                             </div>
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Employed By" >
+                                <input matInput placeholder="Employed By" formControlName="employed_by">
                               </mat-form-field>
                             </div>
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Person to Notify" >
+                                <input matInput placeholder="Person to Notify" formControlName="person_to_notify">
                               </mat-form-field>
                             </div>
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Person CP Number" >
+                                <input matInput placeholder="Person CP Number" formControlName="person_to_notify_no">
                               </mat-form-field>
                             </div>
                             <div class="col-md-8">
                               <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Person Relationship with patient" >
+                                <input matInput placeholder="Person Relationship with patient" formControlName="person_to_notify_cp_relationship">
                               </mat-form-field>
                             </div>
                             <div class="col-md-12">
                               <mat-form-field class="example-full-width">
-                                <textarea matInput placeholder="Person to Notify Address" ></textarea>
+                                <textarea matInput placeholder="Person to Notify Address"formControlName="person_to_notify_address" ></textarea>
                               </mat-form-field>
                             </div>
                           </div>

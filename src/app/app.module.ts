@@ -31,6 +31,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { CdkTreeModule } from '@angular/cdk/tree';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 const materialModules = [
@@ -41,6 +42,7 @@ const materialModules = [
   MatInputModule,
   MatFormFieldModule,
   MatButtonToggleModule,
+  MatCheckboxModule
 ];
 
 @NgModule({
