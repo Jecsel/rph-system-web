@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { ApiServiceService } from 'app/services/api-service.service';
 
 @Component({
   selector: 'app-typography',
@@ -7,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TypographyComponent implements OnInit {
   editField: string;
+  all_users: Array<any> = [];
+  default_data: any = {username: '', password: '', user_type_id: 1, user_role_id: 1};
   personList: Array<any> = [
     { id: 1, name: 'Aurelia Vega', age: 30, companyName: 'Deepends', country: 'Spain', city: 'Madrid' },
     { id: 2, name: 'Guerra Cortez', age: 45, companyName: 'Insectus', country: 'USA', city: 'San Francisco' },
@@ -23,9 +27,52 @@ export class TypographyComponent implements OnInit {
     { id: 10, name: 'John Maklowicz', age: 36, companyName: 'Mako', country: 'Poland', city: 'Bialystok' },
   ];
 
-  constructor() { }
+  constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { }
+  user_data: any;
+  select_user_data: any;
 
   ngOnInit() {
+    this.getAllUsers();
+  }
+
+  getAllUsers(): void {
+    this.apiService
+      .getAllUsers()
+      .subscribe( 
+        (res: any) => {
+          console.log(res);
+          this.all_users = res.user;
+        },
+        (err: any) => {
+          alert(err.error);
+        }
+      )
+  }
+
+  registerUser(): void {
+    this.apiService
+      .registerUser(this.user_data)
+      .subscribe( 
+        (res: any) => {
+          console.log(res);
+        },
+        (err: any) => {
+          alert(err.error);
+        }
+      )
+  }
+
+  updateUser(): void {
+    this.apiService
+      .updateUser(this.select_user_data)
+      .subscribe( 
+        (res: any) => {
+          console.log(res);
+        },
+        (err: any) => {
+          alert(err.error);
+        }
+      )
   }
 
   updateList(id: number, property: string, event: any) {
@@ -40,9 +87,10 @@ export class TypographyComponent implements OnInit {
 
   add() {
     if (this.awaitingPersonList.length > 0) {
-      const person = this.awaitingPersonList[0];
-      this.personList.push(person);
-      this.awaitingPersonList.splice(0, 1);
+      this.all_users.push(this.default_data);
+      // const person = this.awaitingPersonList[0];
+      // this.personList.push(person);
+      // this.awaitingPersonList.splice(0, 1);
     }
   }
 

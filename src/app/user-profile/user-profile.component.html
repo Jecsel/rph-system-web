@@ -26,8 +26,14 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-4">
-                              <mat-form-field class="example-full-width">
+                              <!-- <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Date of Birth" formControlName="dob">
+                              </mat-form-field> -->
+                              <mat-form-field class="example-full-width">
+                                <mat-label>Birthday</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="dob">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
                               </mat-form-field>
                             </div>
                             <div class="col-md-4">
@@ -43,7 +49,7 @@
                             <div class="col-md-4">
                               <mat-label>Gender</mat-label>
                               <section class="example-section">
-                                <mat-radio-group formControlName="gender_id" [(ngModel)]="gender_id">
+                                <mat-radio-group formControlName="gender_id">
                                   <mat-radio-button class="example-margin" value=1>Male</mat-radio-button>
                                   <mat-radio-button class="example-margin" value=2>Female</mat-radio-button>
                                 </mat-radio-group>

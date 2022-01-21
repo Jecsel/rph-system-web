@@ -12,18 +12,17 @@ export class UserProfileComponent implements OnInit {
   user_profile : any;
   profileFormGroup: FormGroup;
   user_id: any;
-  user_profile_id: any;
+  user_profile_id = localStorage.getItem('user_profile_id');
   data_body: any;
   gender_id: 2 | 1 = 1;
   civil_status_id: 2 | 1 = 1;
+  has_profile = localStorage.getItem('has_profile');
   constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    let has_profile = localStorage.getItem('has_profile');
     this.user_id = localStorage.getItem('user_id');
-    this.user_profile_id = localStorage.getItem('user_profile_id');
 
-    if( has_profile == 'false' ){
+    if( this.has_profile == 'false' ){
       this.showNotification();
     }else{
       this.getProfile();
@@ -39,7 +38,7 @@ export class UserProfileComponent implements OnInit {
         res => {
           console.log(res);
           this.user_profile = res.profiles[0];
-          this.setProfileDate();
+          this.setProfileData();
         },
         err => {
           alert(err.data.message);
@@ -47,7 +46,7 @@ export class UserProfileComponent implements OnInit {
       )
   }
 
-  setProfileDate(): void{
+  setProfileData(): void{
     console.log(this.user_profile);
     this.profileFormGroup.setValue({
       user_id: this.user_profile.user_id,
@@ -94,15 +93,49 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  formatDate(f_date): any{
+    let d = f_date;
+    d.setDate(d.getDate() + 1);
+
+    return d;
+  }
+
   onSubmit(): void{
     this.data_body = { profile: this.profileFormGroup.value };
     this.data_body.profile.gender_id = this.gender_id;
     this.data_body.profile.civil_status_id = this.civil_status_id;
+    this.data_body.profile.dob = this.formatDate(this.data_body.profile.dob);
     delete this.data_body.profile.male;
     delete this.data_body.profile.female;
     delete this.data_body.profile.single;
     delete this.data_body.profile.married;
 
+    if( this.has_profile == 'false' ){
+      this.createProfile();
+    }else{
+      this.updateProfile();
+    }
+  }
+
+  updateProfile(): void{
+    this.data_body.profile.id = this.user_profile.id;
+    console.log('update profile', this.user_profile);
+    this.apiService
+      .updateProfile(this.data_body)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.user_profile = res;
+          this.user_profile_id = this.user_profile.id
+        },
+        err => {
+          alert(err.message);
+        }
+      )
+
+  } 
+
+  createProfile(): void{
     console.log(this.data_body);
     this.apiService
       .createProfile(this.data_body)
@@ -111,6 +144,7 @@ export class UserProfileComponent implements OnInit {
           console.log(res);
           this.user_profile = res;
           localStorage.setItem('user_profile_id', this.user_profile.profile.id);
+          localStorage.setItem('has_profile', 'true');
         },
         err =>{
           alert(err.data.message);

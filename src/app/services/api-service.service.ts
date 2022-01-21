@@ -69,7 +69,7 @@ export class ApiServiceService {
       }));
   }
 
-  getAllUsers(id: any): Observable<any>{
+  getAllUsers(): Observable<any>{
     this.httpOptions = {
       headers: new HttpHeaders({
         'Accept': '*/*',
@@ -140,6 +140,21 @@ export class ApiServiceService {
       .post(this.baseUrl + 'profile', data, this.httpOptions)
       .pipe(map((response: any) => {
         localStorage.setItem('has_profile', 'true');
+        return response;
+      }));
+  }
+
+  updateProfile(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+    return this.httpClient
+      .post(this.baseUrl + 'profile/' + data.profile.id +'/update_profile', data, this.httpOptions)
+      .pipe(map((response: any) => {
         return response;
       }));
   }

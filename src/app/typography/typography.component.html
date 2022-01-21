@@ -24,7 +24,27 @@
                             <th class="text-center">User Role</th>
                             <th class="text-center">Remove</th>
                           </tr>
-                          <tr *ngFor="let person of personList; let id = index">
+                          <tr *ngFor="let user of all_users; let id = index">
+                            <td>
+                              <span (keyup)="changeValue(id, 'name', $event)" (blur)="updateList(id, 'name', $event)" contenteditable="true">{{user.username}}</span>
+                            </td>
+                            <td>
+                              <span contenteditable="true" (keyup)="changeValue(id, 'age', $event)" (blur)="updateList(id, 'age', $event)">{{user.password}}</span>
+                            </td>
+                            <td>
+                              <span contenteditable="true" (keyup)="changeValue(id, 'companyName', $event)" (blur)="updateList(id, 'companyName', $event)">{{user.user_type_id}}</span>
+                            </td>
+                            <td>
+                              <span contenteditable="true" (keyup)="changeValue(id, 'country', $event)" (blur)="updateList(id, 'country', $event)">{{user.user_role_id}}</span>
+                            </td>
+                            <td>
+                              <span class="table-remove">
+                                
+                                <button type="button" rounded="true" size="sm" class="btn btn-danger my-0" (click)="remove(id)">Remove</button>
+                              </span>
+                            </td>
+                          </tr>
+                          <!-- <tr *ngFor="let person of personList; let id = index">
                             <td>
                               <span (keyup)="changeValue(id, 'name', $event)" (blur)="updateList(id, 'name', $event)" contenteditable="true">{{person.name}}</span>
                             </td>
@@ -43,7 +63,7 @@
                                 <button type="button" rounded="true" size="sm" class="btn btn-danger my-0" (click)="remove(id)">Remove</button>
                               </span>
                             </td>
-                          </tr>
+                          </tr> -->
                         </table>
                       </div>
                     </div>
