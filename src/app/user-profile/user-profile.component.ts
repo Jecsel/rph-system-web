@@ -14,8 +14,8 @@ export class UserProfileComponent implements OnInit {
   user_id: any;
   user_profile_id = localStorage.getItem('user_profile_id');
   data_body: any;
-  gender_id: 2 | 1 = 1;
-  civil_status_id: 2 | 1 = 1;
+  gender_id: any;
+  civil_status_id: any;
   has_profile = localStorage.getItem('has_profile');
   constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { }
 
@@ -48,6 +48,7 @@ export class UserProfileComponent implements OnInit {
 
   setProfileData(): void{
     console.log(this.user_profile);
+    console.log("gender_id", this.gender_id);
     this.profileFormGroup.setValue({
       user_id: this.user_profile.user_id,
       surname: this.user_profile.surname,
@@ -104,7 +105,7 @@ export class UserProfileComponent implements OnInit {
     this.data_body = { profile: this.profileFormGroup.value };
     this.data_body.profile.gender_id = this.gender_id;
     this.data_body.profile.civil_status_id = this.civil_status_id;
-    this.data_body.profile.dob = this.formatDate(this.data_body.profile.dob);
+    this.data_body.profile.dob = this.data_body.profile.dob;
     delete this.data_body.profile.male;
     delete this.data_body.profile.female;
     delete this.data_body.profile.single;

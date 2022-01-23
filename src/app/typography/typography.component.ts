@@ -11,21 +11,7 @@ export class TypographyComponent implements OnInit {
   editField: string;
   all_users: Array<any> = [];
   default_data: any = {username: '', password: '', user_type_id: 1, user_role_id: 1};
-  personList: Array<any> = [
-    { id: 1, name: 'Aurelia Vega', age: 30, companyName: 'Deepends', country: 'Spain', city: 'Madrid' },
-    { id: 2, name: 'Guerra Cortez', age: 45, companyName: 'Insectus', country: 'USA', city: 'San Francisco' },
-    { id: 3, name: 'Guadalupe House', age: 26, companyName: 'Isotronic', country: 'Germany', city: 'Frankfurt am Main' },
-    { id: 4, name: 'Aurelia Vega', age: 30, companyName: 'Deepends', country: 'Spain', city: 'Madrid' },
-    { id: 5, name: 'Elisa Gallagher', age: 31, companyName: 'Portica', country: 'United Kingdom', city: 'London' },
-  ];
-
-  awaitingPersonList: Array<any> = [
-    { id: 6, name: 'George Vega', age: 28, companyName: 'Classical', country: 'Russia', city: 'Moscow' },
-    { id: 7, name: 'Mike Low', age: 22, companyName: 'Lou', country: 'USA', city: 'Los Angeles' },
-    { id: 8, name: 'John Derp', age: 36, companyName: 'Derping', country: 'USA', city: 'Chicago' },
-    { id: 9, name: 'Anastasia John', age: 21, companyName: 'Ajo', country: 'Brazil', city: 'Rio' },
-    { id: 10, name: 'John Maklowicz', age: 36, companyName: 'Mako', country: 'Poland', city: 'Bialystok' },
-  ];
+  body_data: any = {username: '', password: '', user_type_id: 1, user_role_id: 1};
 
   constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { }
   user_data: any;
@@ -51,47 +37,90 @@ export class TypographyComponent implements OnInit {
 
   registerUser(): void {
     this.apiService
-      .registerUser(this.user_data)
+      .registerUser({user: this.body_data })
       .subscribe( 
         (res: any) => {
           console.log(res);
         },
         (err: any) => {
-          alert(err.error);
+          alert(err.message);
         }
       )
   }
 
-  updateUser(): void {
+  updateUser(data): void {
     this.apiService
-      .updateUser(this.select_user_data)
+      .updateUser({user: data})
       .subscribe( 
         (res: any) => {
           console.log(res);
         },
         (err: any) => {
-          alert(err.error);
+          alert(err.message);
         }
       )
   }
 
-  updateList(id: number, property: string, event: any) {
+  deleteUser(id): void {
+    this.apiService
+    .deleteUser({id: id})
+    .subscribe( 
+      (res: any) => {
+        this.getAllUsers();
+      },
+      (err: any) => {
+        alert(err.message);
+      }
+    )
+  }
+
+  updateList(id: number, property: string, event: any, selected_user: any) {
     const editField = event.target.textContent;
-    this.personList[id][property] = editField;
+    // this.all_users[id][property] = editField;
+    console.log("data body: ",this.body_data);
+    console.log("id : ", id);
+
+    if(id == undefined){
+      this.body_data[property] = editField;
+      var u = this.body_data.username;
+      var p = this.body_data.password;
+      var t = this.body_data.user_type_id;
+      var r = this.body_data.user_role_id;
+      console.log(p);
+      if(u != "" && p != ""){
+        console.log("body", this.body_data);
+        this.registerUser();
+        this.default_data = {username: '', password: '', user_type_id: 1, user_role_id: 1};
+        this.body_data = {username: '', password: '', user_type_id: 1, user_role_id: 1};
+      }
+    }
+  
+    if(id > 0){
+      
+      selected_user[property] = editField;
+      if(selected_user.username != "" && selected_user.password != ""){
+        console.log("log", selected_user);
+        this.updateUser(selected_user);
+        this.default_data = {username: '', password: '', user_type_id: 1, user_role_id: 1};
+        this.body_data = {username: '', password: '', user_type_id: 1, user_role_id: 1};
+      }
+    }
+
   }
 
   remove(id: any) {
-    this.awaitingPersonList.push(this.personList[id]);
-    this.personList.splice(id, 1);
+    this.deleteUser(id);
+    // this.awaitingPersonList.push(this.personList[id]);
+    // this.all_users.splice(id, 1);
   }
 
   add() {
-    if (this.awaitingPersonList.length > 0) {
+    // if (this.awaitingPersonList.length > 0) {
       this.all_users.push(this.default_data);
       // const person = this.awaitingPersonList[0];
       // this.personList.push(person);
       // this.awaitingPersonList.splice(0, 1);
-    }
+    // }
   }
 
   changeValue(id: number, property: string, event: any) {

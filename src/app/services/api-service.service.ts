@@ -102,6 +102,22 @@ export class ApiServiceService {
       }));
   }
 
+  deleteUser(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .post(this.baseUrl + 'user/deactivate_user', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
   registerUser(data: any): Observable<void>{
     this.httpOptions = {
       headers: new HttpHeaders({

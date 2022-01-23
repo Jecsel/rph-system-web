@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.apiService.signIn(this.data).subscribe( (res: any) => {
       res.has_profile? this.router.navigate(['dashboard']) : this.router.navigate(['user-profile']);
     }, err => {
-      this.error_message = err.error;
+      this.error_message = err.message;
       alert(this.error_message);
     });
 
