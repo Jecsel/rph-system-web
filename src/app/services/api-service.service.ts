@@ -85,6 +85,22 @@ export class ApiServiceService {
       }));
   }
 
+  getAllPatients(): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .get(this.baseUrl + 'patient', this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
   // ----------- POST REQUEST -------------//
 
   updateUser(data: any): Observable<void>{
@@ -140,6 +156,21 @@ export class ApiServiceService {
         localStorage.setItem('token', response.bearer_token);
         localStorage.setItem('user_id', response.user_id);
         localStorage.setItem('has_profile', response.has_profile);
+        return response;
+      }));
+  }
+
+  createPatient(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+    return this.httpClient
+      .post(this.baseUrl + 'patient', data, this.httpOptions)
+      .pipe(map((response: any) => {
         return response;
       }));
   }

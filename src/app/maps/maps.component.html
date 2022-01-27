@@ -1,1 +1,71 @@
-<div id="map"></div>
+<div id="map">
+    <div class="main-content">
+        <div class="container-fluid">
+          <div class="card">
+              <div class="card-header card-header-danger">
+                  <h4 class="card-title">List of Patients</h4>
+                  <p class="card-category">Showing all patients recorded</p>
+              </div>
+              <div class="card-body">
+                  <div id="typography">
+                      <div class="card">
+                          <div class="card-body">
+                            <div id="table" class="table-editable">
+                              <span class="table-add float-right mb-3 mr-2">
+                                <a class="text-success" (click)="show()">
+                                  <!-- <mdb-icon fas icon="plus" size="2x"></mdb-icon> -->
+                                  <i class="material-icons" style="cursor: pointer; font-size: 35px;">add</i>
+                                </a>
+                              </span>
+                              <table class="table table-bordered table-responsive-md table-striped text-center">
+                                <tr>
+                                  <th class="text-center">First Name</th>
+                                  <th class="text-center">Last Name</th>
+                                  <th class="text-center">Gender</th>
+                                  <th class="text-center">Birth Date</th>
+                                  <th class="text-center">Age</th>
+                                  <th class="text-center">Actions</th>
+                                </tr>
+                                <tr *ngFor="let patient of all_patients; let id = index">
+                                  <td>
+                                    <span>{{patient.first_name}}</span>
+                                  </td>
+                                  <td>
+                                    <span>{{patient.surname}}</span>
+                                  </td>
+                                  <td>
+                                    <span>{{patient.gender_id == 1 ? 'Male' : 'Female'}}</span>
+                                  </td>
+                                  <td>
+                                    <span>{{patient.dob | date}}</span>
+                                  </td>
+                                  <td>
+                                    <span>{{patient.age}}</span>
+                                  </td>
+                                  <td>
+                                    <div style="display:inline-flex">
+                                      <span class="table-remove">
+                                        <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-success my-0" (click)="viewPatient(patient.id)">View</button>
+                                      </span>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+              </div>
+          </div>
+          <div class="profile-container">
+            <div class="profile-content" style="max-height: 550px; overflow: scroll;">
+              <div *ngIf="show_profile_modal" class="card">
+                <div class="d-flex justify-content-end p-2">
+                  <mat-icon (click)="close()" style="cursor: pointer;">close</mat-icon>
+                </div>
+                <app-user-profile newPatient="true" [selectedUserId]="selected_user_id"></app-user-profile>
+              </div>
+            </div>
+          </div>
+      </div>
+</div>

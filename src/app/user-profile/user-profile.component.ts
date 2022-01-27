@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiServiceService } from 'app/services/api-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 declare var $: any;
@@ -12,20 +12,34 @@ export class UserProfileComponent implements OnInit {
   user_profile : any;
   profileFormGroup: FormGroup;
   user_id: any;
-  user_profile_id = localStorage.getItem('user_profile_id');
+  user_profile_id: any;
   data_body: any;
   gender_id: any;
   civil_status_id: any;
   has_profile = localStorage.getItem('has_profile');
-  constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { }
+
+  @Input()
+  newPatient: string;
+  selectedUserId: any;
+  constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { 
+
+  }
 
   ngOnInit() {
     this.user_id = localStorage.getItem('user_id');
-
+    this.user_profile_id = localStorage.getItem('user_profile_id');
+    
     if( this.has_profile == 'false' ){
       this.showNotification();
     }else{
-      this.getProfile();
+      
+      if(this.newPatient == 'true'){
+        if(this.user_profile_id != undefined){
+          this.getProfile();
+        }
+      }else{
+        this.getProfile();
+      }
     }
     this.getList();
     this.declareFormBuilder();
@@ -37,8 +51,26 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res);
-          this.user_profile = res.profiles[0];
+          if(res.profile.length > 0){
+            this.user_profile = res.profiles[0];
+          }else{
+            this.user_profile = res.profile;
+          }
+          
           this.setProfileData();
+        },
+        err => {
+          alert(err.data.message);
+        }
+      )
+  }
+
+  createNewPatient(): void{
+    this.apiService
+      .createPatient(this.data_body)
+      .subscribe(
+        res => {
+          console.log(res);
         },
         err => {
           alert(err.data.message);
@@ -48,7 +80,6 @@ export class UserProfileComponent implements OnInit {
 
   setProfileData(): void{
     console.log(this.user_profile);
-    console.log("gender_id", this.gender_id);
     this.profileFormGroup.setValue({
       user_id: this.user_profile.user_id,
       surname: this.user_profile.surname,
@@ -111,10 +142,15 @@ export class UserProfileComponent implements OnInit {
     delete this.data_body.profile.single;
     delete this.data_body.profile.married;
 
-    if( this.has_profile == 'false' ){
-      this.createProfile();
+    if(this.newPatient == 'true'){
+      console.log('create new patient', this.data_body);
+      this.createNewPatient();
     }else{
-      this.updateProfile();
+      if( this.has_profile == 'false' ){
+        this.createProfile();
+      }else{
+        this.updateProfile();
+      }
     }
   }
 
