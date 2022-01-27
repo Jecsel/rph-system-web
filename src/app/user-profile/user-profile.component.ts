@@ -13,6 +13,7 @@ export class UserProfileComponent implements OnInit {
   profileFormGroup: FormGroup;
   user_id: any;
   user_profile_id: any;
+  selected_user_profile_id: any;
   data_body: any;
   gender_id: any;
   civil_status_id: any;
@@ -35,7 +36,7 @@ export class UserProfileComponent implements OnInit {
       
       if(this.newPatient == 'true'){
         if(this.user_profile_id != undefined){
-          this.getProfile();
+          this.getSelectedProfile();
         }
       }else{
         this.getProfile();
@@ -45,12 +46,33 @@ export class UserProfileComponent implements OnInit {
     this.declareFormBuilder();
   }
 
+  getSelectedProfile(): void{
+    this.selected_user_profile_id = localStorage.getItem('selected_user_profile_id');
+    this.apiService
+      .showProfile(this.selected_user_profile_id)
+      .subscribe(
+        res => {
+          console.log(res);
+          if(res.profile.length > 0){
+            this.user_profile = res.profiles[0];
+          }else{
+            this.user_profile = res.profile;
+          }
+          this.setProfileData();
+        },
+        err => {
+          alert(err.data.message);
+        }
+      )
+  }
+
   getProfile(): void{
+    console.log("user id:", this.user_profile_id);
     this.apiService
       .showProfile(this.user_profile_id)
       .subscribe(
         res => {
-          console.log(res);
+          console.log("showing profile:", res);
           if(res.profile.length > 0){
             this.user_profile = res.profiles[0];
           }else{

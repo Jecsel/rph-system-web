@@ -34,7 +34,7 @@ export class MapsComponent implements OnInit {
   viewPatient(user_id) {
     console.log('select', user_id);
     this.selected_user_id = user_id;
-    localStorage.setItem('user_profile_id', user_id);
+    localStorage.setItem('selected_user_profile_id', user_id);
     this.show_profile_modal= true;
   }
 

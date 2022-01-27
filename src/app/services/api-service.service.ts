@@ -69,6 +69,22 @@ export class ApiServiceService {
       }));
   }
 
+  showUserProfile(): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .post(this.baseUrl + 'profile/8/get_user_profile', this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
   getAllUsers(): Observable<any>{
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -156,6 +172,7 @@ export class ApiServiceService {
         localStorage.setItem('token', response.bearer_token);
         localStorage.setItem('user_id', response.user_id);
         localStorage.setItem('has_profile', response.has_profile);
+        localStorage.setItem('user_profile_id', response.profile_id);
         return response;
       }));
   }
