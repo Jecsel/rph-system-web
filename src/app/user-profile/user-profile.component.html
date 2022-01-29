@@ -1,7 +1,7 @@
 <div class="main-content">
   <div class="container-fluid">
       <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-8">
               <div class="card">
                   <div class="card-header card-header-danger">
                       <h4 class="card-title">Edit Profile</h4>
@@ -116,7 +116,7 @@
                   </div>
               </div>
           </div>
-          <!-- <div class="col-md-4">
+          <div class="col-md-4">
               <div class="card card-profile">
                   <div class="card-avatar">
                       <a href="javascript:void(0)">
@@ -124,15 +124,37 @@
                       </a>
                   </div>
                   <div class="card-body">
-                      <h6 class="card-category text-gray">CEO / Co-Founder</h6>
-                      <h4 class="card-title">Alec Thompson</h4>
-                      <p class="card-description">
-                          Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
-                      </p>
-                      <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a>
+                    <div class="d-flex flex-row">
+                      <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-primary my-0">New Clinical Record</button>
+                      <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-success my-0">New Outpatient Record</button>
+                    </div>
+                    <div class="result-container" style="max-height: 350px; overflow: scroll;">
+
+                      <div class="clinical-records" *ngFor="let c of clinical_records.clinical_records; let id = index">
+                        <div class="card border-primary mb-3" style="max-width: 18rem; border: 1px solid #9c27b0 !important;
+                        border-radius: 5px;">
+                          <div class="card-body text-primary" style="text-align: start;">
+                            <div class="d-flex flex-column">
+                              <h6 class="card-title">{{c.admitted_datetime | date}}</h6>
+                              <label class="card-text">Diagnosis: {{c.admitting_diagnosis}}</label>
+                              <label class="card-text">Building: {{c.building_id}}</label>
+                              <label class="card-text">Hospital No: {{c.hospital_no}}</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="card border-success mb-3" style="max-width: 18rem;">
+                        <div class="card-body text-success" style="max-width: 18rem; border: 1px solid #4caf50 !important;
+                        border-radius: 5px;">
+                          <h5 class="card-title">Primary card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
               </div>
-          </div> -->
+          </div>
       </div>
   </div>
 </div>

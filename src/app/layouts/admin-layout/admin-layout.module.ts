@@ -22,6 +22,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ClinicalRecordComponent } from 'app/clinical-record/clinical-record.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   imports: [
@@ -39,7 +41,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatRadioModule,
     MatIconModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatExpansionModule,
+    
   ],
   declarations: [
     DashboardComponent,
@@ -51,6 +55,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
+    ClinicalRecordComponent
   ]
 })
 

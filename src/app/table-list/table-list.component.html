@@ -4,8 +4,7 @@
           <div class="col-md-12">
               <div class="card">
                   <div class="card-header card-header-danger">
-                      <h4 class="card-title ">Simple Table</h4>
-                      <p class="card-category"> Here is a subtitle for this table</p>
+                      <h4 class="card-title ">RPH Clinical Records</h4>
                   </div>
                   <div class="card-body">
                       <div class="table-responsive">
@@ -15,119 +14,34 @@
                                       ID
                                   </th>
                                   <th>
-                                      Name
+                                      Admitted Date
                                   </th>
                                   <th>
-                                      Country
+                                      Diagnosis
                                   </th>
                                   <th>
-                                      City
+                                      Transfer From
                                   </th>
                                   <th>
-                                      Salary
+                                      Building No
                                   </th>
                               </thead>
-                              <tbody>
-                                  <tr>
+                              <tbody *ngFor="let c of clinical_records; let id = index">
+                                  <tr style="cursor: pointer;" (click)="view()">
                                       <td>
-                                          1
+                                          {{c.id}}
                                       </td>
                                       <td>
-                                          Dakota Rice
+                                          {{c.admitted_datetime | date}}
                                       </td>
                                       <td>
-                                          Niger
+                                          {{c.admitting_diagnosis}}
                                       </td>
                                       <td>
-                                          Oud-Turnhout
+                                          {{c.transferred_from}}
                                       </td>
                                       <td class="text-primary">
-                                          $36,738
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          2
-                                      </td>
-                                      <td>
-                                          Minerva Hooper
-                                      </td>
-                                      <td>
-                                          Curaçao
-                                      </td>
-                                      <td>
-                                          Sinaai-Waas
-                                      </td>
-                                      <td class="text-primary">
-                                          $23,789
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          3
-                                      </td>
-                                      <td>
-                                          Sage Rodriguez
-                                      </td>
-                                      <td>
-                                          Netherlands
-                                      </td>
-                                      <td>
-                                          Baileux
-                                      </td>
-                                      <td class="text-primary">
-                                          $56,142
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          4
-                                      </td>
-                                      <td>
-                                          Philip Chaney
-                                      </td>
-                                      <td>
-                                          Korea, South
-                                      </td>
-                                      <td>
-                                          Overland Park
-                                      </td>
-                                      <td class="text-primary">
-                                          $38,735
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          5
-                                      </td>
-                                      <td>
-                                          Doris Greene
-                                      </td>
-                                      <td>
-                                          Malawi
-                                      </td>
-                                      <td>
-                                          Feldkirchen in Kärnten
-                                      </td>
-                                      <td class="text-primary">
-                                          $63,542
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                      <td>
-                                          6
-                                      </td>
-                                      <td>
-                                          Mason Porter
-                                      </td>
-                                      <td>
-                                          Chile
-                                      </td>
-                                      <td>
-                                          Gloucester
-                                      </td>
-                                      <td class="text-primary">
-                                          $78,615
+                                          {{c.building_id}}
                                       </td>
                                   </tr>
                               </tbody>
@@ -137,6 +51,16 @@
               </div>
           </div>
       </div>
+
+      <div class="clinical-container">
+        <div class="clinical-content" style="max-height: 550px; overflow: scroll;">
+          <div *ngIf="show_clinical_modal" class="card">
+            <div class="d-flex justify-content-end p-2">
+              <mat-icon (click)="close()" style="cursor: pointer;">close</mat-icon>
+            </div>
+            <app-clinical-record clinicalResultId=""></app-clinical-record>
+          </div>
+        </div>
+      </div>
   </div>
-  
 </div>

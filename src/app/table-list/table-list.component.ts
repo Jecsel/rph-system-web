@@ -1,15 +1,39 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiServiceService } from 'app/services/api-service.service';
 
 @Component({
   selector: 'app-table-list',
   templateUrl: './table-list.component.html',
-  styleUrls: ['./table-list.component.css']
+  styleUrls: ['./table-list.component.scss']
 })
 export class TableListComponent implements OnInit {
-
-  constructor() { }
-
+  clinical_records: any;
+  constructor(private apiService: ApiServiceService) { }
+  show_clinical_modal: any;
+  
   ngOnInit() {
+    this.show_clinical_modal = false;
+    this.getAllClinicalRecords();
   }
 
+  close() {
+    this.show_clinical_modal = false;
+  }
+
+  view() {
+    this.show_clinical_modal = true;
+  }
+
+  getAllClinicalRecords() {
+    this.apiService
+      .allClinicalRecords()
+      .subscribe(
+        res =>{
+          console.log(res);
+          this.clinical_records = res.clinical_records;
+        },err => {
+          alert(err.message);
+        }
+      )
+  }
 }

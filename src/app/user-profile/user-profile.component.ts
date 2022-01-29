@@ -17,6 +17,7 @@ export class UserProfileComponent implements OnInit {
   data_body: any;
   gender_id: any;
   civil_status_id: any;
+  clinical_records: any;
   has_profile = localStorage.getItem('has_profile');
 
   @Input()
@@ -44,6 +45,21 @@ export class UserProfileComponent implements OnInit {
     }
     this.getList();
     this.declareFormBuilder();
+    this.getPatientClinicalRecords();
+  }
+
+  getPatientClinicalRecords(): void{
+    this.apiService
+    .patientAllClinicalRecords({user_id: this.user_id})
+    .subscribe(
+      res => {
+        console.log(res);
+        this.clinical_records = res;
+      },
+      err => {
+        alert(err.data.message);
+      }
+    )
   }
 
   getSelectedProfile(): void{
@@ -87,7 +103,7 @@ export class UserProfileComponent implements OnInit {
       )
   }
 
-  createNewPatient(): void{
+  createNewPatient() {
     this.apiService
       .createPatient(this.data_body)
       .subscribe(

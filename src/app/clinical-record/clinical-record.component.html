@@ -1,0 +1,212 @@
+<div class="card">
+    <div class="card-header card-header-danger">
+        <h4 class="card-title">Clinical Record</h4>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="clinicalFormGroup" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-3">
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Fiscal Year" formControlName="fiscal_year">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Hospital No" formControlName="hospital_no">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Attending Physician" formControlName="attending_physician_id">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Surname" formControlName="surname">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="First Name" formControlName="first_name">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Middle Name" formControlName="middle_name">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Age" formControlName="age">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Gender" formControlName="gender_id">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Address" formControlName="address">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Civil Status" formControlName="civil_status_id">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Religion" formControlName="religion">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Date of Birth</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="bod">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Nationality" formControlName="nationality">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Cellphone no" formControlName="cp_no">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Person To Notify" formControlName="person_to_notify">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Address" formControlName="person_to_notify_address">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="CP No" formControlName="person_to_notify_no">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Relationship"
+                                    formControlName="person_to_notify_cp_relationship">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <mat-label>Admitted Date</mat-label>
+                                <input matInput [matDatepicker]="picker" formControlName="admitted_datetime">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Transfer From" formControlName="transferred_from">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Admitting Diagnosis" formControlName="admitting_diagnosis">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Final Diagnosis" formControlName="final_diagnosis">
+                            </mat-form-field>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="Management/Operations"
+                                    formControlName="management_operations">
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3">
+                    <div class="service-content mb-1">
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Local Service Classification
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-checkbox class="" formControlName="c1">C1</mat-checkbox>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="c1_desc">
+                            </mat-form-field>
+                            <mat-checkbox class="" formControlName="c2">C2</mat-checkbox>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="c2_desc">
+                            </mat-form-field>
+                            <mat-checkbox class="" formControlName="c3">C3</mat-checkbox>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="c3_desc">
+                            </mat-form-field>
+                        </mat-expansion-panel>
+                    </div>
+                    
+                    <div class="department-content mb-1">
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Department
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-checkbox class="" formControlName="d_medical">MEDICAL</mat-checkbox>
+                            <mat-checkbox class="" formControlName="d_surgical">SURGICAL</mat-checkbox>
+                            <mat-checkbox class="" formControlName="d_obstetrics">OBSTETRICS</mat-checkbox>
+                            <mat-checkbox class="" formControlName="d_pediatrics">PEDIATRICS</mat-checkbox>
+                            <mat-checkbox class="" formControlName="d_nicu">NICU</mat-checkbox>
+                            <mat-checkbox class="" formControlName="d_gyne">GYNE</mat-checkbox>
+                            <mat-checkbox class="" formControlName="d_optha">OPTHA</mat-checkbox>
+                            <mat-checkbox class="" formControlName="d_ent">ENT</mat-checkbox>
+                        </mat-expansion-panel>
+                    </div>
+
+                    <div class="class-content mb-1">
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Class
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-checkbox class="" formControlName="c_private">PRIVATE</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_charity">CHARITY</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_life_senior">LIFE/SENIOR</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_non_philhealth">NON-PHILHEALTH</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_philhealth">PHILHEALTH</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_ofw">OFW</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_gm">GM</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_gd">GD</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_sem">SEM</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_pem">PEM</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_im">IM</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_id">ID</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_sed">SED</mat-checkbox>
+                            <mat-checkbox class="" formControlName="c_ped">PED</mat-checkbox>
+                            
+                        </mat-expansion-panel>
+                    </div>
+
+                    <div class="result-content mb-1">
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Result
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-checkbox class="" formControlName="r_recovered">RECOVERED</mat-checkbox>
+                            <mat-checkbox class="" formControlName="r_improved">IMPROVED</mat-checkbox>
+                            <mat-checkbox class="" formControlName="r_unimproved">UNIMPROVED</mat-checkbox>
+                            <mat-checkbox class="" formControlName="r_died">DIED</mat-checkbox>
+                        </mat-expansion-panel>
+                    </div>
+
+                    <div class="disposition-content mb-1">
+                        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    Disposition
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-checkbox class="" formControlName="d_discharged">DISCHARGED AT</mat-checkbox>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="d_discharged_desc">
+                            </mat-form-field>
+                            <mat-checkbox class="" formControlName="d_length">LENGTH OF STAY</mat-checkbox>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="d_length_desc">
+                            </mat-form-field>
+                            <mat-checkbox class="" formControlName="d_absonded">ABSCONDED</mat-checkbox>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="d_absonded_desc">
+                            </mat-form-field>
+                            <mat-checkbox class="" formControlName="d_dismissed">DISMISSED</mat-checkbox>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="d_dismissed_desc">
+                            </mat-form-field>
+                            <mat-checkbox class="" formControlName="d_transferred">TRANSFERRED TO</mat-checkbox>
+                            <mat-form-field class="example-full-width">
+                                <input matInput placeholder="" formControlName="d_transferred_desc">
+                            </mat-form-field>
+                        </mat-expansion-panel>
+                    </div>
+                </div>
+            </div>
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Submit</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>
