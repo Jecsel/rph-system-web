@@ -16,29 +16,37 @@ export class UserProfileComponent implements OnInit {
   selected_user_profile_id: any;
   data_body: any;
   gender_id: any;
+  male: any;
+  female: any;
+  single: any;
+  married: any;
   civil_status_id: any;
   clinical_records: any;
-  has_profile = localStorage.getItem('has_profile');
+  has_profile: any;
 
   @Input()
+  selectedId: any;
   newPatient: string;
-  selectedUserId: any;
   constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { 
 
   }
 
   ngOnInit() {
+    this.clinical_records = { };
     this.user_id = localStorage.getItem('user_id');
     this.user_profile_id = localStorage.getItem('user_profile_id');
-    
+    this.has_profile = localStorage.getItem('has_profile');
+
+    console.log(this.selectedId);
+
     if( this.has_profile == 'false' ){
       this.showNotification();
     }else{
       
-      if(this.newPatient == 'true'){
-        if(this.user_profile_id != undefined){
+      if(this.selectedId != undefined){
+        // if(this.user_profile_id != undefined){
           this.getSelectedProfile();
-        }
+        // }
       }else{
         this.getProfile();
       }
@@ -57,7 +65,7 @@ export class UserProfileComponent implements OnInit {
         this.clinical_records = res;
       },
       err => {
-        alert(err.data.message);
+        alert(err.message);
       }
     )
   }
@@ -98,7 +106,7 @@ export class UserProfileComponent implements OnInit {
           this.setProfileData();
         },
         err => {
-          alert(err.data.message);
+          alert(err.message);
         }
       )
   }
@@ -111,7 +119,7 @@ export class UserProfileComponent implements OnInit {
           console.log(res);
         },
         err => {
-          alert(err.data.message);
+          alert(err.message);
         }
       )
   }
@@ -126,8 +134,10 @@ export class UserProfileComponent implements OnInit {
       dob: this.user_profile.dob,
       age: this.user_profile.age,
       birth_place: this.user_profile.birth_place,
-      gender_id: this.user_profile.gender_id,
-      civil_status_id: this.user_profile.civil_status_id,
+      male: this.user_profile.gender_id == 1 ? true : false,
+      female: this.user_profile.gender_id == 2 ? true : false,
+      single: this.user_profile.civil_status_id == 1 ? true : false,
+      married: this.user_profile.civil_status_id == 2 ? true : false,
       occupation: this.user_profile.occupation,
       religion: this.user_profile.religion,
       nationality: this.user_profile.nationality,
@@ -149,8 +159,10 @@ export class UserProfileComponent implements OnInit {
       dob: ['', Validators.required],
       age: ['', Validators.required],
       birth_place: ['', Validators.required],
-      gender_id: [''],
-      civil_status_id: [''],
+      male: [''],
+      female: [''],
+      single: [''],
+      married: [''],
       occupation: ['', Validators.required],
       religion: ['', Validators.required],
       nationality: ['', Validators.required],
@@ -172,29 +184,54 @@ export class UserProfileComponent implements OnInit {
 
   onSubmit(): void{
     this.data_body = { profile: this.profileFormGroup.value };
-    this.data_body.profile.gender_id = this.gender_id;
-    this.data_body.profile.civil_status_id = this.civil_status_id;
-    this.data_body.profile.dob = this.data_body.profile.dob;
+    if(this.male){
+      this.data_body.profile.gender_id = 1;
+    }else{
+      this.data_body.profile.gender_id = 2;
+    }
+    if(this.single){
+      this.data_body.profile.civil_status_id = 1;
+    }else{
+      this.data_body.profile.civil_status_id = 2;
+    }
     delete this.data_body.profile.male;
     delete this.data_body.profile.female;
     delete this.data_body.profile.single;
     delete this.data_body.profile.married;
-
-    if(this.newPatient == 'true'){
+    if(this.selectedId == undefined && this.data_body.profile.user_id == undefined){
       console.log('create new patient', this.data_body);
       this.createNewPatient();
     }else{
       if( this.has_profile == 'false' ){
+        console.log('create user Profile')
         this.createProfile();
       }else{
+        console.log('Update Patient or User Profile')
         this.updateProfile();
       }
     }
   }
 
   updateProfile(): void{
+    this.data_body = { profile: this.profileFormGroup.value };
+    if(this.male){
+      this.data_body.profile.gender_id = 1;
+    }else{
+      this.data_body.profile.gender_id = 2;
+    }
+    if(this.single){
+      this.data_body.profile.civil_status_id = 1;
+    }else{
+      this.data_body.profile.civil_status_id = 2;
+    }
+    delete this.data_body.profile.male;
+    delete this.data_body.profile.female;
+    delete this.data_body.profile.single;
+    delete this.data_body.profile.married;
+
     this.data_body.profile.id = this.user_profile.id;
-    console.log('update profile', this.user_profile);
+    console.log('update profile', this.data_body);
+
     this.apiService
       .updateProfile(this.data_body)
       .subscribe(
@@ -222,7 +259,7 @@ export class UserProfileComponent implements OnInit {
           localStorage.setItem('has_profile', 'true');
         },
         err =>{
-          alert(err.data.message);
+          alert(err.message);
         }
       )
   }
@@ -233,7 +270,7 @@ export class UserProfileComponent implements OnInit {
       .subscribe(res => {
         this.data_list = res;
       }, err  => {
-        alert(err.data.message);
+        alert(err.message);
       });
   }
 

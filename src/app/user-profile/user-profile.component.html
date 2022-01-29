@@ -48,21 +48,29 @@
                             </div>
                             <div class="col-md-4">
                               <mat-label>Gender</mat-label>
-                              <section class="example-section">
+                              <div>
+                                <mat-checkbox class="mr-1" [(ngModel)]="male" formControlName="male">Male</mat-checkbox>
+                                <mat-checkbox class="" [(ngModel)]="female" formControlName="female">Female</mat-checkbox>
+                              </div>
+                              <!-- <section class="example-section">
                                 <mat-radio-group formControlName="gender_id">
                                   <mat-radio-button class="example-margin mr-1" value=1>Male</mat-radio-button>
                                   <mat-radio-button class="example-margin" value=2>Female</mat-radio-button>
                                 </mat-radio-group>
-                              </section>
+                              </section> -->
                             </div>
                             <div class="col-md-4">
                               <mat-label>Civil Status</mat-label>
-                              <section class="example-section">
+                              <div>
+                                <mat-checkbox class="mr-1" [(ngModel)]="single" formControlName="single">Single</mat-checkbox>
+                                <mat-checkbox class="" [(ngModel)]="married" formControlName="married">Married</mat-checkbox>
+                              </div>
+                              <!-- <section class="example-section">
                                 <mat-radio-group formControlName="civil_status_id" [(ngModel)]="civil_status_id">
                                   <mat-radio-button class="mr-2" class="example-margin mr-1" value=1>Single</mat-radio-button>
                                   <mat-radio-button class="example-margin" value=2>Married</mat-radio-button>
                                 </mat-radio-group>
-                              </section>
+                              </section> -->
                             </div>
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">

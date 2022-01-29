@@ -10,10 +10,13 @@ export class MapsComponent implements OnInit {
   all_patients: any;
   show_profile_modal = false;
   selected_user_id: any;
+  new_patient: any;
   constructor(private apiService: ApiServiceService) { }
 
   ngOnInit() {
     this.getAllPatients();
+    this.new_patient = false;
+    this.selected_user_id = undefined;
   }
 
   getAllPatients() {
@@ -32,17 +35,19 @@ export class MapsComponent implements OnInit {
   }
 
   viewPatient(user_id) {
-    console.log('select', user_id);
+    this.new_patient = false;
     this.selected_user_id = user_id;
     localStorage.setItem('selected_user_profile_id', user_id);
     this.show_profile_modal= true;
   }
 
   show() {
+    this.new_patient = true;
     this.show_profile_modal= true;
   }
 
   close() {
+    this.ngOnInit();
     this.show_profile_modal= false;
   }
 
