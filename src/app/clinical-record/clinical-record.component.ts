@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiServiceService } from 'app/services/api-service.service';
+import { parse } from 'path/posix';
 
 @Component({
   selector: 'app-clinical-record',
@@ -11,19 +12,29 @@ export class ClinicalRecordComponent implements OnInit {
   clinicalFormGroup: FormGroup;
   panelOpenState = false;
   selected_data_record: any;
+  req: any;
+  selected_user_profile_id: any;
 
   @Input()
   clinicalResultId: any;
   constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.selected_user_profile_id = localStorage.getItem('selected_user_profile_id');
+
     this.declareFormBuilder();
-    this.getRecord();
+    if(this.clinicalResultId > 0){
+      this.getRecord();
+    }else{
+      console.log('selected_user_profile_id: ', this.selected_user_profile_id);
+      this.getProfile(this.selected_user_profile_id)
+    }
   }
 
   getRecord() {
+    console.log("Selected ID: ", this.clinicalResultId);
     this.apiService
-      .getOneClinicalRecords(1)
+      .getOneClinicalRecords(this.clinicalResultId)
       .subscribe(
         res => {
           console.log(res)
@@ -36,9 +47,74 @@ export class ClinicalRecordComponent implements OnInit {
       )
   }
 
+   updateRecord(){
+    this.req = this.clinicalFormGroup.value;
+    let s = this.selected_data_record;
+    this.req.departments = [
+      {"id": s.departments[0].id, "department_id":1, "is_selected":this.req.d_medical},
+      {"id": s.departments[1].id, "department_id":2, "is_selected":this.req.d_surgical},
+      {"id": s.departments[2].id, "department_id":3, "is_selected":this.req.d_obstetrics},
+      {"id": s.departments[3].id, "department_id":4, "is_selected":this.req.d_pediatrics},
+      {"id": s.departments[4].id, "department_id":5, "is_selected":this.req.d_nicu},
+      {"id": s.departments[5].id, "department_id":6, "is_selected":this.req.d_gyne},
+      {"id": s.departments[6].id, "department_id":7, "is_selected":this.req.d_optha},
+      {"id": s.departments[7].id, "department_id":8, "is_selected":this.req.d_ent}
+    ]
+    this.req.society_classes = [
+      {"id": s.society_classes[0].id, "society_class_id":1, "is_selected":this.req.c_private},
+      {"id": s.society_classes[1].id, "society_class_id":2, "is_selected":this.req.c_charity},
+      {"id": s.society_classes[2].id, "society_class_id":3, "is_selected":this.req.c_life_senior},
+      {"id": s.society_classes[3].id, "society_class_id":4, "is_selected":this.req.c_non_philhealth},
+      {"id": s.society_classes[4].id, "society_class_id":5, "is_selected":this.req.c_philhealth},
+      {"id": s.society_classes[5].id, "society_class_id":6, "is_selected":this.req.c_ofw},
+      {"id": s.society_classes[6].id, "society_class_id":7, "is_selected":this.req.c_gm},
+      {"id": s.society_classes[7].id, "society_class_id":8, "is_selected":this.req.c_gd},
+      {"id": s.society_classes[8].id, "society_class_id":9, "is_selected":this.req.c_sem},
+      {"id": s.society_classes[9].id, "society_class_id":10, "is_selected":this.req.c_pem},
+      {"id": s.society_classes[10].id, "society_class_id":11, "is_selected":this.req.c_im},
+      {"id": s.society_classes[11].id, "society_class_id":12, "is_selected":this.req.c_id},
+      {"id": s.society_classes[12].id, "society_class_id":13, "is_selected":this.req.c_sed},
+      {"id": s.society_classes[13].id, "society_class_id":14, "is_selected":this.req.c_ped}
+    ]
+    this.req.local_services = [
+      {"id": s.local_services[0].id, "local_service_id":1, "is_selected":this.req.c1, "desc":this.req.c1_desc},
+      {"id": s.local_services[1].id, "local_service_id":2, "is_selected":this.req.c2, "desc":this.req.c2_desc},
+      {"id": s.local_services[2].id, "local_service_id":3, "is_selected":this.req.c3_desc, "desc":this.req.c3_desc}
+    ]
+    this.req.results = [
+      {"id": s.results[0].id, "result_id":1, "is_selected":this.req.r_recovered},
+      {"id": s.results[1].id, "result_id":2, "is_selected":this.req.r_improved},
+      {"id": s.results[2].id, "result_id":3, "is_selected":this.req.r_unimproved},
+      {"id": s.results[3].id, "result_id":4, "is_selected":this.req.r_died}
+    ]
+    this.req.dispositions = [
+      {"id": s.dispositions[0].id, "disposition_id":1, "is_selected":this.req.d_discharged, "desc": this.req.d_discharged_desc},
+      {"id": s.dispositions[1].id, "disposition_id":2, "is_selected":this.req.d_length, "desc": this.req.d_length_desc},
+      {"id": s.dispositions[2].id, "disposition_id":3, "is_selected":this.req.d_absonded, "desc": this.req.d_absonded_desc},
+      {"id": s.dispositions[3].id, "disposition_id":4, "is_selected":this.req.d_dismissed, "desc": this.req.d_dismissed_desc},
+      {"id": s.dispositions[4].id, "disposition_id":5, "is_selected":this.req.d_transferred, "desc": this.req.d_transferred_desc}
+    ]
+
+    console.log('Request Payload: ', this.req);
+
+    this.apiService
+    .updateClinicalRecord({clinical_record: this.req})
+    .subscribe(
+      res => {
+        console.log(res)
+        this.selected_data_record = res;
+        this.setData();
+      },
+      err => {
+        alert(err.message);
+      }
+    )
+   }
+
   setData() {
     
     this.clinicalFormGroup.setValue({
+      clinical_record_id: this.selected_data_record.clinical_record.id,
       surname: this.selected_data_record.profile.surname,
       first_name: this.selected_data_record.profile.first_name,
       middle_name: this.selected_data_record.profile.middle_name,
@@ -110,11 +186,16 @@ export class ClinicalRecordComponent implements OnInit {
   }
 
   onSubmit() {
-
+    if(this.clinicalResultId > 0){
+      this.updateRecord();
+    }else{
+      this.createNewClinical();
+    }
   }
 
   declareFormBuilder(): void{
     this.clinicalFormGroup = this.formBuilder.group({
+      clinical_record_id:[''],
       surname:[ '', Validators.required ],
       first_name:[ '', Validators.required ],
       middle_name:[ '', Validators.required ],
@@ -123,7 +204,7 @@ export class ClinicalRecordComponent implements OnInit {
       address:[ '', Validators.required ],
       civil_status_id:[ '', Validators.required ],
       religion:[ '', Validators.required ],
-      dob:[ '', Validators.required ],
+      dob:[ '' ],
       nationality:[ '', Validators.required ],
       cp_no:[ '', Validators.required ],
       person_to_notify:[ '', Validators.required ],
@@ -183,6 +264,161 @@ export class ClinicalRecordComponent implements OnInit {
       d_dismissed_desc:[ '', Validators.required ],
       d_transferred_desc:[ '', Validators.required ]
     });
+  }
+
+  getProfile(id): void{
+    console.log("user id:", id);
+    this.apiService
+      .showProfile(id)
+      .subscribe(
+        res => {
+          console.log("showing profile:", res);
+          this.selected_data_record = res;
+          this.setProfileData();
+        },
+        err => {
+          alert(err.message);
+        }
+      )
+  }
+
+  setProfileData() {
+    this.clinicalFormGroup.setValue({
+      clinical_record_id: "",
+      surname: this.selected_data_record.profile.surname,
+      first_name: this.selected_data_record.profile.first_name,
+      middle_name: this.selected_data_record.profile.middle_name,
+      age: this.selected_data_record.profile.age,
+      gender_id: this.selected_data_record.profile.gender_id == 1 ? 'Male' : 'Female',
+      address: this.selected_data_record.profile.address,
+      civil_status_id: this.selected_data_record.profile.civil_status_id == 1 ? 'Single' : 'Married',
+      religion: this.selected_data_record.profile.religion,
+      dob: this.selected_data_record.profile.dob,
+      nationality: this.selected_data_record.profile.nationality,
+      cp_no: this.selected_data_record.profile.cp_no,
+      person_to_notify: this.selected_data_record.profile.person_to_notify,
+      person_to_notify_address: this.selected_data_record.profile.person_to_notify_address,
+      person_to_notify_no: this.selected_data_record.profile.person_to_notify_no,
+      person_to_notify_cp_relationship: this.selected_data_record.profile.person_to_notify_cp_relationship,
+      attending_physician_id: "",
+      prepared_by_id: "",
+      fiscal_year: "",
+      hospital_no: "",
+      building_id: "",
+      admitted_datetime: "",
+      transferred_from: "",
+      admitting_diagnosis: "",
+      final_diagnosis: "",
+      management_operations: "",
+      c1: "",
+      c2: "",
+      c3: "",
+      c1_desc: "",
+      c2_desc: "",
+      c3_desc: "",
+      d_medical: "",
+      d_surgical: "",
+      d_obstetrics: "",
+      d_pediatrics: "",
+      d_nicu: "",
+      d_gyne: "",
+      d_optha: "",
+      d_ent: "",
+      c_private: "",
+      c_charity: "",
+      c_life_senior: "",
+      c_non_philhealth: "",
+      c_philhealth: "",
+      c_ofw: "",
+      c_gm: "",
+      c_gd: "",
+      c_sem: "",
+      c_pem: "",
+      c_im: "",
+      c_id: "",
+      c_sed: "",
+      c_ped: "",
+      r_recovered: "",
+      r_improved: "",
+      r_unimproved: "",
+      r_died: "",
+      d_discharged: "",
+      d_length: "",
+      d_absonded: "",
+      d_dismissed: "",
+      d_transferred: "",
+      d_discharged_desc: "",
+      d_length_desc: "",
+      d_absonded_desc: "",
+      d_dismissed_desc: "",
+      d_transferred_desc: ""
+    })
+  }
+
+  createNewClinical() {
+    let c = this.clinicalFormGroup.value;
+    c.attending_physician_id = parseInt(c.attending_physician_id);
+    c.patient_id = this.selected_data_record.user_id;
+    c.profile_id = this.selected_user_profile_id;
+    c.departments = [
+      {"department_id":1, "is_selected": c.d_medical},
+      {"department_id":2, "is_selected": c.d_surgical},
+      {"department_id":3, "is_selected": c.d_obstetrics},
+      {"department_id":4, "is_selected": c.d_pediatrics},
+      {"department_id":5, "is_selected": c.d_nicu},
+      {"department_id":6, "is_selected": c.d_gyne},
+      {"department_id":7, "is_selected": c.d_optha},
+      {"department_id":8, "is_selected": c.d_ent}
+    ]
+    c.society_classes = [
+      {"society_class_id":1, "is_selected": c.c_private},
+      {"society_class_id":2, "is_selected": c.c_charity},
+      {"society_class_id":3, "is_selected":c.c_life_senior},
+      {"society_class_id":4, "is_selected":c.c_non_philhealth},
+      {"society_class_id":5, "is_selected":c.c_philhealth},
+      {"society_class_id":6, "is_selected":c.c_ofw},
+      {"society_class_id":7, "is_selected":c.c_gm},
+      {"society_class_id":8, "is_selected":c.c_gd},
+      {"society_class_id":9, "is_selected":c.c_sem},
+      {"society_class_id":10, "is_selected":c.c_pem},
+      {"society_class_id":11, "is_selected":c.c_im},
+      {"society_class_id":12, "is_selected":c.c_id},
+      {"society_class_id":13, "is_selected":c.c_sed},
+      {"society_class_id":14, "is_selected":c.c_ped}
+    ]
+    c.local_services = [
+      {"local_service_id":1, "is_selected":c.c1, "desc":c.c1_desc},
+      {"local_service_id":2, "is_selected":c.c2, "desc":c.c2_desc},
+      {"local_service_id":3, "is_selected":c.c3, "desc":c.c3_desc}
+    ]
+    c.results = [
+      {"result_id":1, "is_selected":c.r_recovered},
+      {"result_id":2, "is_selected":c.r_improved},
+      {"result_id":3, "is_selected":c.r_unimproved},
+      {"result_id":4, "is_selected":c.r_died}
+    ]
+    c.dispositions = [
+      {"disposition_id":1, "is_selected":c.d_discharged, "desc": c.d_discharged_desc},
+      {"disposition_id":2, "is_selected":c.d_length, "desc": c.d_length_desc},
+      {"disposition_id":3, "is_selected":c.d_absonded, "desc": c.d_absonded_desc},
+      {"disposition_id":4, "is_selected":c.d_dismissed, "desc": c.d_dismissed_desc},
+      {"disposition_id":5, "is_selected":c.d_transferred, "desc": c.d_transferred_desc}
+    ]
+    console.log(c);
+
+    this.apiService
+      .createClinicalRecord({clinical_record: c})
+      .subscribe(
+        res => {
+          console.log(res);
+          this.selected_data_record = res;
+          this.clinicalResultId = this.selected_data_record.clinical_record.id;
+          this.getRecord();
+        },
+        err => {
+          alert(err.message);
+        }
+      )
   }
 
 }

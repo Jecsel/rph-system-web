@@ -5,7 +5,7 @@ declare var $: any;
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit {
   data_list: any;
@@ -23,6 +23,8 @@ export class UserProfileComponent implements OnInit {
   civil_status_id: any;
   clinical_records: any;
   has_profile: any;
+  selected_clinical_id: any;
+  show_clinical_modal: any = false;
 
   @Input()
   selectedId: any;
@@ -134,6 +136,7 @@ export class UserProfileComponent implements OnInit {
       dob: this.user_profile.dob,
       age: this.user_profile.age,
       birth_place: this.user_profile.birth_place,
+      address: this.user_profile.address,
       male: this.user_profile.gender_id == 1 ? true : false,
       female: this.user_profile.gender_id == 2 ? true : false,
       single: this.user_profile.civil_status_id == 1 ? true : false,
@@ -159,6 +162,7 @@ export class UserProfileComponent implements OnInit {
       dob: ['', Validators.required],
       age: ['', Validators.required],
       birth_place: ['', Validators.required],
+      address: ['', Validators.required],
       male: [''],
       female: [''],
       single: [''],
@@ -301,5 +305,20 @@ export class UserProfileComponent implements OnInit {
         '</div>'
     });
   }
+
+view(id) {
+  this.show_clinical_modal = true;
+  this.selected_clinical_id = id;
+}  
+
+close() {
+  this.show_clinical_modal = false;
+}
+
+newClinical() {
+  this.selected_user_profile_id = localStorage.setItem('selected_user_profile_id', this.user_profile_id);
+  this.show_clinical_modal = true;
+  this.selected_clinical_id = 0;
+}
 
 }

@@ -10,6 +10,7 @@ export class TableListComponent implements OnInit {
   clinical_records: any;
   constructor(private apiService: ApiServiceService) { }
   show_clinical_modal: any;
+  selected_clinical_id: any;
   
   ngOnInit() {
     this.show_clinical_modal = false;
@@ -20,7 +21,8 @@ export class TableListComponent implements OnInit {
     this.show_clinical_modal = false;
   }
 
-  view() {
+  view(id) {
+    this.selected_clinical_id = id;
     this.show_clinical_modal = true;
   }
 

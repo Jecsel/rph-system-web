@@ -27,7 +27,7 @@
                                   </th>
                               </thead>
                               <tbody *ngFor="let c of clinical_records; let id = index">
-                                  <tr style="cursor: pointer;" (click)="view()">
+                                  <tr style="cursor: pointer;" (click)="view(c.id)">
                                       <td>
                                           {{c.id}}
                                       </td>
@@ -58,7 +58,7 @@
             <div class="d-flex justify-content-end p-2">
               <mat-icon (click)="close()" style="cursor: pointer;">close</mat-icon>
             </div>
-            <app-clinical-record clinicalResultId=""></app-clinical-record>
+            <app-clinical-record [clinicalResultId]="selected_clinical_id"></app-clinical-record>
           </div>
         </div>
       </div>
