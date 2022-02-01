@@ -1,0 +1,271 @@
+<!-- <button [useExistingCss]="true" class="mr-2" printSectionId="outpatient" style="cursor: pointer;" ngxPrint>print</button> -->
+<div id="outpatient">
+    <div class="outpatient-card mx-5">
+        <div class="row">
+            <div class="col-sm-12 col-md-4">
+                <div class="d-flex justify-content-center ">
+                    <img class="login-logo" mat-card-image src="../../assets/img/romblon.jpeg" style="height: 100px;">
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="d-flex justify-content-center ">
+                    <p style="text-align: center;">Republic of the Philippines <br> Province of Romblon <br><b>OFFICE OF THE GOVERNOR</b> <br><b>ROMBLON PROVINCIAL HOSPITAL</b><br>Odiongan, Romblon</p>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                
+            </div>
+        </div>
+    
+        <div class="d-flex justify-content-center">
+            <h5><b>OUTPATIENT RECORD CHARTS</b></h5><br>
+        </div>
+        <form [formGroup]="outpatientFormGroup" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-sm-6 col-md-8" style="text-align: start;">
+                    <label>CLINICS:</label>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <mat-checkbox class="mr-1" [(ngModel)]="medical" formControlName="medical">MEDICAL</mat-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-checkbox class="mr-1" [(ngModel)]="eent" formControlName="eent">E.E.N.T.</mat-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-checkbox class="mr-1" [(ngModel)]="obstetrics" formControlName="obstetrics">OBSTETRICS</mat-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-checkbox class="mr-1" [(ngModel)]="pediatrics" formControlName="pediatrics">PEDIATRICS</mat-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-checkbox class="mr-1" [(ngModel)]="urology" formControlName="urology">UROLOGY</mat-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-checkbox class="mr-1" [(ngModel)]="dental" formControlName="dental">Dental</mat-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-checkbox class="mr-1" [(ngModel)]="surgery" formControlName="surgery">SURGERY</mat-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-checkbox class="mr-1" [(ngModel)]="dermatology" formControlName="dermatology">DERMATOLOGY</mat-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-checkbox class="mr-1" [(ngModel)]="gynecology" formControlName="gynecology">GYNECOLOGY</mat-checkbox>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-checkbox class="mr-1" [(ngModel)]="neurology" formControlName="neurology">NEUROLOGY</mat-checkbox>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4" style="text-align: start;">
+                    <label>SERVICES:</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <mat-checkbox class="mr-1" [(ngModel)]="charity" formControlName="charity">CHARITY</mat-checkbox>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-checkbox class="mr-1" [(ngModel)]="resident" formControlName="resident">RESIDENT</mat-checkbox>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-checkbox class="mr-1" [(ngModel)]="transient" formControlName="transient">TRANSIENT</mat-checkbox>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-checkbox class="mr-1" [(ngModel)]="government" formControlName="government">GOVERNMENT</mat-checkbox>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-checkbox class="mr-1" [(ngModel)]="private" formControlName="private">PRIVATE PAY</mat-checkbox>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <div class="d-flex justify-content-center">
+                    <p><b>APPROVED AS TO CLINICS AND SERVICE</b></p>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <p>DR. BENEDICT G. ANATALIO <br> Chief of Hospital II</p>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Surname" formControlName="surname">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="First Name" formControlName="first_name">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Middle Name" formControlName="middle_name">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Age" formControlName="age">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Nationality" formControlName="nationality">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 col-lg-2">
+                        <mat-checkbox class="mr-1" [(ngModel)]="male" formControlName="male">Male</mat-checkbox>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-2">
+                        <mat-checkbox class="mr-1" [(ngModel)]="female" formControlName="female">Female</mat-checkbox>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-2">
+                        <mat-checkbox class="mr-1" [(ngModel)]="single" formControlName="single">Single</mat-checkbox>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-2">
+                        <mat-checkbox class="mr-1" [(ngModel)]="married" formControlName="married">Married</mat-checkbox>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-2">
+                        <mat-checkbox class="mr-1" [(ngModel)]="widow" formControlName="widow">Widow</mat-checkbox>
+                    </div>
+                    <div class="col-sm-12 col-md-4 col-lg-2">
+                        <mat-checkbox class="mr-1" [(ngModel)]="separated" formControlName="separated">Separated</mat-checkbox>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Address" formControlName="address">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="religion" formControlName="religion">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Birth Place" formControlName="birth_place">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Employed By" formControlName="employed_by">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <!-- <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Birthday" formControlName="birthday">
+                        </mat-form-field> -->
+                        <mat-form-field class="example-full-width">
+                            <mat-label>Birthday</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="dob">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-5 col-lg-5">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Payees person to notify in case of Emergency" formControlName="payees_person_to_notify">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Referred By" formControlName="referred_by">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Relation to Patient" formControlName="relations_to_patient">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3 col-lg-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Note to Allergies" formControlName="note_to_allergies">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                    <tr>
+                      <th class="text-center">Date</th>
+                      <th class="text-center">Time of Arrival</th>
+                      <th class="text-center">Time of Discharge</th>
+                      <th class="text-center">Diagnosis</th>
+                      <th class="text-center">Service of Treatment</th>
+                      <th class="text-center">Doctor on Duty</th>
+                      <th class="text-center">Remarks</th>
+                    </tr>
+                    <tr>
+                    <tr *ngFor="let mark of outpatient_records.remarks; let id = index">
+                      <td>
+                        <span>{{mark.record_date | date}}</span>
+                      </td>
+                      <td>
+                        <span>{{mark.time_of_arrival}}</span>
+                      </td>
+                      <td>
+                        <span>{{mark.time_of_discharge}}</span>
+                      </td>
+                      <td>
+                        <span>{{mark.service_of_treatment}}</span>
+                      </td>
+                      <td>
+                        <span>{{mark.remarks}}</span>
+                      </td>
+                      <td>
+                        <span>{{mark.time_of_arrival}}</span>
+                      </td>
+                      <td>
+                        <span>{{mark.time_of_arrival}}</span>
+                      </td>
+                    </tr>
+                </table>
+                <div class="row">
+                    <div class="col-sm-12 col-md-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="NOI" formControlName="noi">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="POI" formControlName="poi">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="DOI" formControlName="doi">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="TOI" formControlName="toi">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Assailant" formControlName="assailant">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Nearest Kin" formControlName="nearest_kin">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Patient who brought the victim" formControlName="patient_brought_victim">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="Address" formControlName="payees_address">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </form>
+    
+    </div>
+</div>

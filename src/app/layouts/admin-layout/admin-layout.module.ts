@@ -24,6 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { ClinicalRecordComponent } from 'app/clinical-record/clinical-record.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { OutpatientRecordComponent } from 'app/outpatient-record/outpatient-record.component';
+import { NgxPrintModule } from 'ngx-print';
 
 @NgModule({
   imports: [
@@ -43,7 +45,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatDatepickerModule,
     MatNativeDateModule,
     MatExpansionModule,
-    
+    NgxPrintModule,
   ],
   declarations: [
     DashboardComponent,
@@ -55,7 +57,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MapsComponent,
     NotificationsComponent,
     UpgradeComponent,
-    ClinicalRecordComponent
+    ClinicalRecordComponent,
+    OutpatientRecordComponent
   ]
 })
 

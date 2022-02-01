@@ -3,19 +3,19 @@
       <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
-                  <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-header card-header-dark card-header-icon">
                       <div class="card-icon">
-                          <i class="material-icons">content_copy</i>
+                          <i class="material-icons">admin_panel_settings</i>
                       </div>
-                      <p class="card-category">Used Space</p>
-                      <h3 class="card-title">49/50
-                          <small>GB</small>
+                      <p class="card-category">Total</p>
+                      <h3 class="card-title">{{data.admin}}
+                          <!-- <small>GB</small> -->
                       </h3>
                   </div>
                   <div class="card-footer">
                       <div class="stats">
-                          <i class="material-icons text-danger">warning</i>
-                          <a href="javascript:void(0)">Get More Space...</a>
+                          <i class="material-icons">info</i>
+                          Admin
                       </div>
                   </div>
               </div>
@@ -24,30 +24,30 @@
               <div class="card card-stats">
                   <div class="card-header card-header-success card-header-icon">
                       <div class="card-icon">
-                          <i class="material-icons">store</i>
+                          <i class="material-icons">local_pharmacy</i>
                       </div>
-                      <p class="card-category">Revenue</p>
-                      <h3 class="card-title">$34,245</h3>
+                      <p class="card-category">Total</p>
+                      <h3 class="card-title">{{data.nurse}}</h3>
                   </div>
                   <div class="card-footer">
                       <div class="stats">
-                          <i class="material-icons">date_range</i> Last 24 Hours
+                          <i class="material-icons">date_range</i> Nurse
                       </div>
                   </div>
               </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6">
               <div class="card card-stats">
-                  <div class="card-header card-header-danger card-header-icon">
+                  <div class="card-header card-header-primary card-header-icon">
                       <div class="card-icon">
-                          <i class="material-icons">info_outline</i>
+                          <i class="material-icons">person</i>
                       </div>
-                      <p class="card-category">Fixed Issues</p>
-                      <h3 class="card-title">75</h3>
+                      <p class="card-category">Total</p>
+                      <h3 class="card-title">{{data.patient}}</h3>
                   </div>
                   <div class="card-footer">
                       <div class="stats">
-                          <i class="material-icons">local_offer</i> Tracked from Github
+                          <i class="material-icons">local_offer</i> Patient
                       </div>
                   </div>
               </div>
@@ -56,20 +56,84 @@
               <div class="card card-stats">
                   <div class="card-header card-header-info card-header-icon">
                       <div class="card-icon">
-                          <i class="fa fa-twitter"></i>
+                        <i class="material-icons">medical_services</i>
                       </div>
-                      <p class="card-category">Followers</p>
-                      <h3 class="card-title">+245</h3>
+                      <p class="card-category">Total</p>
+                      <h3 class="card-title">{{data.doctor}}</h3>
                   </div>
                   <div class="card-footer">
                       <div class="stats">
-                          <i class="material-icons">update</i> Just Updated
+                          <i class="material-icons">update</i> Doctor
                       </div>
                   </div>
               </div>
           </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-success card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">mood</i>
+                    </div>
+                    <p class="card-category">Total</p>
+                    <h3 class="card-title">{{data.recovered}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">update</i> Recovered
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-danger card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">mood_bad</i>
+                    </div>
+                    <p class="card-category">Total</p>
+                    <h3 class="card-title">{{data.died}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">update</i> Death
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">person_add_alt_1</i>
+                    </div>
+                    <p class="card-category">Total</p>
+                    <h3 class="card-title">{{data.improved}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">update</i> Improved
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-light card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">sentiment_neutral</i>
+                    </div>
+                    <p class="card-category">Total</p>
+                    <h3 class="card-title">{{data.unimproved}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">update</i> Unimproved
+                    </div>
+                </div>
+            </div>
+        </div>
       </div>
-      <div class="row">
+      <!-- <div class="row">
           <div class="col-md-4">
               <div class="card card-chart">
                   <div class="card-header card-header-success">
@@ -119,7 +183,7 @@
                   </div>
               </div>
           </div>
-      </div>
+      </div> -->
       <!-- <div class="row">
           <div class="col-lg-6 col-md-12">
               <div class="card">

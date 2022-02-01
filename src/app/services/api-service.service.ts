@@ -149,6 +149,54 @@ export class ApiServiceService {
       }));
   }
 
+  getAllOutPatientRecord(): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .get(this.baseUrl + 'outpatient_record/', this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  getOneOutPatientRecord(id: any): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .get(this.baseUrl + 'outpatient_record/' + id, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  getDashboardData(): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .get(this.baseUrl + 'dashboard/', this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
   // ----------- POST REQUEST -------------//
 
   updateUser(data: any): Observable<void>{
@@ -295,6 +343,36 @@ export class ApiServiceService {
     };
     return this.httpClient
       .post(this.baseUrl + 'clinical_record/1/update_clinical_record', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  updateOutpatientRecord(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+    return this.httpClient
+      .post(this.baseUrl + 'outpatient_record/1/update', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  createOutpatientRecord(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+    return this.httpClient
+      .post(this.baseUrl + 'outpatient_record/', data, this.httpOptions)
       .pipe(map((response: any) => {
         return response;
       }));

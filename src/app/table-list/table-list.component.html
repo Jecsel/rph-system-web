@@ -56,9 +56,12 @@
         <div class="clinical-content" style="max-height: 550px; overflow: scroll;">
           <div *ngIf="show_clinical_modal" class="card">
             <div class="d-flex justify-content-end p-2">
+              <button [useExistingCss]="true" class="mr-2" printSectionId="clinical" style="cursor: pointer;" ngxPrint>print</button>
               <mat-icon (click)="close()" style="cursor: pointer;">close</mat-icon>
             </div>
-            <app-clinical-record [clinicalResultId]="selected_clinical_id"></app-clinical-record>
+            <div id="clinical">
+                <app-clinical-record [clinicalResultId]="selected_clinical_id"></app-clinical-record>
+            </div>
           </div>
         </div>
       </div>

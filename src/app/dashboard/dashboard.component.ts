@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiServiceService } from 'app/services/api-service.service';
 import * as Chartist from 'chartist';
 
 @Component({
@@ -8,10 +9,8 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
-
-
-
+  data: any = {};
+  constructor(private apiService: ApiServiceService) { }
 
   //Default Codes
   startAnimationForLineChart(chart){
@@ -73,6 +72,7 @@ export class DashboardComponent implements OnInit {
 
   
   ngOnInit() {
+    this.getDashboardData();
 
 
 
@@ -158,4 +158,17 @@ export class DashboardComponent implements OnInit {
       this.startAnimationForBarChart(websiteViewsChart);
   }
 
+  getDashboardData(){
+    this.apiService
+      .getDashboardData()
+      .subscribe(
+        res =>{
+          console.log(res);
+          this.data = res;
+        },
+        err => {
+          alert(err.message);
+        }
+      )
+  }
 }
