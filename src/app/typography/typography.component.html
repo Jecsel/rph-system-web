@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
-    <div class="card">
+    <div *ngIf="!show_account_modal" class="card">
         <div class="card-header card-header-danger">
             <h4 class="card-title">Manage Accounts</h4>
             <p class="card-category">Showing all accounts registered</p>
@@ -9,46 +9,63 @@
             <div id="typography">
                 <div class="card">
                     <div class="card-body">
-                      <div id="table" class="table-editable">
-                        <span class="table-add float-right mb-3 mr-2">
-                          <a class="text-success" (click)="add()">
-                            <!-- <mdb-icon fas icon="plus" size="2x"></mdb-icon> -->
-                            <i class="material-icons" style="cursor: pointer; font-size: 35px;">add</i>
-                          </a>
-                        </span>
-                        <table class="table table-bordered table-responsive-md table-striped text-center">
-                          <tr>
-                            <th class="text-center">Username</th>
-                            <th class="text-center">Password</th>
-                            <th class="text-center">User Type</th>
-                            <th class="text-center">User Role</th>
-                            <th class="text-center">Remove</th>
-                          </tr>
-                          <tr *ngFor="let user of all_users; let id = index">
-                            <td>
-                              <span (blur)="updateList(user.id, 'username', $event, user)" contenteditable="true">{{user.username}}</span>
-                            </td>
-                            <td>
-                              <span contenteditable="true" (blur)="updateList(user.id, 'password', $event, user)">{{user.password}}</span>
-                            </td>
-                            <td>
-                              <span contenteditable="true" (blur)="updateList(user.id, 'user_type_id', $event, user)">{{user.user_type_id}}</span>
-                            </td>
-                            <td>
-                              <span contenteditable="true" (blur)="updateList(user.id, 'user_role_id', $event, user)">{{user.user_role_id}}</span>
-                            </td>
-                            <td>
-                              <span class="table-remove">
-                                
-                                <button type="button" rounded="true" size="sm" class="btn btn-danger my-0" (click)="remove(user.id)">Remove</button>
-                              </span>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
+                      <form [formGroup]="accountFormGroup">
+                        <div id="table" class="table-editable">
+                          <span class="table-add float-right mb-3 mr-2">
+                            <a class="text-success" (click)="newModal()">
+                              <i class="material-icons" style="cursor: pointer; font-size: 35px;">add</i>
+                            </a>
+                          </span>
+                          <table class="table table-bordered table-responsive-md table-striped text-center">
+                            <tr>
+                              <th class="text-center">Username</th>
+                              <th class="text-center">Password</th>
+                              <th class="text-center">User Type</th>
+                              <th class="text-center">User Role</th>
+                              <th class="text-center">Building</th>
+                              <th class="text-center">Remove</th>
+                            </tr>
+                            <tr *ngFor="let user of all_users; let id = index" (click)="updateModal(user)">
+                              <td>
+                                <span (blur)="updateList(user.id, 'username', $event, user)" contenteditable="true">{{user.username}}</span>
+                              </td>
+                              <td>
+                                <span contenteditable="true" (blur)="updateList(user.id, 'password', $event, user)">{{user.password}}</span>
+                              </td>
+                              <td>
+                                <span>{{data_list.user_types[user.user_type_id - 1].name}}</span>
+                              </td>
+                              <td>
+                                <span>{{data_list.user_roles[user.user_role_id - 1].name}}</span>
+                              </td>
+                              <td>
+                                <span>{{data_list.buildings[user.building_id - 1].name}}</span>
+                              </td>
+                              <td>
+                                <span class="table-remove">
+                                  <button type="button" rounded="true" size="sm" class="btn btn-danger my-0" (click)="remove(user.id)">Remove</button>
+                                </span>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </form>
                     </div>
                   </div>
             </div>
         </div>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <div class="clinical-content" style="overflow: scroll;">
+        <div *ngIf="show_account_modal" class="card">
+          <div class="d-flex justify-content-end p-2">
+            <mat-icon (click)="closeModal()" style="cursor: pointer;">close</mat-icon>
+          </div>
+          <div id="account">
+            <app-create-account [accountRecord]="account_data"></app-create-account>
+          </div>
+        </div>
+      </div>
     </div>
 </div>

@@ -77,9 +77,9 @@
                             </mat-form-field>
                             <mat-form-field class="example-full-width">
                                 <mat-label>Admitted Date</mat-label>
-                                <input matInput [matDatepicker]="picker" formControlName="admitted_datetime">
-                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
+                                <input matInput [matDatepicker]="apicker" formControlName="admitted_datetime">
+                                <mat-datepicker-toggle matSuffix [for]="apicker"></mat-datepicker-toggle>
+                                <mat-datepicker #apicker></mat-datepicker>
                             </mat-form-field>
                             <mat-form-field class="example-full-width">
                                 <input matInput placeholder="Transfer From" formControlName="transferred_from">
@@ -109,8 +109,7 @@
                     <mat-form-field class="example-full-width">
                         <input matInput placeholder="Attending Physician" formControlName="attending_physician_id">
                     </mat-form-field>
-                </div>
-                <div class="col-md-3">
+                    
                     <div class="service-content mb-1">
                         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                             <mat-expansion-panel-header>
@@ -150,6 +149,8 @@
                             <mat-checkbox class="" formControlName="d_ent">ENT</mat-checkbox>
                         </mat-expansion-panel>
                     </div>
+                </div>
+                <div class="col-md-3">
 
                     <div class="class-content mb-1">
                         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">

@@ -26,6 +26,8 @@ import { ClinicalRecordComponent } from 'app/clinical-record/clinical-record.com
 import {MatExpansionModule} from '@angular/material/expansion';
 import { OutpatientRecordComponent } from 'app/outpatient-record/outpatient-record.component';
 import { NgxPrintModule } from 'ngx-print';
+import { CreateAccountComponent } from 'app/create-account/create-account.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   imports: [
@@ -46,6 +48,7 @@ import { NgxPrintModule } from 'ngx-print';
     MatNativeDateModule,
     MatExpansionModule,
     NgxPrintModule,
+    MatCardModule,
   ],
   declarations: [
     DashboardComponent,
@@ -58,7 +61,8 @@ import { NgxPrintModule } from 'ngx-print';
     NotificationsComponent,
     UpgradeComponent,
     ClinicalRecordComponent,
-    OutpatientRecordComponent
+    OutpatientRecordComponent,
+    CreateAccountComponent
   ]
 })
 

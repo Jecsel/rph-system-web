@@ -25,6 +25,8 @@ export class UserProfileComponent implements OnInit {
   has_profile: any;
   selected_clinical_id: any;
   show_clinical_modal: any = false;
+  show_outpatient_modal: any = false;
+  outpatient_result: any = {};
 
   @Input()
   selectedId: any;
@@ -53,9 +55,17 @@ export class UserProfileComponent implements OnInit {
         this.getProfile();
       }
     }
-    this.getList();
+    // this.getList();
     this.declareFormBuilder();
     this.getPatientClinicalRecords();
+  }
+
+  newOutpatient(): void{
+    this.show_outpatient_modal = true;
+  }
+
+  closeOutpatient(): void{
+    this.show_outpatient_modal = false;
   }
 
   getPatientClinicalRecords(): void{
@@ -306,19 +316,19 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
-view(id) {
-  this.show_clinical_modal = true;
-  this.selected_clinical_id = id;
-}  
+  view(id) {
+    this.show_clinical_modal = true;
+    this.selected_clinical_id = id;
+  }  
 
-close() {
-  this.show_clinical_modal = false;
-}
+  close() {
+    this.show_clinical_modal = false;
+  }
 
-newClinical() {
-  this.selected_user_profile_id = localStorage.setItem('selected_user_profile_id', this.user_profile_id);
-  this.show_clinical_modal = true;
-  this.selected_clinical_id = 0;
-}
+  newClinical() {
+    this.selected_user_profile_id = localStorage.setItem('selected_user_profile_id', this.user_profile_id);
+    this.show_clinical_modal = true;
+    this.selected_clinical_id = 0;
+  }
 
 }

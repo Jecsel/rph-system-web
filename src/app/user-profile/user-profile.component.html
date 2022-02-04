@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
-      <div class="row">
+      <div *ngIf="!show_outpatient_modal && !show_clinical_modal" class="row">
           <div class="col-md-8">
               <div class="card">
                   <div class="card-header card-header-danger">
@@ -26,9 +26,6 @@
                                 </mat-form-field>
                             </div>
                             <div class="col-md-4">
-                              <!-- <mat-form-field class="example-full-width">
-                                <input matInput placeholder="Date of Birth" formControlName="dob">
-                              </mat-form-field> -->
                               <mat-form-field class="example-full-width">
                                 <mat-label>Birthday</mat-label>
                                 <input matInput [matDatepicker]="picker" formControlName="dob">
@@ -52,12 +49,6 @@
                                 <mat-checkbox class="mr-1" [(ngModel)]="male" formControlName="male">Male</mat-checkbox>
                                 <mat-checkbox class="" [(ngModel)]="female" formControlName="female">Female</mat-checkbox>
                               </div>
-                              <!-- <section class="example-section">
-                                <mat-radio-group formControlName="gender_id">
-                                  <mat-radio-button class="example-margin mr-1" value=1>Male</mat-radio-button>
-                                  <mat-radio-button class="example-margin" value=2>Female</mat-radio-button>
-                                </mat-radio-group>
-                              </section> -->
                             </div>
                             <div class="col-md-4">
                               <mat-label>Civil Status</mat-label>
@@ -65,12 +56,6 @@
                                 <mat-checkbox class="mr-1" [(ngModel)]="single" formControlName="single">Single</mat-checkbox>
                                 <mat-checkbox class="" [(ngModel)]="married" formControlName="married">Married</mat-checkbox>
                               </div>
-                              <!-- <section class="example-section">
-                                <mat-radio-group formControlName="civil_status_id" [(ngModel)]="civil_status_id">
-                                  <mat-radio-button class="mr-2" class="example-margin mr-1" value=1>Single</mat-radio-button>
-                                  <mat-radio-button class="example-margin" value=2>Married</mat-radio-button>
-                                </mat-radio-group>
-                              </section> -->
                             </div>
                             <div class="col-md-4">
                               <mat-form-field class="example-full-width">
@@ -139,7 +124,7 @@
                   <div class="card-body">
                     <div class="d-flex flex-row">
                       <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-primary my-0" (click)="newClinical()">New Clinical Record</button>
-                      <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-success my-0">New Outpatient Record</button>
+                      <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-success my-0" (click)="newOutpatient()">New Outpatient Record</button>
                     </div>
                     <div class="result-container" style="max-height: 350px; overflow: scroll;">
 
@@ -171,7 +156,7 @@
               </div>
           </div>
       </div>
-      <div class="user-clinical-container">
+      <div class="clinical-container">
         <div class="clinical-content" style="max-height: 550px; overflow: scroll;">
           <div *ngIf="show_clinical_modal" class="card">
             <div class="d-flex justify-content-end p-2">
@@ -184,5 +169,19 @@
           </div>
         </div>
       </div>  
+
+      <div class="clinical-container">
+        <div class="clinical-content" style="max-height: 550px; overflow: scroll;">
+          <div *ngIf="show_outpatient_modal" class="card">
+            <div class="d-flex justify-content-end p-2">
+              <button [useExistingCss]="true" class="mr-2" printSectionId="outpatient" style="cursor: pointer;" ngxPrint>print</button>
+              <mat-icon (click)="close()" style="cursor: pointer;">close</mat-icon>
+            </div>
+            <div id="outpatient">
+              <app-outpatient-record [outpatientResult]="outpatient_result"></app-outpatient-record>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 </div>

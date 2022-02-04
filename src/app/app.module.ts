@@ -36,6 +36,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { OutpatientRecordComponent } from './outpatient-record/outpatient-record.component';
+import { CreateAccountComponent } from './create-account/create-account.component';
 // import { UserComponent } from './user/user.component';
 
 
@@ -72,6 +73,7 @@ const materialModules = [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    // CreateAccountComponent,
     // OutpatientRecordComponent,
     // ClinicalRecordComponent
     // UserComponent,

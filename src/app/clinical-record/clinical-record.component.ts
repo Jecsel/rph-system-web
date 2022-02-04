@@ -204,7 +204,7 @@ export class ClinicalRecordComponent implements OnInit {
       address:[ '', Validators.required ],
       civil_status_id:[ '', Validators.required ],
       religion:[ '', Validators.required ],
-      dob:[ '' ],
+      dob:[ '' , Validators.required],
       nationality:[ '', Validators.required ],
       cp_no:[ '', Validators.required ],
       person_to_notify:[ '', Validators.required ],
