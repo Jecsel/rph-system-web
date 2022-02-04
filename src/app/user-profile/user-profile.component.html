@@ -108,13 +108,13 @@
                               </mat-form-field>
                             </div>
                           </div>
-                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">Update Profile</button>
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right">{{submit_button_name}}</button>
                           <div class="clearfix"></div>
                       </form>
                   </div>
               </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4" *ngIf="show_sidebar_profile">
               <div class="card card-profile">
                   <div class="card-avatar">
                       <a href="javascript:void(0)">

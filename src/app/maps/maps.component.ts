@@ -11,6 +11,8 @@ export class MapsComponent implements OnInit {
   show_profile_modal = false;
   selected_user_id: any;
   new_patient: any;
+
+  user_data: any = {}
   constructor(private apiService: ApiServiceService) { }
 
   ngOnInit() {
@@ -34,14 +36,16 @@ export class MapsComponent implements OnInit {
       )
   }
 
-  viewPatient(user_id) {
+  viewPatient(user) {
     this.new_patient = false;
-    this.selected_user_id = user_id;
-    localStorage.setItem('selected_user_profile_id', user_id);
+    this.user_data = user;
+    this.user_data.create_new = false;
     this.show_profile_modal= true;
   }
 
-  show() {
+  addPatient() {
+    this.user_data = { "create_new": true };
+
     this.new_patient = true;
     this.show_profile_modal= true;
   }

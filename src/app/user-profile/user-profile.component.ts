@@ -28,9 +28,11 @@ export class UserProfileComponent implements OnInit {
   show_outpatient_modal: any = false;
   outpatient_result: any = {};
 
+  submit_button_name: any = 'Create';
+  show_sidebar_profile : any = false;
+
   @Input()
-  selectedId: any;
-  newPatient: string;
+  newPatient: any;;
   constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { 
 
   }
@@ -41,21 +43,36 @@ export class UserProfileComponent implements OnInit {
     this.user_profile_id = localStorage.getItem('user_profile_id');
     this.has_profile = localStorage.getItem('has_profile');
 
-    console.log(this.selectedId);
+    console.log('newPatient Date: ', this.user_profile);
 
-    if( this.has_profile == 'false' ){
-      this.showNotification();
-    }else{
-      
-      if(this.selectedId != undefined){
-        // if(this.user_profile_id != undefined){
-          this.getSelectedProfile();
-        // }
-      }else{
+    if(this.newPatient == undefined){
+      if(this.has_profile == 'true'){
         this.getProfile();
+        this.submit_button_name = 'Update';
+      }else{
+        this.showNotification();
+      }
+    }else{
+      if(this.newPatient.create_new){
+        this.submit_button_name = 'Create';
+      }else{
+        this.show_sidebar_profile = true;
+        this.submit_button_name = 'Update';
+        this.user_profile_id = this.newPatient.id;
+        this.getProfile()
       }
     }
-    // this.getList();
+
+    // if( this.has_profile == 'false' ){
+    //   this.showNotification();
+    // }else{
+    //   if(this.selectedId != undefined){
+    //       this.getSelectedProfile();
+    //   }else{
+    //     this.getProfile();
+    //   }
+    // }
+
     this.declareFormBuilder();
     this.getPatientClinicalRecords();
   }
@@ -114,7 +131,7 @@ export class UserProfileComponent implements OnInit {
           }else{
             this.user_profile = res.profile;
           }
-          
+          this.show_sidebar_profile = true;
           this.setProfileData();
         },
         err => {
@@ -127,10 +144,11 @@ export class UserProfileComponent implements OnInit {
     this.apiService
       .createPatient(this.data_body)
       .subscribe(
-        res => {
+        (res: any) => {
           console.log(res);
+          alert(res.message);
         },
-        err => {
+        (err: any) => {
           alert(err.message);
         }
       )
@@ -212,18 +230,34 @@ export class UserProfileComponent implements OnInit {
     delete this.data_body.profile.female;
     delete this.data_body.profile.single;
     delete this.data_body.profile.married;
-    if(this.selectedId == undefined && this.data_body.profile.user_id == undefined){
-      console.log('create new patient', this.data_body);
-      this.createNewPatient();
-    }else{
-      if( this.has_profile == 'false' ){
-        console.log('create user Profile')
-        this.createProfile();
+
+    if(this.newPatient == undefined){
+      if(this.has_profile == 'true'){
+        this.updateProfile();
       }else{
-        console.log('Update Patient or User Profile')
+        this.createProfile();
+      }
+    }else{
+      if(this.newPatient.create_new){
+        this.createNewPatient();
+      }else{
         this.updateProfile();
       }
     }
+
+
+    // if(this.selectedId == undefined && this.data_body.profile.user_id == undefined){
+    //   console.log('create new patient', this.data_body);
+    //   this.createNewPatient();
+    // }else{
+    //   if( this.has_profile == 'false' ){
+    //     console.log('create user Profile')
+    //     this.createProfile();
+    //   }else{
+    //     console.log('Update Patient or User Profile')
+    //     this.updateProfile();
+    //   }
+    // }
   }
 
   updateProfile(): void{
@@ -252,7 +286,8 @@ export class UserProfileComponent implements OnInit {
         res => {
           console.log(res);
           this.user_profile = res;
-          this.user_profile_id = this.user_profile.id
+          alert('Updated Successfully');
+          this.ngOnInit();
         },
         err => {
           alert(err.message);
@@ -271,6 +306,7 @@ export class UserProfileComponent implements OnInit {
           this.user_profile = res;
           localStorage.setItem('user_profile_id', this.user_profile.profile.id);
           localStorage.setItem('has_profile', 'true');
+          alert('Updated Successfully');
         },
         err =>{
           alert(err.message);

@@ -1,7 +1,7 @@
 <div id="map">
     <div class="main-content">
         <div class="container-fluid">
-          <div class="card">
+          <div *ngIf="!show_profile_modal" class="card">
               <div class="card-header card-header-danger">
                   <h4 class="card-title">List of Patients</h4>
                   <p class="card-category">Showing all patients recorded</p>
@@ -12,7 +12,7 @@
                           <div class="card-body">
                             <div id="table" class="table-editable">
                               <span class="table-add float-right mb-3 mr-2">
-                                <a class="text-success" (click)="show()">
+                                <a class="text-success" (click)="addPatient()">
                                   <!-- <mdb-icon fas icon="plus" size="2x"></mdb-icon> -->
                                   <i class="material-icons" style="cursor: pointer; font-size: 35px;">add</i>
                                 </a>
@@ -45,7 +45,7 @@
                                   <td>
                                     <div style="display:inline-flex">
                                       <span class="table-remove">
-                                        <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-success my-0" (click)="viewPatient(patient.id)">View</button>
+                                        <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-success my-0" (click)="viewPatient(patient)">View</button>
                                       </span>
                                     </div>
                                   </td>
@@ -57,13 +57,13 @@
                   </div>
               </div>
           </div>
-          <div class="profile-container">
+          <div class="profile-containers">
             <div class="profile-content" style="max-height: 550px; overflow: scroll;">
               <div *ngIf="show_profile_modal" class="card">
                 <div class="d-flex justify-content-end p-2">
                   <mat-icon (click)="close()" style="cursor: pointer;">close</mat-icon>
                 </div>
-                <app-user-profile [newPatient]="new_patient" [selectedId]="selected_user_id"></app-user-profile>
+                <app-user-profile [newPatient]="user_data"></app-user-profile>
               </div>
             </div>
           </div>
