@@ -143,12 +143,18 @@
                           </div>
                         </div>
                       </div>
-
-                      <div class="card border-success mb-3" style="max-width: 18rem;">
-                        <div class="card-body text-success" style="max-width: 18rem; border: 1px solid #4caf50 !important;
-                        border-radius: 5px;">
-                          <h5 class="card-title">Primary card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <div class="outpatient-records" *ngFor="let d of outpatients.outpatient_records; let id = index">
+                        <div 
+                          class="card border-primary mb-3" 
+                          (click)="view(c.id)"
+                          style="max-width: 18rem; border: 1px solid #4caf50 !important;border-radius: 5px;">
+                          <div class="card-body text-primary" style="text-align: start;">
+                            <div class="d-flex flex-column">
+                              <h6 class="card-title">Person To notify: {{d.payees_person_to_notify}}</h6>
+                              <label class="card-text">Date: {{d.created_at | date}}</label>
+                              <label class="card-text">Not To Allery: {{d.note_to_allergies}}</label>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

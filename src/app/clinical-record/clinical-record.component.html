@@ -106,9 +106,17 @@
                     <mat-form-field class="example-full-width">
                         <input matInput placeholder="Hospital No" formControlName="hospital_no">
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
+                    <!-- <mat-form-field class="example-full-width">
                         <input matInput placeholder="Attending Physician" formControlName="attending_physician_id">
-                    </mat-form-field>
+                    </mat-form-field> -->
+                    <mat-form-field class="login-full-width" appearance="outline">
+                        <mat-label>Attending Physician</mat-label>
+                        <mat-select formControlName="attending_physician_id">
+                            <mat-option *ngFor="let doc of doctors.doctors" [value]="doc">
+                              {{doc.first_name + ' ' +  doc.surname}}
+                            </mat-option>
+                          </mat-select>
+                      </mat-form-field>
                     
                     <div class="service-content mb-1">
                         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">

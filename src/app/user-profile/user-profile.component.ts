@@ -26,7 +26,7 @@ export class UserProfileComponent implements OnInit {
   selected_clinical_id: any;
   show_clinical_modal: any = false;
   show_outpatient_modal: any = false;
-  outpatient_result: any = {};
+  outpatients: any = { "outpatient_records":[]};
 
   submit_button_name: any = 'Create';
   show_sidebar_profile : any = false;
@@ -45,14 +45,16 @@ export class UserProfileComponent implements OnInit {
 
     console.log('newPatient Date: ', this.user_profile);
 
-    if(this.newPatient == undefined){
+    if(this.newPatient == undefined){     //from userProfile
       if(this.has_profile == 'true'){
         this.getProfile();
         this.submit_button_name = 'Update';
+        this.getPatientClinicalRecords(this.user_id);
+        this.getAllPatientOutPatientRecord(this.user_id);
       }else{
         this.showNotification();
       }
-    }else{
+    }else{    //Profile list
       if(this.newPatient.create_new){
         this.submit_button_name = 'Create';
       }else{
@@ -60,6 +62,8 @@ export class UserProfileComponent implements OnInit {
         this.submit_button_name = 'Update';
         this.user_profile_id = this.newPatient.id;
         this.getProfile()
+        this.getPatientClinicalRecords(this.newPatient.user_id);
+        this.getAllPatientOutPatientRecord(this.newPatient.user_id);
       }
     }
 
@@ -74,7 +78,6 @@ export class UserProfileComponent implements OnInit {
     // }
 
     this.declareFormBuilder();
-    this.getPatientClinicalRecords();
   }
 
   newOutpatient(): void{
@@ -85,18 +88,39 @@ export class UserProfileComponent implements OnInit {
     this.show_outpatient_modal = false;
   }
 
-  getPatientClinicalRecords(): void{
+  getPatientClinicalRecords(user_id): void{
+    
     this.apiService
-    .patientAllClinicalRecords({user_id: this.user_id})
+    .patientAllClinicalRecords({user_id: user_id})
     .subscribe(
       res => {
-        console.log(res);
+        console.log('clinical records', res);
         this.clinical_records = res;
       },
       err => {
         alert(err.message);
       }
     )
+  }
+
+  getAllPatientOutPatientRecord(user_id): void {
+
+    this.apiService
+      .getAllPatientOutPatientRecord(user_id)
+      .subscribe(
+        res => {
+          // if(res.outpatient_record.length == 0){
+          //   this.outpatients = {outpatient_record: [res.profile]};
+          // }else{
+            this.outpatients = res;
+          // }
+          
+          console.log('outpatient: ', this.outpatients);
+        },
+        err => {
+          alert(err.message);
+        }
+      )
   }
 
   getSelectedProfile(): void{
@@ -359,6 +383,7 @@ export class UserProfileComponent implements OnInit {
 
   close() {
     this.show_clinical_modal = false;
+    this.show_outpatient_modal = false;
   }
 
   newClinical() {

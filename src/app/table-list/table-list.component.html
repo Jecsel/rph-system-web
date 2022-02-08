@@ -3,10 +3,17 @@
       <div class="row">
           <div class="col-md-12">
               <div class="card">
+
                   <div class="card-header card-header-danger">
                       <h4 class="card-title ">RPH Clinical Records</h4>
                   </div>
                   <div class="card-body">
+                    <div>
+                        <mat-checkbox class="mr-1" [(ngModel)]="building_1" >Building 1</mat-checkbox>
+                        <mat-checkbox class="mr-1" [(ngModel)]="building_2">Building 2</mat-checkbox>  
+                        <button style="padding: 3px 15px; margin-bottom: 10px !important;" type="button" rounded="true" size="sm" class="btn btn-primary my-0" (click)="filter()">FILTER</button>
+                      </div>
+                      <hr>
                       <div class="table-responsive">
                           <table class="table">
                               <thead class=" text-primary">

@@ -11,12 +11,23 @@
                       <div class="card">
                           <div class="card-body">
                             <div id="table" class="table-editable">
-                              <span class="table-add float-right mb-3 mr-2">
-                                <a class="text-success" (click)="addPatient()">
-                                  <!-- <mdb-icon fas icon="plus" size="2x"></mdb-icon> -->
-                                  <i class="material-icons" style="cursor: pointer; font-size: 35px;">add</i>
-                                </a>
-                              </span>
+                              <div class="d-flex justify-content-between">
+                                <div>
+                                  <mat-checkbox class="mr-1" [(ngModel)]="building_1" >Building 1</mat-checkbox>
+                                  <mat-checkbox class="mr-1" [(ngModel)]="building_2">Building 2</mat-checkbox>  
+                                  <button style="padding: 3px 15px; margin-bottom: 10px !important;" type="button" rounded="true" size="sm" class="btn btn-primary my-0" (click)="filter()">FILTER</button>
+                                </div>
+                                <span class="table-add float-right mb-3 mr-2">
+                                  <a class="text-success" (click)="addPatient()">
+                                    <i class="material-icons" style="cursor: pointer; font-size: 35px;">add</i>
+                                  </a>
+                                </span>
+                              </div>
+                              <div>
+                                <mat-checkbox class="mr-1" [(ngModel)]="building_1" >Building 1</mat-checkbox>
+                                <mat-checkbox class="mr-1" [(ngModel)]="building_2">Building 2</mat-checkbox>  
+                                <button style="padding: 3px 15px; margin-bottom: 10px !important;" type="button" rounded="true" size="sm" class="btn btn-primary my-0" (click)="filter()">FILTER</button>
+                              </div>
                               <table class="table table-bordered table-responsive-md table-striped text-center">
                                 <tr>
                                   <th class="text-center">First Name</th>

@@ -41,9 +41,9 @@ export class OutpatientRecordComponent implements OnInit {
   constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    console.log(this.outpatientResult);
+    console.log('Outpatient : ', this.outpatientResult);
     this.declareFormBuilder();
-    if(this.outpatientResult != undefined){
+    if(this.outpatientResult != undefined && this.outpatientResult != {}){
       this.outpatient_records = this.outpatientResult;
       this.setDataBuilder();
     }

@@ -21,6 +21,23 @@ export class ApiServiceService {
   };
 
   // ----------- GET REQUEST --------------//
+
+  getAllDoctors(): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+    
+    return this.httpClient
+      .get(this.baseUrl + 'list/1/get_all_doctor', this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
   getList(): Observable<any>{
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -177,6 +194,23 @@ export class ApiServiceService {
     return this.httpClient
       .get(this.baseUrl + 'outpatient_record/' + id, this.httpOptions)
       .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  getAllPatientOutPatientRecord(id: any): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .get(this.baseUrl + 'outpatient_record/' + id + '/show_patient_outpatient_records', this.httpOptions)
+      .pipe(map((response: any) => {
+        console.log(response);
         return response;
       }));
   }
@@ -373,6 +407,37 @@ export class ApiServiceService {
     };
     return this.httpClient
       .post(this.baseUrl + 'outpatient_record/', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  filterPatients(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+    return this.httpClient
+      .post(this.baseUrl + 'patient/1/filter_patient', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  filterClinical(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .post(this.baseUrl + '/clinical_record/1/filter_clinical', data, this.httpOptions)
       .pipe(map((response: any) => {
         return response;
       }));

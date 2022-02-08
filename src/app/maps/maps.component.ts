@@ -11,6 +11,10 @@ export class MapsComponent implements OnInit {
   show_profile_modal = false;
   selected_user_id: any;
   new_patient: any;
+  building_1: any = true;
+  building_2: any = true;
+  male: any = true;
+  female: any = true;
 
   user_data: any = {}
   constructor(private apiService: ApiServiceService) { }
@@ -57,6 +61,33 @@ export class MapsComponent implements OnInit {
 
   add(){
 
+  }
+
+  filter() {
+    console.log(this.building_1 + " " + this.building_2);
+    let building_id = this.building_1
+    if(this.building_1 && this.building_2){
+      building_id = 0;
+    }else{
+      if(this.building_1){
+        building_id = 1;
+      }
+      if(this.building_2){
+        building_id = 2;
+      }
+    }
+
+    this.apiService
+      .filterPatients({"building_id": building_id})
+      .subscribe(
+        (res: any) => {
+          this.all_patients = res.patients;
+          console.log(res);
+        },
+        (err: any) => {
+          alert(err.message)
+        }
+      )
   }
 
 }

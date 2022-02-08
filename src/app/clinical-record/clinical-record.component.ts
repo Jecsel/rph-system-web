@@ -14,6 +14,7 @@ export class ClinicalRecordComponent implements OnInit {
   selected_data_record: any;
   req: any;
   selected_user_profile_id: any;
+  doctors: any = {doctors:[]};
 
   @Input()
   clinicalResultId: any;
@@ -29,6 +30,23 @@ export class ClinicalRecordComponent implements OnInit {
       console.log('selected_user_profile_id: ', this.selected_user_profile_id);
       this.getProfile(this.selected_user_profile_id)
     }
+
+    this.getAllDoctors();
+  }
+
+  getAllDoctors(){
+    this.apiService
+    .getAllDoctors()
+    .subscribe(
+      res => {
+        console.log(res)
+        this.doctors = res;
+        this.setData();
+      },
+      err => {
+        alert(err.message);
+      }
+    )
   }
 
   getRecord() {
