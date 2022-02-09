@@ -283,10 +283,12 @@ export class ApiServiceService {
     return this.httpClient
       .post(this.baseUrl + 'auth/sign_in', data)
       .pipe(map((response: any) => {
+        console.log(response);
         localStorage.setItem('token', response.bearer_token);
         localStorage.setItem('user_id', response.user_id);
         localStorage.setItem('has_profile', response.has_profile);
         localStorage.setItem('user_profile_id', response.profile_id);
+        localStorage.setItem('user_role_id', response.user.user_role_id)
         return response;
       }));
   }
@@ -443,5 +445,20 @@ export class ApiServiceService {
       }));
   }
 
+  search_patient(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .post(this.baseUrl + '/patient/1/patient_search', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
 
 }

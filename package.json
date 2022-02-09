@@ -42,6 +42,7 @@
     "googleapis": "81.0.0",
     "hammerjs": "2.0.8",
     "jquery": "3.6.0",
+    "mat-select-search": "^1.1.3",
     "moment": "2.29.1",
     "ngx-print": "^1.2.1",
     "perfect-scrollbar": "1.5.0",

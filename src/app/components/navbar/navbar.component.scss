@@ -1,0 +1,11 @@
+.search-container {
+    position: fixed;
+    top: 25px;
+    right: 60px;
+    max-width: 200px;
+    .search-label{
+        padding: 5px;
+        max-height: 500px;
+        overflow: scroll;
+    }
+}

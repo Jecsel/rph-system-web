@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
@@ -14,6 +14,18 @@ export class NavbarComponent implements OnInit {
       mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
+    filteredCountries: any = [
+        {
+          name: "India",
+          dialCode: "+91",
+          code: "IN"
+        },
+        {
+          name: "Indonesia",
+          dialCode: "+62",
+          code: "ID"
+        }
+    ]
 
     constructor(location: Location,  private element: ElementRef, private router: Router) {
       this.location = location;
@@ -121,5 +133,9 @@ export class NavbarComponent implements OnInit {
           }
       }
       return 'Dashboard';
+    }
+
+    filter() {
+        this.router.navigate(['/patient-list']);
     }
 }

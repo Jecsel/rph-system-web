@@ -15,6 +15,7 @@ export class MapsComponent implements OnInit {
   building_2: any = true;
   male: any = true;
   female: any = true;
+  search_key: any = '';
 
   user_data: any = {}
   constructor(private apiService: ApiServiceService) { }
@@ -86,6 +87,21 @@ export class MapsComponent implements OnInit {
         },
         (err: any) => {
           alert(err.message)
+        }
+      )
+  }
+
+  search() {
+    console.log(this.search_key);
+    this.apiService
+      .search_patient({ "search_key": this.search_key })
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+          this.all_patients = res.patients;
+        },
+        (err: any) => {
+          alert(err.message);
         }
       )
   }

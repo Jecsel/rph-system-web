@@ -28,6 +28,7 @@ import { OutpatientRecordComponent } from 'app/outpatient-record/outpatient-reco
 import { NgxPrintModule } from 'ngx-print';
 import { CreateAccountComponent } from 'app/create-account/create-account.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectSearchModule } from 'mat-select-search';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { MatCardModule } from '@angular/material/card';
     MatExpansionModule,
     NgxPrintModule,
     MatCardModule,
+    MatSelectSearchModule
   ],
   declarations: [
     DashboardComponent,
