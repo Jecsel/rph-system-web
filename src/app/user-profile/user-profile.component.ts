@@ -47,6 +47,8 @@ export class UserProfileComponent implements OnInit {
 
     if(this.newPatient == undefined){     //from userProfile
       if(this.has_profile == 'true'){
+        console.log('dito ba')
+        console.log(this.has_profile);
         this.getProfile();
         this.submit_button_name = 'Update';
         this.getPatientClinicalRecords(this.user_id);
