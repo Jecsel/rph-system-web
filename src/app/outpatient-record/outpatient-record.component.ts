@@ -35,6 +35,8 @@ export class OutpatientRecordComponent implements OnInit {
 
   remarks: any = [];
 
+  req_body: any = {};
+
   @Input()
   outpatientResult: any;
 
@@ -173,7 +175,61 @@ export class OutpatientRecordComponent implements OnInit {
   }
 
   onSubmit(){
+    this.outpatientResult.clinics[0].is_true = this.medical;
+    this.outpatientResult.clinics[1].is_true = this.eent;
+    this.outpatientResult.clinics[2].is_true = this.obstetrics;
+    this.outpatientResult.clinics[3].is_true = this.pediatrics;
+    this.outpatientResult.clinics[4].is_true = this.urology;
+    this.outpatientResult.clinics[5].is_true = this.dental;
+    this.outpatientResult.clinics[6].is_true = this.surgery;
+    this.outpatientResult.clinics[7].is_true = this.dermatology;
+    this.outpatientResult.clinics[8].is_true = this.gynecology;
+    this.outpatientResult.clinics[9].is_true = this.neurology;
 
+    this.outpatientResult.clinic_service[0].is_true = this.charity;
+    this.outpatientResult.clinic_service[1].is_true = this.resident;
+    this.outpatientResult.clinic_service[2].is_true = this.transient;
+    this.outpatientResult.clinic_service[3].is_true = this.government;
+    this.outpatientResult.clinic_service[4].is_true = this.private;
+
+    this.req_body = this.outpatientFormGroup.value;
+    this.req_body.outpatient_record_id = this.outpatientResult.record.id;
+    this.req_body.clinics = this.outpatientResult.clinics;
+    this.req_body.clinic_services = this.outpatientResult.clinic_service;
+    this.req_body.outpatient_record_remarks = this.outpatientResult.remarks;
+    // this.req_body.clinincs = [
+    //   {"clinic_id":1, "is_true":this.medical},
+    //   {"clinic_id":2, "is_true":this.eent},
+    //   {"clinic_id":3, "is_true":this.obstetrics},
+    //   {"clinic_id":4, "is_true":this.pediatrics},
+    //   {"clinic_id":5, "is_true":this.urology},
+    //   {"clinic_id":6, "is_true":this.dental},
+    //   {"clinic_id":7, "is_true":this.surgery},
+    //   {"clinic_id":8, "is_true":this.dermatology},
+    //   {"clinic_id":9, "is_true":this.gynecology},
+    //   {"clinic_id":10, "is_true":this.neurology}
+    // ];
+    // this.req_body.clinic_services = [
+    //   {"clinic_service_id":1, "is_true":this.charity},
+    //   {"clinic_service_id":2, "is_true":this.resident},
+    //   {"clinic_service_id":3, "is_true":this.transient},
+    //   {"clinic_service_id":4, "is_true":this.government},
+    //   {"clinic_service_id":5, "is_true":this.private}
+    // ];
+    this.updateRecord(this.req_body)
   }
 
+  updateRecord(req){
+    this.apiService
+      .updateOutpatientRecord({"outpatient_record": req})
+      .subscribe(
+        res => {
+          console.log(res);
+          alert('Successfully Updated');
+        },
+        err => {
+          alert(err.message)
+        }
+      )
+  }
 }
