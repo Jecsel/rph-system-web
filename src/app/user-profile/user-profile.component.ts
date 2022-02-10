@@ -30,6 +30,7 @@ export class UserProfileComponent implements OnInit {
 
   submit_button_name: any = 'Create';
   show_sidebar_profile : any = false;
+  outpatient_result: any = {};
 
   @Input()
   newPatient: any;;
@@ -69,25 +70,26 @@ export class UserProfileComponent implements OnInit {
       }
     }
 
-    // if( this.has_profile == 'false' ){
-    //   this.showNotification();
-    // }else{
-    //   if(this.selectedId != undefined){
-    //       this.getSelectedProfile();
-    //   }else{
-    //     this.getProfile();
-    //   }
-    // }
-
     this.declareFormBuilder();
   }
 
   newOutpatient(): void{
     this.show_outpatient_modal = true;
+    this.outpatient_result = {};
+    this.outpatient_result.from_user_profile = true;
+    this.outpatient_result.create_new = true;
   }
 
   closeOutpatient(): void{
     this.show_outpatient_modal = false;
+  }
+
+  viewOutpatient(data) {
+    this.show_outpatient_modal = true;
+    console.log(data);
+    data.from_user_profile = true;
+    data.create_new = false;
+    this.outpatient_result = data
   }
 
   getPatientClinicalRecords(user_id): void{

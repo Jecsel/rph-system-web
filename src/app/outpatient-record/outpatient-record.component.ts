@@ -45,7 +45,19 @@ export class OutpatientRecordComponent implements OnInit {
   ngOnInit(): void {
     console.log('Outpatient : ', this.outpatientResult);
     this.declareFormBuilder();
-    if(this.outpatientResult != undefined && this.outpatientResult != {}){
+    // if(this.outpatientResult != undefined && this.outpatientResult != {}){
+    //   this.outpatient_records = this.outpatientResult;
+    //   this.setDataBuilder();
+    // }
+
+    if(this.outpatientResult.from_user_profile){    //from User Profile
+      if(this.outpatientResult.create_new){         //creating new Outpatient Record
+        console.log('create new outpatient record')
+      }else{                                        //update OutPatient Record
+        this.outpatient_records = this.outpatientResult;
+      this.setDataBuilder();
+      }
+    }else{                                          //from Outpatient Record List
       this.outpatient_records = this.outpatientResult;
       this.setDataBuilder();
     }
@@ -197,25 +209,6 @@ export class OutpatientRecordComponent implements OnInit {
     this.req_body.clinics = this.outpatientResult.clinics;
     this.req_body.clinic_services = this.outpatientResult.clinic_service;
     this.req_body.outpatient_record_remarks = this.outpatientResult.remarks;
-    // this.req_body.clinincs = [
-    //   {"clinic_id":1, "is_true":this.medical},
-    //   {"clinic_id":2, "is_true":this.eent},
-    //   {"clinic_id":3, "is_true":this.obstetrics},
-    //   {"clinic_id":4, "is_true":this.pediatrics},
-    //   {"clinic_id":5, "is_true":this.urology},
-    //   {"clinic_id":6, "is_true":this.dental},
-    //   {"clinic_id":7, "is_true":this.surgery},
-    //   {"clinic_id":8, "is_true":this.dermatology},
-    //   {"clinic_id":9, "is_true":this.gynecology},
-    //   {"clinic_id":10, "is_true":this.neurology}
-    // ];
-    // this.req_body.clinic_services = [
-    //   {"clinic_service_id":1, "is_true":this.charity},
-    //   {"clinic_service_id":2, "is_true":this.resident},
-    //   {"clinic_service_id":3, "is_true":this.transient},
-    //   {"clinic_service_id":4, "is_true":this.government},
-    //   {"clinic_service_id":5, "is_true":this.private}
-    // ];
     this.updateRecord(this.req_body)
   }
 

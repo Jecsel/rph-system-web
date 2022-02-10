@@ -29,6 +29,8 @@ export class IconsComponent implements OnInit {
 
   view(data) {
     this.outpatient_result = data;
+    this.outpatient_result.from_user_profile = false;
+    this.outpatient_result.create_new = false;
     this.show_modal = true;
   }
 

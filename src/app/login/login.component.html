@@ -20,7 +20,7 @@
                 </button>
               </mat-form-field>
             </mat-card-content>
-            <button mat-stroked-button color="accent" class="btn-block">Log in</button>
+            <button mat-stroked-button color="accent" class="btn-block" [disabled]="form.invalid">Log in</button>
           </form>
         </mat-card>
     </div>
