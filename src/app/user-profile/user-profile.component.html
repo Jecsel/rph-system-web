@@ -46,15 +46,15 @@
                             <div class="col-md-4">
                               <mat-label>Gender</mat-label>
                               <div>
-                                <mat-checkbox class="mr-1" [(ngModel)]="male" formControlName="male">Male</mat-checkbox>
-                                <mat-checkbox class="" [(ngModel)]="female" formControlName="female">Female</mat-checkbox>
+                                <mat-checkbox class="mr-1" [(ngModel)]="male" (change)="female = false" formControlName="male">Male</mat-checkbox>
+                                <mat-checkbox class="" [(ngModel)]="female" (change)="male = false" formControlName="female">Female</mat-checkbox>
                               </div>
                             </div>
                             <div class="col-md-4">
                               <mat-label>Civil Status</mat-label>
                               <div>
-                                <mat-checkbox class="mr-1" [(ngModel)]="single" formControlName="single">Single</mat-checkbox>
-                                <mat-checkbox class="" [(ngModel)]="married" formControlName="married">Married</mat-checkbox>
+                                <mat-checkbox class="mr-1" [(ngModel)]="single" (change)="married = false" formControlName="single">Single</mat-checkbox>
+                                <mat-checkbox class="" [(ngModel)]="married" (change)="single = false" formControlName="married">Married</mat-checkbox>
                               </div>
                             </div>
                             <div class="col-md-4">
@@ -116,11 +116,11 @@
           </div>
           <div class="col-md-4" *ngIf="show_sidebar_profile">
               <div class="card card-profile">
-                  <div class="card-avatar">
+                  <!-- <div class="card-avatar">
                       <a href="javascript:void(0)">
                           <img class="img" src="./assets/img/faces/marc.jpg" />
                       </a>
-                  </div>
+                  </div> -->
                   <div class="card-body">
                     <div class="d-flex flex-row">
                       <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-primary my-0" (click)="newClinical()">New Clinical Record</button>

@@ -78,6 +78,8 @@ export class UserProfileComponent implements OnInit {
     this.outpatient_result = {};
     this.outpatient_result.from_user_profile = true;
     this.outpatient_result.create_new = true;
+    this.outpatient_result.profile = this.user_profile;
+    this.outpatient_result.record = this.clinical_records;
   }
 
   closeOutpatient(): void{

@@ -9,6 +9,7 @@ import { ApiServiceService } from 'app/services/api-service.service';
 })
 export class OutpatientRecordComponent implements OnInit {
   outpatientFormGroup: FormGroup;
+  remarksFormGroup: FormGroup;
   outpatient_records: any = { };
   male: any = false;
   female: any = false;
@@ -33,26 +34,38 @@ export class OutpatientRecordComponent implements OnInit {
   government: any = false;
   private: any = false;
 
-  remarks: any = [];
+  record_date: any;
+  time_of_arrival: any = '';
+  time_of_discharge: any = '';
+  service_of_treatment: any = '';
+  diagnosis: any = '';
+  doctor_on_duty: any = '';
+  remark: any = '';
 
+
+  remarks: any = [];
   req_body: any = {};
 
+  remark_button: any = 'Create';
+
+
+  show_remark_modal = false;
+
   @Input()
-  outpatientResult: any;
+  outpatientResult: any = {};
 
   constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     console.log('Outpatient : ', this.outpatientResult);
-    this.declareFormBuilder();
-    // if(this.outpatientResult != undefined && this.outpatientResult != {}){
-    //   this.outpatient_records = this.outpatientResult;
-    //   this.setDataBuilder();
-    // }
 
+
+    this.outpatientResult.outpatient_record_remarks = [];
+    this.declareFormBuilder();
     if(this.outpatientResult.from_user_profile){    //from User Profile
       if(this.outpatientResult.create_new){         //creating new Outpatient Record
-        console.log('create new outpatient record')
+        console.log('create new outpatient record');
+        this.setDataBuilderOutpatient();
       }else{                                        //update OutPatient Record
         this.outpatient_records = this.outpatientResult;
       this.setDataBuilder();
@@ -111,6 +124,64 @@ export class OutpatientRecordComponent implements OnInit {
     })
   }
 
+  setDataBuilderOutpatient(){
+    console.log('set data')
+    let pat = this.outpatientResult;
+
+    this.male = pat.profile.gender_id == 1 ? true : false;
+    this.female = pat.profile.gender_id == 2 ? true : false;
+    this.single = pat.profile.civil_status_id == 1 ? true : false;
+    this.married = pat.profile.civil_status_id == 2 ? true : false;
+    this.widow = false;
+    this.separated = false;
+
+    this.outpatientFormGroup.setValue({
+      medical: false,
+      eent: false,
+      obstetrics: false,
+      pediatrics: false,
+      urology: false,
+      dental: false,
+      surgery: false,
+      dermatology: false,
+      gynecology: false,
+      neurology: false,
+      charity: false,
+      resident: false,
+      transient : false,
+      government: false,
+      private: false,
+      surname: pat.profile.surname,
+      first_name: pat.profile.first_name,
+      middle_name: pat.profile.middle_name,
+      age: pat.profile.age,
+      nationality: pat.profile.nationality,
+      male: pat.profile.gender_id == 1 ? true : false,
+      female: pat.profile.gender_id == 2 ? true : false,
+      single: pat.profile.civil_status_id == 1 ? true : false,
+      married: pat.profile.civil_status_id == 2 ? true : false,
+      widow: false,
+      separated: false,
+      address: pat.profile.address,
+      religion: pat.profile.religion,
+      birth_place: pat.profile.birth_place,
+      employed_by: pat.profile.employed_by,
+      dob: pat.profile.dob,
+      payees_person_to_notify: '',
+      referred_by: '',
+      relations_to_patient: '',
+      note_to_allergies: '',
+      noi: '',
+      poi: '',
+      doi: '',
+      toi: '',
+      assailant: '',
+      nearest_kin: '',
+      patient_brought_victim: '',
+      payees_address: '',
+    });
+  }
+
   setDataBuilder(){
     console.log('set data')
     let pat = this.outpatientResult;
@@ -136,8 +207,8 @@ export class OutpatientRecordComponent implements OnInit {
     this.female = pat.profile.gender_id == 2 ? true : false;
     this.single = pat.profile.civil_status_id == 1 ? true : false;
     this.married = pat.profile.civil_status_id == 1 ? true : false;
-    this.widow = pat.profile.civil_status_id == 1 ? true : false;
-    this.separated = pat.profile.civil_status_id == 1 ? true : false;
+    this.widow = false;
+    this.separated = false;
 
     this.outpatientFormGroup.setValue({
       medical: pat.clinics[0].is_true,
@@ -187,6 +258,10 @@ export class OutpatientRecordComponent implements OnInit {
   }
 
   onSubmit(){
+
+    if(this.outpatientResult.from_user_profile && this.outpatientResult.create_new){
+      this.createNewRecord(this.outpatientFormGroup.value);
+    }
     this.outpatientResult.clinics[0].is_true = this.medical;
     this.outpatientResult.clinics[1].is_true = this.eent;
     this.outpatientResult.clinics[2].is_true = this.obstetrics;
@@ -209,7 +284,72 @@ export class OutpatientRecordComponent implements OnInit {
     this.req_body.clinics = this.outpatientResult.clinics;
     this.req_body.clinic_services = this.outpatientResult.clinic_service;
     this.req_body.outpatient_record_remarks = this.outpatientResult.remarks;
-    this.updateRecord(this.req_body)
+
+    
+    if(this.outpatientResult.from_user_profile){    //from User Profile
+      if(!this.outpatientResult.create_new){         //creating new Outpatient Record
+      //   console.log('create new outpatient record')
+      //   this.createNewRecord(this.req_body);
+      // }else{                                        //update OutPatient Record
+        this.updateRecord(this.req_body)
+      }
+    }else{                                          //from Outpatient Record List
+      this.outpatient_records = this.outpatientResult;
+      this.updateRecord(this.req_body)
+    }
+  }
+
+  createNewRecord(data) {
+    if(this.outpatient_records.remarks != undefined){
+      data.patient_id = this.outpatientResult.profile.user_id;
+      data.clinical_record_id = this.outpatientResult.record.clinical_records[0].id;
+      data.physician_id = 1;
+      data.outpatient_record_remarks = this.outpatient_records.remarks;
+      data.clinics = [
+        {"clinic_id":1, "is_true":this.medical},
+        {"clinic_id":2, "is_true":this.eent},
+        {"clinic_id":3, "is_true":this.obstetrics},
+        {"clinic_id":4, "is_true":this.pediatrics},
+        {"clinic_id":5, "is_true":this.urology},
+        {"clinic_id":6, "is_true":this.dental},
+        {"clinic_id":7, "is_true":this.surgery},
+        {"clinic_id":8, "is_true":this.dermatology},
+        {"clinic_id":9, "is_true":this.gynecology},
+        {"clinic_id":10, "is_true":this.neurology}
+      ];
+      data.clinic_services = [
+        {"clinic_service_id":1, "is_true":this.charity},
+        {"clinic_service_id":2, "is_true":this.resident},
+        {"clinic_service_id":3, "is_true":this.transient},
+        {"clinic_service_id":4, "is_true":this.government},
+        {"clinic_service_id":5, "is_true":this.private}
+    ]
+  
+      console.log('Req Body: ', data);
+  
+      this.apiService
+        .createOutpatientRecord({'outpatient_record': data})
+        .subscribe(
+          res => {
+            console.log(res);
+            alert('Successfully Created!')
+          },
+          err => {
+            alert(err.message);
+          }
+        )
+    }
+
+  }
+
+  updateRemarks(e){
+    console.log(e);
+    console.log(this.outpatientResult);
+    this.remark_button = 'Update';
+  }
+
+  removeRemark(mark_id){
+    this.outpatientResult.outpatient_record_remarks.splice(mark_id, 1);
   }
 
   updateRecord(req){
@@ -224,5 +364,49 @@ export class OutpatientRecordComponent implements OnInit {
           alert(err.message)
         }
       )
+  }
+
+  closeRemarkModal(){
+    this.show_remark_modal = false;
+  }
+
+  showRemarkModal(action_typ, data, remark_id){
+    console.log('showRemarkModal: ', data);
+
+    // this.record_date = '01/02/2000';
+    this.time_of_arrival = '2PM';
+    this.time_of_discharge = '3PM';
+    this.diagnosis = 'Fever';
+    this.service_of_treatment = 'Special';
+    this.doctor_on_duty = 'Dr. San Juan';
+    this.remark = 'None';
+
+    // this.record_date = data.record_date;
+    // this.time_of_arrival = data.time_of_arrival;
+    // this.time_of_discharge = data.time_of_discharge;
+    // this.diagnosis = data.diagnosis;
+    // this.service_of_treatment = data.service_of_treatment;
+    // this.doctor_on_duty = data.doctor_on_duty;
+    // this.remark = data.remark;
+
+
+    this.remark_button = 'Update'
+    this.show_remark_modal = true;
+  }
+
+  addDiagnosis(){
+    let mark = {
+      "record_date": this.record_date,
+      "time_of_arrival": this.time_of_arrival,
+      "time_of_discharge": this.time_of_discharge,
+      "diagnosis": this.diagnosis,
+      "service_of_treatment": this.service_of_treatment,
+      "doctor_on_duty": this.doctor_on_duty,
+      "remarks": this.remark
+    }
+    this.outpatientResult.outpatient_record_remarks.push(mark);
+    this.outpatient_records.remarks =  this.outpatientResult.outpatient_record_remarks;
+    console.log(this.outpatient_records);
+    this.closeRemarkModal();
   }
 }
