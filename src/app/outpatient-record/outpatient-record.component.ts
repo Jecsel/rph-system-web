@@ -41,7 +41,7 @@ export class OutpatientRecordComponent implements OnInit {
   diagnosis: any = '';
   doctor_on_duty: any = '';
   remark: any = '';
-
+  user_role: any;
 
   remarks: any = [];
   req_body: any = {};
@@ -58,7 +58,7 @@ export class OutpatientRecordComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Outpatient : ', this.outpatientResult);
-
+    this.user_role = localStorage.getItem('user_role_id');
 
     this.outpatientResult.outpatient_record_remarks = [];
     this.declareFormBuilder();

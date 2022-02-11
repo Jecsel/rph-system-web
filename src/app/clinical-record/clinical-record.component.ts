@@ -15,12 +15,14 @@ export class ClinicalRecordComponent implements OnInit {
   req: any;
   selected_user_profile_id: any;
   doctors: any = {doctors:[]};
+  user_role: any;
 
   @Input()
   clinicalResultId: any;
   constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
+    this.user_role = localStorage.getItem('user_role_id');
     this.selected_user_profile_id = localStorage.getItem('selected_user_profile_id');
 
     this.declareFormBuilder();

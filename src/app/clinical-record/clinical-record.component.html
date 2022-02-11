@@ -232,7 +232,7 @@
             <div class="d-flex justify-content-end">
                 <p>APPROVED BY: <br><br> DR BENEDICT G. ANATALIO<br> Chief of Hospital II</p>
             </div>
-            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Submit</button>
+            <button *ngIf="user_role != 1" mat-raised-button type="submit" class="btn btn-danger pull-right">Submit</button>
             <div class="clearfix"></div>
         </form>
     </div>
