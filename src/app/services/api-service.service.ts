@@ -288,7 +288,8 @@ export class ApiServiceService {
         localStorage.setItem('user_id', response.user_id);
         localStorage.setItem('has_profile', response.has_profile);
         localStorage.setItem('user_profile_id', response.profile_id);
-        localStorage.setItem('user_role_id', response.user.user_role_id)
+        localStorage.setItem('user_role_id', response.user.user_role_id);
+        localStorage.setItem('user_building_id', response.user.building_id);
         return response;
       }));
   }

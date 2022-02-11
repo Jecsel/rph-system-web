@@ -124,7 +124,7 @@
                   <div class="card-body">
                     <div class="d-flex flex-row" *ngIf="user_role != 1">
                       <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-primary my-0" (click)="newClinical()">New Clinical Record</button>
-                      <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-success my-0" (click)="newOutpatient()">New Outpatient Record</button>
+                      <button *ngIf="user_building == 2" style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-success my-0" (click)="newOutpatient()">New Outpatient Record</button>
                     </div>
                     <label *ngIf="clinical_records.clinical_records.length == 0 && outpatients.outpatient_records.length == 0">No Records</label>
                     <div class="result-container" style="max-height: 350px; overflow: scroll;">
@@ -143,20 +143,24 @@
                           </div>
                         </div>
                       </div>
-                      <div class="outpatient-records" *ngFor="let d of outpatients.outpatient_records; let id = index">
-                        <div 
-                          class="card border-primary mb-3" 
-                          (click)="viewOutpatient(d)"
-                          style="max-width: 18rem; border: 1px solid #4caf50 !important;border-radius: 5px;">
-                          <div class="card-body text-primary" style="text-align: start;">
-                            <div class="d-flex flex-column">
-                              <h6 class="card-title">Person To notify: {{d.record.payees_person_to_notify}}</h6>
-                              <label class="card-text">Date: {{d.record.created_at | date}}</label>
-                              <label class="card-text">Not To Allery: {{d.record.note_to_allergies}}</label>
+                      
+                      <div *ngIf="user_building == 2">
+                        <div class="outpatient-records" *ngFor="let d of outpatients.outpatient_records; let id = index">
+                          <div 
+                            class="card border-primary mb-3" 
+                            (click)="viewOutpatient(d)"
+                            style="max-width: 18rem; border: 1px solid #4caf50 !important;border-radius: 5px;">
+                            <div class="card-body text-primary" style="text-align: start;">
+                              <div class="d-flex flex-column">
+                                <h6 class="card-title">Person To notify: {{d.record.payees_person_to_notify}}</h6>
+                                <label class="card-text">Date: {{d.record.created_at | date}}</label>
+                                <label class="card-text">Not To Allery: {{d.record.note_to_allergies}}</label>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
+
                     </div>
                   </div>
               </div>

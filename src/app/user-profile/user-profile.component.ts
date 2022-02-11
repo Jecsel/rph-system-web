@@ -32,6 +32,7 @@ export class UserProfileComponent implements OnInit {
   show_sidebar_profile : any = false;
   outpatient_result: any = {};
   user_role: any;
+  user_building: any;
 
   @Input()
   newPatient: any;;
@@ -41,6 +42,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit() {
     this.user_role = localStorage.getItem('user_role_id');
+    this.user_building = localStorage.getItem('user_building_id');
     this.clinical_records = { };
     this.user_id = localStorage.getItem('user_id');
     this.user_profile_id = localStorage.getItem('user_profile_id');

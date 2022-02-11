@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('has_profile', '');
     localStorage.setItem('user_id', '');
     localStorage.setItem('user_profile_id', '');
+    localStorage.setItem('user_building_id', '');
     this.data = {user: {} };
   }
 

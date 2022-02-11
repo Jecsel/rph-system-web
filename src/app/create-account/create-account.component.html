@@ -48,7 +48,7 @@
                         </mat-form-field>
                 </div>
             </div>
-            <button mat-stroked-button color="accent" class="btn-block">{{submit_button_name}}</button>
+            <button mat-stroked-button color="accent" class="btn-block" [disabled]="accountFormGroup.invalid">{{submit_button_name}}</button>
           </form>
         </div>
     </div>
