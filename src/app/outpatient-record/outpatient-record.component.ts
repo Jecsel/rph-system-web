@@ -77,6 +77,8 @@ export class OutpatientRecordComponent implements OnInit {
   }
 
   declareFormBuilder(){
+    this.single = false;
+    this.married = false;
     this.outpatientFormGroup = this.formBuilder.group({
       medical: [''],
       eent: [''],
@@ -130,8 +132,15 @@ export class OutpatientRecordComponent implements OnInit {
 
     this.male = pat.profile.gender_id == 1 ? true : false;
     this.female = pat.profile.gender_id == 2 ? true : false;
-    this.single = pat.profile.civil_status_id == 1 ? true : false;
-    this.married = pat.profile.civil_status_id == 2 ? true : false;
+    
+    if( pat.profile.civil_status_id == 1){
+      this.single = true;
+      this.married = false;
+    }else{
+      this.single = false;
+      this.married = true;
+    }
+    
     this.widow = false;
     this.separated = false;
 
@@ -206,7 +215,7 @@ export class OutpatientRecordComponent implements OnInit {
     this.male = pat.profile.gender_id == 1 ? true : false;
     this.female = pat.profile.gender_id == 2 ? true : false;
     this.single = pat.profile.civil_status_id == 1 ? true : false;
-    this.married = pat.profile.civil_status_id == 1 ? true : false;
+    this.married = pat.profile.civil_status_id == 2 ? true : false;
     this.widow = false;
     this.separated = false;
 
@@ -288,9 +297,6 @@ export class OutpatientRecordComponent implements OnInit {
     
     if(this.outpatientResult.from_user_profile){    //from User Profile
       if(!this.outpatientResult.create_new){         //creating new Outpatient Record
-      //   console.log('create new outpatient record')
-      //   this.createNewRecord(this.req_body);
-      // }else{                                        //update OutPatient Record
         this.updateRecord(this.req_body)
       }
     }else{                                          //from Outpatient Record List
@@ -350,10 +356,13 @@ export class OutpatientRecordComponent implements OnInit {
 
   removeRemark(mark_id){
     this.outpatientResult.outpatient_record_remarks.splice(mark_id, 1);
+    this.outpatient_records.remarks = this.outpatientResult.outpatient_record_remarks;
   }
 
   updateRecord(req){
-    this.apiService
+    console.log('update Record', req);
+    if(req.outpatient_record_remarks.length > 0){
+      this.apiService
       .updateOutpatientRecord({"outpatient_record": req})
       .subscribe(
         res => {
@@ -364,6 +373,7 @@ export class OutpatientRecordComponent implements OnInit {
           alert(err.message)
         }
       )
+    }
   }
 
   closeRemarkModal(){
@@ -371,24 +381,15 @@ export class OutpatientRecordComponent implements OnInit {
   }
 
   showRemarkModal(action_typ, data, remark_id){
-    console.log('showRemarkModal: ', data);
+    console.log('showRemarkModal: ', data);;
 
-    // this.record_date = '01/02/2000';
-    this.time_of_arrival = '2PM';
-    this.time_of_discharge = '3PM';
-    this.diagnosis = 'Fever';
-    this.service_of_treatment = 'Special';
-    this.doctor_on_duty = 'Dr. San Juan';
-    this.remark = 'None';
-
-    // this.record_date = data.record_date;
-    // this.time_of_arrival = data.time_of_arrival;
-    // this.time_of_discharge = data.time_of_discharge;
-    // this.diagnosis = data.diagnosis;
-    // this.service_of_treatment = data.service_of_treatment;
-    // this.doctor_on_duty = data.doctor_on_duty;
-    // this.remark = data.remark;
-
+    this.record_date = data.record_date;
+    this.time_of_arrival = data.time_of_arrival;
+    this.time_of_discharge = data.time_of_discharge;
+    this.diagnosis = data.diagnosis;
+    this.service_of_treatment = data.service_of_treatment;
+    this.doctor_on_duty = data.doctor_on_duty;
+    this.remark = data.remark;
 
     this.remark_button = 'Update'
     this.show_remark_modal = true;

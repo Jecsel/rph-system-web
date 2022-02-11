@@ -20,7 +20,7 @@
         <div class="d-flex justify-content-center">
             <h5><b>OUTPATIENT RECORD CHARTS</b></h5><br>
         </div>
-        <form [formGroup]="outpatientFormGroup" (ngSubmit)="onSubmit()">
+        <form [formGroup]="outpatientFormGroup">
             <div class="row">
                 <div class="col-sm-6 col-md-8" style="text-align: start;">
                     <label>CLINICS:</label>
@@ -196,6 +196,7 @@
                       <th class="text-center">Service of Treatment</th>
                       <th class="text-center">Doctor on Duty</th>
                       <th class="text-center">Remarks</th>
+                      <th class="text-center">Actions</th>
                     </tr>
                     <tr>
                     <tr *ngFor="let mark of outpatient_records.remarks; let id = index" (click)="showRemarkModal('add', mark, id)">
@@ -220,9 +221,12 @@
                       <td>
                         <span>{{mark.remarks}}</span>
                       </td>
+                      <td (click)="removeRemark(id)">
+                        <i class="material-icons">delete</i>
+                      </td>
                     </tr>
                     <tr>
-                        <button mat-raised-button (click)="showRemarkModal('add', 1, 1)" class="btn btn-primary">Add Diagnosis</button>
+                        <button (click)="showRemarkModal('add', 1, 1)" class="btn btn-primary">Add Diagnosis</button>
                     </tr>
                 </table>
                 <div class="row">
@@ -313,7 +317,7 @@
                     </div>
                 </div>
 
-                <button mat-raised-button type="submit" class="btn btn-danger pull-right">Submit</button>
+                <button mat-raised-button type="button" (click)="onSubmit()" class="btn btn-danger pull-right">Submit</button>
             </div>
         </form>
     
