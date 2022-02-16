@@ -36,12 +36,17 @@ export class LoginComponent implements OnInit {
   submitLogin(): void {
     this.data.user = this.form.value;
     this.apiService.signIn(this.data).subscribe( (res: any) => {
-      res.has_profile? this.router.navigate(['dashboard']) : this.router.navigate(['user-profile']);
+      if(res.user.building_id == 1){
+        this.router.navigate(['user-profile']);
+      }else{
+        res.has_profile? this.router.navigate(['dashboard']) : this.router.navigate(['user-profile']);
+      }
+      alert(res.message);
     }, err => {
-      this.error_message = err.message;
+      this.error_message = err.error.message;
+      console.log(err);
       alert(this.error_message);
     });
-
   }
 
 }

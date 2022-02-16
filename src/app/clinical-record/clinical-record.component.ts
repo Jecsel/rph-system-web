@@ -140,7 +140,7 @@ export class ClinicalRecordComponent implements OnInit {
       middle_name: this.selected_data_record.profile.middle_name,
       age: this.selected_data_record.profile.age,
       gender_id: this.selected_data_record.profile.gender_id,
-      address: "",
+      address: this.selected_data_record.profile.address,
       civil_status_id: this.selected_data_record.profile.civil_status_id,
       religion: this.selected_data_record.profile.religion,
       dob: this.selected_data_record.profile.dob,
@@ -303,6 +303,28 @@ export class ClinicalRecordComponent implements OnInit {
   }
 
   setProfileData() {
+    let cStatus = 'Male';
+    switch (this.selected_data_record.profile.civil_status_id) {
+      case 1:
+        cStatus = 'Male';
+      break;
+      case 2:
+        cStatus = 'Female';
+      break;
+      case 3:
+        cStatus = 'Separated';
+      break;
+      case 4:
+        cStatus = 'Widowed';
+      break;
+      case 5:
+        cStatus = 'Divorce';
+      break;
+    
+      default:
+        cStatus = 'Male';
+        break;
+    }
     this.clinicalFormGroup.setValue({
       clinical_record_id: "",
       surname: this.selected_data_record.profile.surname,

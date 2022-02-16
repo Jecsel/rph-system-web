@@ -50,11 +50,14 @@
                                 <mat-checkbox class="" [(ngModel)]="female" (change)="male = false" formControlName="female">Female</mat-checkbox>
                               </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-8">
                               <mat-label>Civil Status</mat-label>
                               <div>
-                                <mat-checkbox class="mr-1" [(ngModel)]="single" (change)="married = false" formControlName="single">Single</mat-checkbox>
-                                <mat-checkbox class="" [(ngModel)]="married" (change)="single = false" formControlName="married">Married</mat-checkbox>
+                                <mat-checkbox class="mr-1" [(ngModel)]="single" (change)="married = false; separated = false; widowed = false; divorce = false;" formControlName="single">Single</mat-checkbox>
+                                <mat-checkbox class="mr-1" [(ngModel)]="married" (change)="single = false; separated = false; widowed = false; divorce = false;" formControlName="married">Married</mat-checkbox>
+                                <mat-checkbox class="mr-1" [(ngModel)]="separated" (change)="single = false; married = false; widowed = false; divorce = false;" formControlName="separated">Separated</mat-checkbox>
+                                <mat-checkbox class="mr-1" [(ngModel)]="widowed" (change)="single = false; married = false; separated = false; divorce = false;" formControlName="widowed">Widowed</mat-checkbox>
+                                <mat-checkbox class="mr-1" [(ngModel)]="divorce" (change)="single = false; married = false; separated = false; widowed = false;" formControlName="divorce">Divorce</mat-checkbox>
                               </div>
                             </div>
                             <div class="col-md-4">

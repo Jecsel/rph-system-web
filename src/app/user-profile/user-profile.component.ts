@@ -17,9 +17,12 @@ export class UserProfileComponent implements OnInit {
   data_body: any;
   gender_id: any;
   male: any;
-  female: any;
-  single: any;
-  married: any;
+  female: any = false;
+  single: any = false;
+  married: any = false;
+  separated: any = false;
+  widowed: any = false;
+  divorce: any = false;
   civil_status_id: any;
   clinical_records: any;
   has_profile: any;
@@ -119,12 +122,7 @@ export class UserProfileComponent implements OnInit {
       .getAllPatientOutPatientRecord(user_id)
       .subscribe(
         res => {
-          // if(res.outpatient_record.length == 0){
-          //   this.outpatients = {outpatient_record: [res.profile]};
-          // }else{
-            this.outpatients = res;
-          // }
-          
+          this.outpatients = res;
           console.log('outpatient: ', this.outpatients);
         },
         err => {
@@ -203,6 +201,9 @@ export class UserProfileComponent implements OnInit {
       female: this.user_profile.gender_id == 2 ? true : false,
       single: this.user_profile.civil_status_id == 1 ? true : false,
       married: this.user_profile.civil_status_id == 2 ? true : false,
+      separated: this.user_profile.civil_status_id == 3 ? true : false,
+      widowed: this.user_profile.civil_status_id == 4 ? true : false,
+      divorce: this.user_profile.civil_status_id == 5 ? true : false,
       occupation: this.user_profile.occupation,
       religion: this.user_profile.religion,
       nationality: this.user_profile.nationality,
@@ -229,15 +230,18 @@ export class UserProfileComponent implements OnInit {
       female: [''],
       single: [''],
       married: [''],
-      occupation: ['', Validators.required],
-      religion: ['', Validators.required],
-      nationality: ['', Validators.required],
-      cp_no: ['', Validators.required],
-      employed_by: ['', Validators.required],
-      person_to_notify: ['', Validators.required],
-      person_to_notify_address: ['', Validators.required],
-      person_to_notify_no: ['', Validators.required],
-      person_to_notify_cp_relationship: ['', Validators.required]
+      separated: [''],
+      widowed: [''],
+      divorce: [''],
+      occupation: [''],
+      religion: [''],
+      nationality: [''],
+      cp_no: [''],
+      employed_by: [''],
+      person_to_notify: [''],
+      person_to_notify_address: [''],
+      person_to_notify_no: [''],
+      person_to_notify_cp_relationship: ['']
     });
   }
 
@@ -257,8 +261,18 @@ export class UserProfileComponent implements OnInit {
     }
     if(this.single){
       this.data_body.profile.civil_status_id = 1;
-    }else{
+    }
+    if(this.married){
       this.data_body.profile.civil_status_id = 2;
+    }
+    if(this.separated){
+      this.data_body.profile.civil_status_id = 3;
+    }
+    if(this.widowed){
+      this.data_body.profile.civil_status_id = 4;
+    }
+    if(this.divorce){
+      this.data_body.profile.civil_status_id = 5;
     }
     delete this.data_body.profile.male;
     delete this.data_body.profile.female;
@@ -279,19 +293,6 @@ export class UserProfileComponent implements OnInit {
       }
     }
 
-
-    // if(this.selectedId == undefined && this.data_body.profile.user_id == undefined){
-    //   console.log('create new patient', this.data_body);
-    //   this.createNewPatient();
-    // }else{
-    //   if( this.has_profile == 'false' ){
-    //     console.log('create user Profile')
-    //     this.createProfile();
-    //   }else{
-    //     console.log('Update Patient or User Profile')
-    //     this.updateProfile();
-    //   }
-    // }
   }
 
   updateProfile(): void{
@@ -303,8 +304,18 @@ export class UserProfileComponent implements OnInit {
     }
     if(this.single){
       this.data_body.profile.civil_status_id = 1;
-    }else{
+    }
+    if(this.married){
       this.data_body.profile.civil_status_id = 2;
+    }
+    if(this.separated){
+      this.data_body.profile.civil_status_id = 3;
+    }
+    if(this.widowed){
+      this.data_body.profile.civil_status_id = 4;
+    }
+    if(this.divorce){
+      this.data_body.profile.civil_status_id = 5;
     }
     delete this.data_body.profile.male;
     delete this.data_body.profile.female;
