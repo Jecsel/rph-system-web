@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from 'app/services/api-service.service';
 
 @Component({
-  selector: 'app-maps',
-  templateUrl: './maps.component.html',
-  styleUrls: ['./maps.component.scss']
+  selector: 'app-doctor-list',
+  templateUrl: './doctor-list.component.html',
+  styleUrls: ['./doctor-list.component.scss']
 })
-export class MapsComponent implements OnInit {
+export class DoctorListComponent implements OnInit {
   public all_patients: any;
   public show_profile_modal = false;
   public selected_user_id: any;
@@ -16,23 +16,23 @@ export class MapsComponent implements OnInit {
   public male: any = true;
   public female: any = true;
   public search_key: any = '';
-  public user_data: any = {}
+  public user_data: any = {};
+
   constructor(private apiService: ApiServiceService) { }
 
   ngOnInit() {
-    this.getAllPatients();
+    this.getAllDoctors();
     this.new_patient = false;
     this.selected_user_id = undefined;
   }
 
-  getAllPatients() {
+  getAllDoctors() {
     this.apiService
-      .getAllPatients()
+      .getAllDoctors()
       .subscribe(
         res => {
           console.log(res);
           this.all_patients = res.patients;
-
         },
         err =>{
           alert(err.message);

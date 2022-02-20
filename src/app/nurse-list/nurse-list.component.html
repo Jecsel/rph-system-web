@@ -1,10 +1,10 @@
-<div id="map">
+<div id="nurse_list">
     <div class="main-content">
         <div class="container-fluid">
           <div *ngIf="!show_profile_modal" class="card">
               <div class="card-header card-header-danger">
-                  <h4 class="card-title">List of Patients</h4>
-                  <p class="card-category">Showing all patients recorded</p>
+                  <h4 class="card-title">List of Nurses</h4>
+                  <p class="card-category">Showing all nurses recorded</p>
               </div>
               <div class="card-body">
                   <div id="typography">
@@ -31,7 +31,7 @@
                                   </div>
                                 </div> -->
                                 <span class="table-add float-right mb-3 mr-2">
-                                  <a class="text-success" (click)="addPatient('patient')">
+                                  <a class="text-success" (click)="addPatient('nurse')">
                                     <i class="material-icons" style="cursor: pointer; font-size: 35px;">add</i>
                                   </a>
                                 </span>

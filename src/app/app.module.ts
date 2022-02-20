@@ -37,6 +37,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
 import { OutpatientRecordComponent } from './outpatient-record/outpatient-record.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
+import { ClinicalListComponent } from './clinical-list/clinical-list.component';
+import { NurseListComponent } from './nurse-list/nurse-list.component';
+import { DoctorListComponent } from './doctor-list/doctor-list.component';
 // import { UserComponent } from './user/user.component';
 
 
@@ -50,6 +53,7 @@ const materialModules = [
   MatButtonToggleModule,
   MatCheckboxModule,
   MatDatepickerModule,
+  MatCheckboxModule,
 ];
 
 @NgModule({
@@ -73,6 +77,9 @@ const materialModules = [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    // DoctorListComponent,
+    // NurseListComponent,
+    // ClinicalListComponent,
     // CreateAccountComponent,
     // OutpatientRecordComponent,
     // ClinicalRecordComponent

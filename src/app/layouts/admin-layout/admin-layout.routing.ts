@@ -9,6 +9,9 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { ClinicalListComponent } from 'app/clinical-list/clinical-list.component';
+import { NurseListComponent } from '../../nurse-list/nurse-list.component';
+import { DoctorListComponent } from 'app/doctor-list/doctor-list.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -62,4 +65,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user',           component: UserComponent },
     { path: 'notifications',  component: NotificationsComponent },
     { path: 'upgrade',        component: UpgradeComponent },
+    { path: 'clinical_list',        component: ClinicalListComponent },
+    { path: 'nurse-list',        component: NurseListComponent },
+    { path: 'doctor-list',        component: DoctorListComponent },
 ];

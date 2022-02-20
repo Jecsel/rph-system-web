@@ -56,7 +56,6 @@ export class UserProfileComponent implements OnInit {
     this.declareFormBuilder();
     if(this.newPatient == undefined){     //from userProfile
       if(this.has_profile == 'true'){
-        console.log('dito ba')
         console.log(this.has_profile);
         this.getProfile();
         this.submit_button_name = 'Update';
@@ -188,6 +187,36 @@ export class UserProfileComponent implements OnInit {
       )
   }
 
+  createNewNurse() {
+    this.apiService
+    .createNurse(this.data_body)
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        alert(res.message);
+        this.router.navigate(['dashboard']);
+      },
+      (err: any) => {
+        alert(err.message);
+      }
+    )
+  }
+
+  createNewDoctor() {
+    this.apiService
+    .createDoctor(this.data_body)
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        alert(res.message);
+        this.router.navigate(['dashboard']);
+      },
+      (err: any) => {
+        alert(err.message);
+      }
+    )
+  }
+
   setProfileData(): void{
     console.log(this.user_profile);
     this.profileFormGroup.setValue({
@@ -294,7 +323,22 @@ export class UserProfileComponent implements OnInit {
         }
       }else{
         if(this.newPatient.create_new){
-          this.createNewPatient();
+          switch (this.newPatient.user_type) {
+            case 'patient':
+              this.createNewPatient();
+              break;
+            case 'nurse':
+              this.createNewNurse();
+              break;
+            case 'doctor':
+              this.createNewDoctor();
+              break;
+
+            default:
+              this.createNewPatient();
+              break;
+          }
+          
         }else{
           this.updateProfile();
         }

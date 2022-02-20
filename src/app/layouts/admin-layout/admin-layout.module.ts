@@ -29,6 +29,9 @@ import { NgxPrintModule } from 'ngx-print';
 import { CreateAccountComponent } from 'app/create-account/create-account.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectSearchModule } from 'mat-select-search';
+import { ClinicalListComponent } from 'app/clinical-list/clinical-list.component';
+import { NurseListComponent } from 'app/nurse-list/nurse-list.component';
+import { DoctorListComponent } from 'app/doctor-list/doctor-list.component';
 
 @NgModule({
   imports: [
@@ -64,7 +67,10 @@ import { MatSelectSearchModule } from 'mat-select-search';
     UpgradeComponent,
     ClinicalRecordComponent,
     OutpatientRecordComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    ClinicalListComponent,
+    NurseListComponent,
+    DoctorListComponent,
   ]
 })
 

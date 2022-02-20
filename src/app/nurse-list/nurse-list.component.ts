@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from 'app/services/api-service.service';
 
 @Component({
-  selector: 'app-maps',
-  templateUrl: './maps.component.html',
-  styleUrls: ['./maps.component.scss']
+  selector: 'app-nurse-list',
+  templateUrl: './nurse-list.component.html',
+  styleUrls: ['./nurse-list.component.scss']
 })
-export class MapsComponent implements OnInit {
+export class NurseListComponent implements OnInit {
   public all_patients: any;
   public show_profile_modal = false;
   public selected_user_id: any;
@@ -16,23 +16,23 @@ export class MapsComponent implements OnInit {
   public male: any = true;
   public female: any = true;
   public search_key: any = '';
-  public user_data: any = {}
+  public user_data: any = {};
+
   constructor(private apiService: ApiServiceService) { }
 
   ngOnInit() {
-    this.getAllPatients();
+    this.getAllNurses();
     this.new_patient = false;
     this.selected_user_id = undefined;
   }
 
-  getAllPatients() {
+  getAllNurses() {
     this.apiService
-      .getAllPatients()
+      .getAllNurses()
       .subscribe(
         res => {
           console.log(res);
           this.all_patients = res.patients;
-
         },
         err =>{
           alert(err.message);
@@ -48,7 +48,7 @@ export class MapsComponent implements OnInit {
   }
 
   addPatient(user_type) {
-    this.user_data = { "create_new": true, "user_type": user_type };
+    this.user_data = { "create_new": true, "user_type":user_type };
 
     this.new_patient = true;
     this.show_profile_modal= true;
