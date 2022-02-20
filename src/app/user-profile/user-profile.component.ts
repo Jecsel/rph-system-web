@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiServiceService } from 'app/services/api-service.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 declare var $: any;
 @Component({
   selector: 'app-user-profile',
@@ -39,7 +40,7 @@ export class UserProfileComponent implements OnInit {
 
   @Input()
   newPatient: any;;
-  constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { 
+  constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder, private router: Router) { 
 
   }
 
@@ -52,7 +53,7 @@ export class UserProfileComponent implements OnInit {
     this.has_profile = localStorage.getItem('has_profile');
 
     console.log('newPatient Date: ', this.user_profile);
-
+    this.declareFormBuilder();
     if(this.newPatient == undefined){     //from userProfile
       if(this.has_profile == 'true'){
         console.log('dito ba')
@@ -64,20 +65,20 @@ export class UserProfileComponent implements OnInit {
       }else{
         this.showNotification();
       }
+      
     }else{    //Profile list
       if(this.newPatient.create_new){
         this.submit_button_name = 'Create';
       }else{
         this.show_sidebar_profile = true;
-        this.submit_button_name = 'Update';
+        this.submit_button_name = 'Edit';
+        this.profileFormGroup.disable();
         this.user_profile_id = this.newPatient.id;
         this.getProfile()
         this.getPatientClinicalRecords(this.newPatient.user_id);
         this.getAllPatientOutPatientRecord(this.newPatient.user_id);
       }
     }
-
-    this.declareFormBuilder();
   }
 
   newOutpatient(): void{
@@ -179,6 +180,7 @@ export class UserProfileComponent implements OnInit {
         (res: any) => {
           console.log(res);
           alert(res.message);
+          this.router.navigate(['dashboard']);
         },
         (err: any) => {
           alert(err.message);
@@ -252,47 +254,52 @@ export class UserProfileComponent implements OnInit {
     return d;
   }
 
-  onSubmit(): void{
-    this.data_body = { profile: this.profileFormGroup.value };
-    if(this.male){
-      this.data_body.profile.gender_id = 1;
+  onSubmit(action): void{
+    console.log(action);
+    if(action == 'Edit'){
+      this.submit_button_name = 'Update';
+      this.profileFormGroup.enable();
     }else{
-      this.data_body.profile.gender_id = 2;
-    }
-    if(this.single){
-      this.data_body.profile.civil_status_id = 1;
-    }
-    if(this.married){
-      this.data_body.profile.civil_status_id = 2;
-    }
-    if(this.separated){
-      this.data_body.profile.civil_status_id = 3;
-    }
-    if(this.widowed){
-      this.data_body.profile.civil_status_id = 4;
-    }
-    if(this.divorce){
-      this.data_body.profile.civil_status_id = 5;
-    }
-    delete this.data_body.profile.male;
-    delete this.data_body.profile.female;
-    delete this.data_body.profile.single;
-    delete this.data_body.profile.married;
-
-    if(this.newPatient == undefined){
-      if(this.has_profile == 'true'){
-        this.updateProfile();
+      this.data_body = { profile: this.profileFormGroup.value };
+      if(this.male){
+        this.data_body.profile.gender_id = 1;
       }else{
-        this.createProfile();
+        this.data_body.profile.gender_id = 2;
       }
-    }else{
-      if(this.newPatient.create_new){
-        this.createNewPatient();
+      if(this.single){
+        this.data_body.profile.civil_status_id = 1;
+      }
+      if(this.married){
+        this.data_body.profile.civil_status_id = 2;
+      }
+      if(this.separated){
+        this.data_body.profile.civil_status_id = 3;
+      }
+      if(this.widowed){
+        this.data_body.profile.civil_status_id = 4;
+      }
+      if(this.divorce){
+        this.data_body.profile.civil_status_id = 5;
+      }
+      delete this.data_body.profile.male;
+      delete this.data_body.profile.female;
+      delete this.data_body.profile.single;
+      delete this.data_body.profile.married;
+  
+      if(this.newPatient == undefined){
+        if(this.has_profile == 'true'){
+          this.updateProfile();
+        }else{
+          this.createProfile();
+        }
       }else{
-        this.updateProfile();
+        if(this.newPatient.create_new){
+          this.createNewPatient();
+        }else{
+          this.updateProfile();
+        }
       }
     }
-
   }
 
   updateProfile(): void{
@@ -332,7 +339,8 @@ export class UserProfileComponent implements OnInit {
           console.log(res);
           this.user_profile = res;
           alert('Updated Successfully');
-          this.ngOnInit();
+          this.router.navigate(['dashboard']);
+          // this.ngOnInit();
         },
         err => {
           alert(err.message);
@@ -352,6 +360,7 @@ export class UserProfileComponent implements OnInit {
           localStorage.setItem('user_profile_id', this.user_profile.profile.id);
           localStorage.setItem('has_profile', 'true');
           alert('Updated Successfully');
+          this.router.navigate(['dashboard']);
         },
         err =>{
           alert(err.message);

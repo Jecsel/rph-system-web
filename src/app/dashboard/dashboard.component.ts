@@ -10,6 +10,7 @@ import * as Chartist from 'chartist';
 export class DashboardComponent implements OnInit {
 
   data: any = {};
+  show_patients: any = false;
   constructor(private apiService: ApiServiceService) { }
 
   //Default Codes
@@ -170,5 +171,9 @@ export class DashboardComponent implements OnInit {
           alert(err.message);
         }
       )
+  }
+
+  showPatientLists(){
+    this.show_patients = true;
   }
 }

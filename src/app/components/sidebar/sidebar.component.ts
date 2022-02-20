@@ -35,36 +35,36 @@ export class SidebarComponent implements OnInit {
     this.user_role = localStorage.getItem('user_role_id');
     this.user_building = localStorage.getItem('user_building_id');
 
-    console.log('User Role :',  ROUTES);
-    switch (this.user_role) {
-      case '1':
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-        this.menuItems = [this.menuItems[1],this.menuItems[6]];
-        console.log(this.menuItems);
-        break;
-      case '2':
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-        this.menuItems = [this.menuItems[1],this.menuItems[2],this.menuItems[6]];
-        break;
-      case '3':
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-        if(this.user_building == 1){
-          this.menuItems = [this.menuItems[0],this.menuItems[1],this.menuItems[2],this.menuItems[3],this.menuItems[6]];
-        }else{
-          this.menuItems = [this.menuItems[0],this.menuItems[1],this.menuItems[2],this.menuItems[3],this.menuItems[4],this.menuItems[6]];
-        }
-        break;
-      case '4':
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-        if(this.user_building == 1){
-          this.menuItems = [this.menuItems[0],this.menuItems[1],this.menuItems[2],this.menuItems[3],this.menuItems[5],this.menuItems[6]];
-        }
-        break;
+    this.menuItems = ROUTES.filter(menuItem => menuItem);
+    // switch (this.user_role) {
+    //   case '1':
+    //     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    //     this.menuItems = [this.menuItems[1],this.menuItems[6]];
+    //     console.log(this.menuItems);
+    //     break;
+    //   case '2':
+    //     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    //     this.menuItems = [this.menuItems[1],this.menuItems[2],this.menuItems[6]];
+    //     break;
+    //   case '3':
+    //     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    //     if(this.user_building == 1){
+    //       this.menuItems = [this.menuItems[0],this.menuItems[1],this.menuItems[2],this.menuItems[3],this.menuItems[6]];
+    //     }else{
+    //       this.menuItems = [this.menuItems[0],this.menuItems[1],this.menuItems[2],this.menuItems[3],this.menuItems[4],this.menuItems[6]];
+    //     }
+    //     break;
+    //   case '4':
+    //     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    //     if(this.user_building == 1){
+    //       this.menuItems = [this.menuItems[0],this.menuItems[1],this.menuItems[2],this.menuItems[3],this.menuItems[5],this.menuItems[6]];
+    //     }
+    //     break;
     
-      default:
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-        break;
-    }
+    //   default:
+    //     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    //     break;
+    // }
   }
   isMobileMenu() {
       if ($(window).width() > 991) {

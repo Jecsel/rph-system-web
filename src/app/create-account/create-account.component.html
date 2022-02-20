@@ -1,13 +1,9 @@
 <div class="d-flex justify-content-center">
     <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
         <div class="box" style="border-radius: 0px; box-shadow: none;">
-          <!-- <mat-card-header>
-            <img class="login-logo" mat-card-image src="../../assets/img/romblon.jpeg">
-          </mat-card-header> -->
-      
-          <form class="login-form" [formGroup]="accountFormGroup" (ngSubmit)="submit()">
+          <form class="login-form" [formGroup]="accountFormGroup">
             <div class="row">
-                <div class="col-sm-12 col-md-6">
+                <div class="col-sm-12 col-md-12">
                     <mat-form-field appearance="outline" class="login-full-width">
                         <mat-label>Username</mat-label>
                         <input matInput placeholder="Username" required="required" formControlName="username">
@@ -17,38 +13,29 @@
                         <mat-label>Password</mat-label>
                         <input matInput type="text" required="required" formControlName="password">
                       </mat-form-field>
-                </div>
 
-                <div class="col-sm-12 col-md-6">
-                    <mat-form-field class="login-full-width" appearance="outline">
-                        <mat-label>User Type</mat-label>
-                        <mat-select formControlName="user_type_id">
-                            <mat-option *ngFor="let type of data_list.user_types" [value]="type.id">
-                              {{type.name}}
+                      <mat-form-field class="login-full-width" appearance="outline">
+                        <mat-label>Building</mat-label>
+                        <mat-select formControlName="building_id">
+                            <mat-option *ngFor="let build of data_list.buildings" [value]="build.id">
+                              {{build.name}}
                             </mat-option>
                           </mat-select>
                       </mat-form-field>
-        
-                        <mat-form-field class="login-full-width" appearance="outline">
-                            <mat-label>User Role</mat-label>
-                            <mat-select formControlName="user_role_id">
-                                <mat-option *ngFor="let role of data_list.user_roles" [value]="role.id">
-                                  {{role.name}}
-                                </mat-option>
-                              </mat-select>
-                        </mat-form-field>
-        
-                        <mat-form-field class="login-full-width" appearance="outline">
-                            <mat-label>Building</mat-label>
-                            <mat-select formControlName="building_id">
-                                <mat-option *ngFor="let build of data_list.buildings" [value]="build.id">
-                                  {{build.name}}
-                                </mat-option>
-                              </mat-select>
-                        </mat-form-field>
+
+                    <div *ngIf="is_delete">
+                      <label style="color: red;">Please provide your admin password.</label>
+                      <mat-form-field class="login-full-width" appearance="outline">
+                        <mat-label>Admin Password</mat-label>
+                        <input matInput type="text" formControlName="admin_password">
+                      </mat-form-field>
+                    </div>
+
                 </div>
             </div>
-            <button mat-stroked-button color="accent" class="btn-block" [disabled]="accountFormGroup.invalid">{{submit_button_name}}</button>
+            <button *ngIf="!is_delete" mat-stroked-button color="accent" class="btn-block" [disabled]="accountFormGroup.invalid" (click)="submit()">{{submit_button_name}}</button>
+            <button *ngIf="!is_delete" mat-raised-button color="basic" class="btn-block" [disabled]="accountFormGroup.invalid" (click)="deleteAccount()">Delete</button>
+            <button *ngIf="is_delete" mat-raised-button color="warn" class="btn-block" (click)="confirmDeleteAccount(accountRecord.id)">Delete Account</button>
           </form>
         </div>
     </div>

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiServiceService } from 'app/services/api-service.service';
 import { parse } from 'path/posix';
 
@@ -19,7 +20,7 @@ export class ClinicalRecordComponent implements OnInit {
 
   @Input()
   clinicalResultId: any;
-  constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { }
+  constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     this.user_role = localStorage.getItem('user_role_id');
@@ -124,6 +125,7 @@ export class ClinicalRecordComponent implements OnInit {
         console.log(res)
         this.selected_data_record = res;
         this.setData();
+        this.router.navigate(['dashboard']);
       },
       err => {
         alert(err.message);
@@ -456,6 +458,7 @@ export class ClinicalRecordComponent implements OnInit {
           this.selected_data_record = res;
           this.clinicalResultId = this.selected_data_record.clinical_record.id;
           this.getRecord();
+          this.router.navigate(['dashboard']);
         },
         err => {
           alert(err.message);

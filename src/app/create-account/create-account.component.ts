@@ -17,9 +17,11 @@ export class CreateAccountComponent implements OnInit {
   submit_button_name = 'Create'
   req_body: any = {};
   accountFormGroup: FormGroup;
+  adminPass: any = '';
   
   @Input()
   accountRecord: any = {};
+  is_delete: any = false;
   
   constructor(private router: Router, private apiService: ApiServiceService, private formBuilder: FormBuilder) { 
     
@@ -31,10 +33,10 @@ export class CreateAccountComponent implements OnInit {
     this.getList();
 
     if(this.accountRecord.create_new){
-      this.submit_button_name = 'Create'
+      this.submit_button_name = 'Create';
     }else{
-      this.submit_button_name = 'Update'
-      this.setValueFormBuilder()
+      this.submit_button_name = 'Update';
+      this.setValueFormBuilder();
     }
   }
 
@@ -56,7 +58,8 @@ export class CreateAccountComponent implements OnInit {
       password: ['', Validators.required],
       user_type_id: [1, Validators.required],
       user_role_id: [1, Validators.required],
-      building_id: [1, Validators.required]
+      building_id: [1, Validators.required],
+      admin_password: ['']
     });
   }
 
@@ -69,6 +72,7 @@ export class CreateAccountComponent implements OnInit {
       user_type_id: this.accountRecord.user_type_id,
       user_role_id: this.accountRecord.user_role_id,
       building_id: this.accountRecord.building_id,
+      admin_password: ''
     })
   }
 
@@ -103,12 +107,34 @@ export class CreateAccountComponent implements OnInit {
       .subscribe( 
         (res: any) => {
           console.log(res);
-          alert('Created Successfully!')
+          alert('Created Successfully!');
+          this.router.navigate(['dashboard']);
         },
         (err: any) => {
           alert(err.message);
         }
       )
   }
+
+  deleteAccount(): void{
+    this.is_delete = true
+  }
+
+  confirmDeleteAccount(id): void{
+    this.req_body = { user: this.accountFormGroup.value };
+    console.log(this.req_body);
+    this.apiService
+    .deleteUser({id: id, admin_password: this.req_body.user.admin_password})
+    .subscribe( 
+      (res: any) => {
+        alert(res.message)
+        this.router.navigate(['dashboard']);
+      },
+      (err: any) => {
+        alert(err.message);
+      }
+    )
+  }
+  
 
 }

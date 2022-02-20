@@ -37,7 +37,7 @@
               </div>
           </div>
           <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
+              <div class="card card-stats" (click)="showPatientLists()">
                   <div class="card-header card-header-primary card-header-icon">
                       <div class="card-icon">
                           <i class="material-icons">person</i>
@@ -100,7 +100,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <!-- <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-header card-header-warning card-header-icon">
                     <div class="card-icon">
@@ -132,8 +132,14 @@
                 </div>
             </div>
         </div>
-      </div>
-      <!-- <div class="row">
+      </div> -->
+      
+        <!-- Showing The Patient List -->
+        <div *ngIf="show_patients" style="width:100%">
+            <app-maps style="width:100%"></app-maps>
+        </div>
+
+        <div class="row mt-5">
           <div class="col-md-4">
               <div class="card card-chart">
                   <div class="card-header card-header-success">
@@ -183,7 +189,8 @@
                   </div>
               </div>
           </div>
-      </div> -->
+      </div>
+
       <!-- <div class="row">
           <div class="col-lg-6 col-md-12">
               <div class="card">
@@ -475,5 +482,6 @@
               </div>
           </div>
       </div> -->
+
   </div>
 </div>

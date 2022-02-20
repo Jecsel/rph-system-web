@@ -20,30 +20,22 @@
                             <tr>
                               <th class="text-center">Username</th>
                               <th class="text-center">Password</th>
-                              <th class="text-center">User Type</th>
-                              <th class="text-center">User Role</th>
                               <th class="text-center">Building</th>
-                              <th class="text-center">Remove</th>
+                              <th class="text-center">Action</th>
                             </tr>
-                            <tr *ngFor="let user of all_users; let id = index" (click)="updateModal(user)">
-                              <td>
+                            <tr *ngFor="let user of all_users; let id = index">
+                              <td (click)="updateModal(user)">
                                 <span (blur)="updateList(user.id, 'username', $event, user)" contenteditable="true">{{user.username}}</span>
                               </td>
-                              <td>
+                              <td (click)="updateModal(user)">
                                 <span contenteditable="true" (blur)="updateList(user.id, 'password', $event, user)">{{user.password}}</span>
                               </td>
-                              <td>
-                                <span>{{data_list.user_types[user.user_type_id - 1].name}}</span>
-                              </td>
-                              <td>
-                                <span>{{data_list.user_roles[user.user_role_id - 1].name}}</span>
-                              </td>
-                              <td>
+                              <td (click)="updateModal(user)">
                                 <span>{{data_list.buildings[user.building_id - 1].name}}</span>
                               </td>
                               <td>
                                 <span class="table-remove">
-                                  <button type="button" rounded="true" size="sm" class="btn btn-danger my-0" (click)="remove(user.id)">Remove</button>
+                                  <button type="button" rounded="true" size="sm" class="btn btn-primary my-0" (click)="updateModal(user)">View</button>
                                 </span>
                               </td>
                             </tr>

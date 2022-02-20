@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiServiceService } from 'app/services/api-service.service';
 
 @Component({
@@ -54,7 +55,7 @@ export class OutpatientRecordComponent implements OnInit {
   @Input()
   outpatientResult: any = {};
 
-  constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder) { }
+  constructor(private apiService: ApiServiceService, private formBuilder: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     console.log('Outpatient : ', this.outpatientResult);
@@ -339,6 +340,7 @@ export class OutpatientRecordComponent implements OnInit {
           res => {
             console.log(res);
             alert('Successfully Created!')
+            this.router.navigate(['dashboard']);
           },
           err => {
             alert(err.message);
@@ -368,6 +370,7 @@ export class OutpatientRecordComponent implements OnInit {
         res => {
           console.log(res);
           alert('Successfully Updated');
+          this.router.navigate(['dashboard']);
         },
         err => {
           alert(err.message)

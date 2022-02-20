@@ -8,7 +8,7 @@
                       <p class="card-category">Complete your profile</p>
                   </div>
                   <div class="card-body">
-                      <form [formGroup]="profileFormGroup" (ngSubmit)="onSubmit()">
+                      <form [formGroup]="profileFormGroup" (ngSubmit)="onSubmit(submit_button_name)">
                           <div class="row">
                               <div class="col-md-4">
                                 <mat-form-field class="example-full-width">
@@ -112,6 +112,7 @@
                             </div>
                           </div>
                           <button mat-raised-button type="submit" class="btn btn-danger pull-right">{{submit_button_name}}</button>
+                          <!-- <button mat-raised-button *ngIf="submit_button_name == 'Update'" type="button" class="btn btn-danger pull-right">Edit</button> -->
                           <div class="clearfix"></div>
                       </form>
                   </div>
