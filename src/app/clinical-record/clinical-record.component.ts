@@ -25,7 +25,7 @@ export class ClinicalRecordComponent implements OnInit {
   ngOnInit(): void {
     this.user_role = localStorage.getItem('user_role_id');
     this.selected_user_profile_id = localStorage.getItem('selected_user_profile_id');
-
+    this.getAllDoctors();
     this.declareFormBuilder();
     if(this.clinicalResultId > 0){
       this.getRecord();
@@ -33,8 +33,6 @@ export class ClinicalRecordComponent implements OnInit {
       console.log('selected_user_profile_id: ', this.selected_user_profile_id);
       this.getProfile(this.selected_user_profile_id)
     }
-
-    this.getAllDoctors();
   }
 
   getAllDoctors(){
@@ -43,7 +41,7 @@ export class ClinicalRecordComponent implements OnInit {
     .subscribe(
       res => {
         console.log(res)
-        this.doctors = res;
+        this.doctors = res.patients;
         this.setData();
       },
       err => {
@@ -135,6 +133,8 @@ export class ClinicalRecordComponent implements OnInit {
    }
 
   setData() {
+    let attending_physician_id = this.selected_data_record.clinical_record.attending_physician_id;
+    let doctor = this.doctors[attending_physician_id];
     
     this.clinicalFormGroup.setValue({
       clinical_record_id: this.selected_data_record.clinical_record.id,
@@ -153,7 +153,7 @@ export class ClinicalRecordComponent implements OnInit {
       person_to_notify_address: this.selected_data_record.profile.person_to_notify_address,
       person_to_notify_no: this.selected_data_record.profile.person_to_notify_no,
       person_to_notify_cp_relationship: this.selected_data_record.profile.person_to_notify_cp_relationship,
-      attending_physician_id: this.selected_data_record.clinical_record.attending_physician_id,
+      attending_physician_id: doctor,
       prepared_by_id: this.selected_data_record.clinical_record.prepared_by_id,
       fiscal_year: this.selected_data_record.clinical_record.fiscal_year,
       hospital_no: this.selected_data_record.clinical_record.hospital_no,

@@ -9,8 +9,8 @@
                   </div>
                   <div class="card-body">
                     <div>
-                        <mat-checkbox class="mr-1" [(ngModel)]="building_1" >Building 1</mat-checkbox>
-                        <mat-checkbox class="mr-1" [(ngModel)]="building_2">Building 2</mat-checkbox>  
+                        <mat-checkbox class="mr-1" [(ngModel)]="building_1" >Emergency Building</mat-checkbox>
+                        <mat-checkbox class="mr-1" [(ngModel)]="building_2">Outpatient Building</mat-checkbox>  
                         <button style="padding: 3px 15px; margin-bottom: 10px !important;" type="button" rounded="true" size="sm" class="btn btn-primary my-0" (click)="filter()">FILTER</button>
                       </div>
                       <hr>
@@ -48,7 +48,7 @@
                                           {{c.transferred_from}}
                                       </td>
                                       <td class="text-primary">
-                                          {{c.building_id}}
+                                          {{c.building_id == 1 ? 'Emergency Building' : 'OPD Building'}}
                                       </td>
                                   </tr>
                               </tbody>
