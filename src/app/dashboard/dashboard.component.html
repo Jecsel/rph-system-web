@@ -7,7 +7,7 @@
                       <div class="card-icon">
                           <i class="material-icons">admin_panel_settings</i>
                       </div>
-                      <p class="card-category">Total</p>
+                      <p class="card-category">Admin</p>
                       <h3 class="card-title">{{data.admin}}
                           <!-- <small>GB</small> -->
                       </h3>
@@ -15,7 +15,7 @@
                   <div class="card-footer">
                       <div class="stats">
                           <i class="material-icons">info</i>
-                          Admin
+                          Online: {{data.online_admins}}
                       </div>
                   </div>
               </div>
@@ -26,12 +26,12 @@
                       <div class="card-icon">
                           <i class="material-icons">local_pharmacy</i>
                       </div>
-                      <p class="card-category">Total</p>
+                      <p class="card-category">Nurse</p>
                       <h3 class="card-title">{{data.nurse}}</h3>
                   </div>
                   <div class="card-footer">
                       <div class="stats">
-                          <i class="material-icons">date_range</i> Nurse
+                          <i class="material-icons">date_range</i> Online: {{data.online_nurses}}
                       </div>
                   </div>
               </div>
@@ -42,12 +42,12 @@
                       <div class="card-icon">
                           <i class="material-icons">person</i>
                       </div>
-                      <p class="card-category">Total</p>
+                      <p class="card-category">Patient</p>
                       <h3 class="card-title">{{data.patient}}</h3>
                   </div>
                   <div class="card-footer">
                       <div class="stats">
-                          <i class="material-icons">local_offer</i> Patient
+                          <i class="material-icons">local_offer</i>
                       </div>
                   </div>
               </div>
@@ -58,12 +58,12 @@
                       <div class="card-icon">
                         <i class="material-icons">medical_services</i>
                       </div>
-                      <p class="card-category">Total</p>
+                      <p class="card-category">Doctor</p>
                       <h3 class="card-title">{{data.doctor}}</h3>
                   </div>
                   <div class="card-footer">
                       <div class="stats">
-                          <i class="material-icons">update</i> Doctor
+                          <i class="material-icons">update</i> Online: {{data.online_doctors}}
                       </div>
                   </div>
               </div>
