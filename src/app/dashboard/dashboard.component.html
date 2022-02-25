@@ -2,7 +2,7 @@
   <div class="container-fluid">
       <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats">
+              <div class="card card-stats" (click)="showAdminLists()">
                   <div class="card-header card-header-dark card-header-icon">
                       <div class="card-icon">
                           <i class="material-icons">admin_panel_settings</i>
@@ -147,6 +147,11 @@
         <!-- Showing The Doctors List -->
         <div *ngIf="show_doctors" style="width:100%">
             <app-doctor-list style="width:100%"></app-doctor-list>
+        </div>
+
+        <!-- Showing The Doctors List -->
+        <div *ngIf="show_admins" style="width:100%">
+            <app-admin-list style="width:100%"></app-admin-list>
         </div>
 
         <div class="row mt-5">
