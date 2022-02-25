@@ -14,6 +14,8 @@ export class DashboardComponent implements OnInit {
   show_nurses: any = false;
   show_doctors: any = false;
   show_admins: any = false;
+  show_recovereds: any = false;
+  show_deaths: any = false;
   constructor(private apiService: ApiServiceService) { }
 
   //Default Codes
@@ -181,6 +183,8 @@ export class DashboardComponent implements OnInit {
     this.show_doctors = false;
     this.show_patients = true;
     this.show_nurses = false;
+    this.show_recovereds = false;
+    this.show_deaths = false;
   }
 
   showDoctorLists(){
@@ -188,6 +192,8 @@ export class DashboardComponent implements OnInit {
     this.show_doctors = true;
     this.show_patients = false;
     this.show_nurses = false;
+    this.show_recovereds = false;
+    this.show_deaths = false;
   } 
 
   showNurseLists() {
@@ -195,6 +201,8 @@ export class DashboardComponent implements OnInit {
     this.show_doctors = false;
     this.show_patients = false;
     this.show_nurses = true;
+    this.show_recovereds = false;
+    this.show_deaths = false;
   }
 
   showAdminLists() {
@@ -202,5 +210,25 @@ export class DashboardComponent implements OnInit {
     this.show_doctors = false;
     this.show_patients = false;
     this.show_nurses = false;
+    this.show_recovereds = false;
+    this.show_deaths = false;
+  }
+
+  showRecoveredList() {
+    this.show_admins = false;
+    this.show_doctors = false;
+    this.show_patients = false;
+    this.show_nurses = false;
+    this.show_recovereds = true;
+    this.show_deaths = false;
+  }
+
+  showDiedList() {
+    this.show_admins = false;
+    this.show_doctors = false;
+    this.show_patients = false;
+    this.show_nurses = false;
+    this.show_recovereds = false;
+    this.show_deaths = true;
   }
 }
