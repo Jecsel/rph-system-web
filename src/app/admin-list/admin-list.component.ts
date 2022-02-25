@@ -105,4 +105,19 @@ export class AdminListComponent implements OnInit {
       )
   }
 
+  setAdminIsOnline(id, is_online){
+    console.log(id + " "+ is_online);
+    this.apiService
+    .update_admin_is_online({ "id": id, "is_online": is_online})
+    .subscribe(
+      (res: any) => {
+        console.log(res);
+        this.ngOnInit();
+      },
+      (err: any) => {
+        alert(err.message);
+      }
+    )
+  }
+
 }

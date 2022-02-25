@@ -540,4 +540,52 @@ export class ApiServiceService {
       }));
   }
 
+  update_doctor_is_online(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .post(this.baseUrl + '/patient/'+ data.id +'/update_doctor_is_online', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  update_nurse_is_online(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .post(this.baseUrl + '/patient/'+ data.id +'/update_nurse_is_online', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  update_admin_is_online(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .post(this.baseUrl + '/patient/'+ data.id +'/update_admin_is_online', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
 }

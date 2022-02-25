@@ -40,8 +40,8 @@
                                   <th class="text-center">First Name</th>
                                   <th class="text-center">Last Name</th>
                                   <th class="text-center">Gender</th>
-                                  <th class="text-center">Birth Date</th>
                                   <th class="text-center">Age</th>
+                                  <th class="text-center">Online</th>
                                   <th class="text-center">Actions</th>
                                 </tr>
                                 <tr *ngFor="let patient of all_patients; let id = index">
@@ -55,10 +55,15 @@
                                     <span>{{patient.gender_id == 1 ? 'Male' : 'Female'}}</span>
                                   </td>
                                   <td>
-                                    <span>{{patient.dob | date}}</span>
+                                    <span>{{patient.age}}</span>
                                   </td>
                                   <td>
-                                    <span>{{patient.age}}</span>
+                                    <span>
+                                      <label class="switch">
+                                        <input type="checkbox" (change)="setNurseIsOnline(patient.id, patient.is_online)" [(ngModel)]="patient.is_online">
+                                        <span class="slider round"></span>
+                                      </label>
+                                    </span>
                                   </td>
                                   <td>
                                     <div style="display:inline-flex">
