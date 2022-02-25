@@ -166,6 +166,22 @@ export class ApiServiceService {
       }));
   }
 
+  getAllAdmins(): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .get(this.baseUrl + 'patient/1/show_all_admins', this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
   allClinicalRecords(): Observable<any>{
     this.httpOptions = {
       headers: new HttpHeaders({

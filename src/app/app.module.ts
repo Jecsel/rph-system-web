@@ -40,6 +40,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { ClinicalListComponent } from './clinical-list/clinical-list.component';
 import { NurseListComponent } from './nurse-list/nurse-list.component';
 import { DoctorListComponent } from './doctor-list/doctor-list.component';
+import { AdminListComponent } from './admin-list/admin-list.component';
 // import { UserComponent } from './user/user.component';
 
 
@@ -77,6 +78,7 @@ const materialModules = [
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    // AdminListComponent,
     // DoctorListComponent,
     // NurseListComponent,
     // ClinicalListComponent,

@@ -56,8 +56,8 @@ export class CreateAccountComponent implements OnInit {
       id: 1,
       username: ['', Validators.required],
       password: ['', Validators.required],
-      user_type_id: [1, Validators.required],
-      user_role_id: [1, Validators.required],
+      user_type_id: [4, Validators.required],
+      user_role_id: [4, Validators.required],
       building_id: [1, Validators.required],
       admin_password: ['']
     });

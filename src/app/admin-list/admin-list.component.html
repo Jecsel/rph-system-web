@@ -1,0 +1,90 @@
+<div id="admin_list">
+    <div class="main-content">
+        <div class="container-fluid">
+          <div *ngIf="!show_profile_modal" class="card">
+              <div class="card-header card-header-danger">
+                  <h4 class="card-title">List of Doctors</h4>
+              </div>
+              <div class="card-body">
+                  <div id="typography">
+                      <div class="card">
+                          <div class="card-body">
+                            <div id="table" class="table-editable">
+                              <div class="d-flex justify-content-between">
+                                <!-- <div class="row">
+                                  <div class="col-sm-12 col-md-4">
+                                    <form class="navbar-form" (click)="search()">
+                                      <div class="input-group no-border">
+                                          <input type="text" class="form-control" [(ngModel)]="search_key" (ngModelChange)="search()" placeholder="Search...">
+                                      </div>
+                                    </form>
+                                  </div>
+                                  <div class="col-sm-12 col-md-3">
+                                    <mat-checkbox class="mx-1 mt-3" [(ngModel)]="building_1" >Building 1</mat-checkbox>
+                                  </div>
+                                  <div class="col-sm-12 col-md-3">
+                                    <mat-checkbox class="mr-1 mt-3" [(ngModel)]="building_2">Building 2</mat-checkbox>
+                                  </div>
+                                  <div class="col-sm-12 col-md-2" style="padding: 11px 0;">
+                                    <button style="padding: 5px 10px; max-height: 40px;" type="button" rounded="true" size="sm" class="btn btn-primary my-0" (click)="filter()">FILTER</button>
+                                  </div>
+                                </div> -->
+                                <span class="table-add float-right mb-3 mr-2">
+                                  <a class="text-success" (click)="addPatient('doctor')">
+                                    <i class="material-icons" style="cursor: pointer; font-size: 35px;">add</i>
+                                  </a>
+                                </span>
+                              </div>
+                              <table class="table table-bordered table-responsive-md table-striped text-center">
+                                <tr>
+                                  <th class="text-center">First Name</th>
+                                  <th class="text-center">Last Name</th>
+                                  <th class="text-center">Gender</th>
+                                  <th class="text-center">Birth Date</th>
+                                  <th class="text-center">Age</th>
+                                  <th class="text-center">Actions</th>
+                                </tr>
+                                <tr *ngFor="let patient of all_patients; let id = index">
+                                  <td>
+                                    <span>{{patient.first_name}}</span>
+                                  </td>
+                                  <td>
+                                    <span>{{patient.surname}}</span>
+                                  </td>
+                                  <td>
+                                    <span>{{patient.gender_id == 1 ? 'Male' : 'Female'}}</span>
+                                  </td>
+                                  <td>
+                                    <span>{{patient.dob | date}}</span>
+                                  </td>
+                                  <td>
+                                    <span>{{patient.age}}</span>
+                                  </td>
+                                  <td>
+                                    <div style="display:inline-flex">
+                                      <span class="table-remove">
+                                        <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-success my-0" (click)="viewPatient(patient)">View</button>
+                                      </span>
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+              </div>
+          </div>
+          <div class="profile-containers">
+            <div class="profile-content" style="max-height: 550px; overflow: scroll;">
+              <div *ngIf="show_profile_modal" class="card">
+                <div class="d-flex justify-content-end p-2">
+                  <mat-icon (click)="close()" style="cursor: pointer;">close</mat-icon>
+                </div>
+                <app-user-profile [newPatient]="user_data"></app-user-profile>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
