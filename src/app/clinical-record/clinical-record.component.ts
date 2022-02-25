@@ -125,6 +125,7 @@ export class ClinicalRecordComponent implements OnInit {
         console.log(res)
         this.selected_data_record = res;
         this.setData();
+        alert("Successully updated.");
         this.router.navigate(['dashboard']);
       },
       err => {
@@ -458,6 +459,7 @@ export class ClinicalRecordComponent implements OnInit {
           this.selected_data_record = res;
           this.clinicalResultId = this.selected_data_record.clinical_record.id;
           this.getRecord();
+          alert("Successully updated.");
           this.router.navigate(['dashboard']);
         },
         err => {

@@ -184,8 +184,9 @@ export class TypographyComponent implements OnInit {
     this.ngOnInit();
   }
 
-  newModal(){
+  newAccount(){
     this.show_account_modal = true;
+    this.account_data.create_new = true;
   }
 
   updateModal(data){

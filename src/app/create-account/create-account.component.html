@@ -34,7 +34,7 @@
                 </div>
             </div>
             <button *ngIf="!is_delete" mat-stroked-button color="accent" class="btn-block" [disabled]="accountFormGroup.invalid" (click)="submit()">{{submit_button_name}}</button>
-            <button *ngIf="!is_delete" mat-raised-button color="basic" class="btn-block" [disabled]="accountFormGroup.invalid" (click)="deleteAccount()">Delete</button>
+            <button *ngIf="!is_delete && !this.accountRecord.create_new" mat-raised-button color="basic" class="btn-block" [disabled]="accountFormGroup.invalid" (click)="deleteAccount()">Delete</button>
             <button *ngIf="is_delete" mat-raised-button color="warn" class="btn-block" (click)="confirmDeleteAccount(accountRecord.id)">Delete Account</button>
           </form>
         </div>

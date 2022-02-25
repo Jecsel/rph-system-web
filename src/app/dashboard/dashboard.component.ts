@@ -11,6 +11,8 @@ export class DashboardComponent implements OnInit {
 
   data: any = {};
   show_patients: any = false;
+  show_nurses: any = false;
+  show_doctors: any = false;
   constructor(private apiService: ApiServiceService) { }
 
   //Default Codes
@@ -174,6 +176,20 @@ export class DashboardComponent implements OnInit {
   }
 
   showPatientLists(){
+    this.show_doctors = false;
     this.show_patients = true;
+    this.show_nurses = false;
+  }
+
+  showDoctorLists(){
+    this.show_doctors = true;
+    this.show_patients = false;
+    this.show_nurses = false;
+  } 
+
+  showNurseLists() {
+    this.show_doctors = false;
+    this.show_patients = false;
+    this.show_nurses = true;
   }
 }
