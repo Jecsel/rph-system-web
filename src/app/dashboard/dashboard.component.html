@@ -1,101 +1,102 @@
 <div class="main-content">
-  <div class="container-fluid">
-      <div class="row">
-          <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats" (click)="showAdminLists()">
-                  <div class="card-header card-header-dark card-header-icon">
-                      <div class="card-icon">
-                          <i class="material-icons">admin_panel_settings</i>
-                      </div>
-                      <p class="card-category">Admin</p>
-                      <h3 class="card-title">{{data.admin}}
-                          <!-- <small>GB</small> -->
-                      </h3>
-                  </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons">admin_panel_settings</i>
-                          Online: {{data.online_admins}}
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats" (click)="showNurseLists()">
-                  <div class="card-header card-header-warning card-header-icon">
-                      <div class="card-icon">
-                          <i class="material-icons">local_pharmacy</i>
-                      </div>
-                      <p class="card-category">Nurse</p>
-                      <h3 class="card-title">{{data.nurse}}</h3>
-                  </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons">local_pharmacy</i> Online: {{data.online_nurses}}
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats" (click)="showPatientLists()">
-                  <div class="card-header card-header-primary card-header-icon">
-                      <div class="card-icon">
-                          <i class="material-icons">person</i>
-                      </div>
-                      <p class="card-category">Patient</p>
-                      <h3 class="card-title">{{data.patient}}</h3>
-                  </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons">person</i>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="card card-stats" (click)="showDoctorLists()">
-                  <div class="card-header card-header-info card-header-icon">
-                      <div class="card-icon">
-                        <i class="material-icons">medical_services</i>
-                      </div>
-                      <p class="card-category">Doctor</p>
-                      <h3 class="card-title">{{data.doctor}}</h3>
-                  </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons">medical_services</i> Online: {{data.online_doctors}}
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats" (click)="showRecoveredList()">
-                <div class="card-header card-header-success card-header-icon">
-                    <div class="card-icon">
-                        <i class="material-icons">mood</i>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats" (click)="showAdminLists()">
+                    <div class="card-header card-header-dark card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">admin_panel_settings</i>
+                        </div>
+                        <p class="card-category">Admin</p>
+                        <h3 class="card-title">{{data.admin}}
+                            <!-- <small>GB</small> -->
+                        </h3>
                     </div>
-                    <p class="card-category">Total</p>
-                    <h3 class="card-title">{{data.recovered.count}}</h3>
-                </div>
-                <div class="card-footer">
-                    <div class="stats">
-                        <i class="material-icons">mood</i> Recovered
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">admin_panel_settings</i>
+                            Online: {{data.online_admins}}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats" (click)="showDiedList()">
-                <div class="card-header card-header-danger card-header-icon">
-                    <div class="card-icon">
-                        <i class="material-icons">mood_bad</i>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats" (click)="showNurseLists()">
+                    <div class="card-header card-header-warning card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">local_pharmacy</i>
+                        </div>
+                        <p class="card-category">Nurse</p>
+                        <h3 class="card-title">{{data.nurse}}</h3>
                     </div>
-                    <p class="card-category">Total</p>
-                    <h3 class="card-title">{{data.died.count}}</h3>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">local_pharmacy</i> Online: {{data.online_nurses}}
+                        </div>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <div class="stats">
-                        <i class="material-icons">mood_bad</i> Death
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats" (click)="showPatientLists()">
+                    <div class="card-header card-header-primary card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">person</i>
+                        </div>
+                        <p class="card-category">Patient</p>
+                        <h3 class="card-title">{{data.patient}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">person</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats" (click)="showDoctorLists()">
+                    <div class="card-header card-header-info card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">medical_services</i>
+                        </div>
+                        <p class="card-category">Doctor</p>
+                        <h3 class="card-title">{{data.doctor}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">medical_services</i> Online: {{data.online_doctors}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats" (click)="showRecoveredList()">
+                    <div class="card-header card-header-success card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">mood</i>
+                        </div>
+                        <p class="card-category">Total</p>
+                        <h3 class="card-title">{{data.recovered != undefined ? data.recovered.count : '0'}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">mood</i> Recovered
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="card card-stats" (click)="showDiedList()">
+                    <div class="card-header card-header-danger card-header-icon">
+                        <div class="card-icon">
+                            <i class="material-icons">mood_bad</i>
+                        </div>
+                        <p class="card-category">Total</p>
+                        <h3 class="card-title">{{data.died != undefined ? data.died.count : '0'}}</h3>
+                    </div>
+                    <div class="card-footer">
+                        <div class="stats">
+                            <i class="material-icons">mood_bad</i> Death
+                        </div>
                     </div>
                 </div>
             </div>
@@ -172,7 +173,7 @@
                 </div>
             </div>
         </div>
-      
+
         <!-- Showing The Patient List -->
         <div *ngIf="show_patients" style="width:100%">
             <app-maps style="width:100%"></app-maps>
@@ -192,58 +193,39 @@
         <div *ngIf="show_admins" style="width:100%">
             <app-admin-list style="width:100%"></app-admin-list>
         </div>
-
-        <div class="row mt-5">
-          <div class="col-md-4">
-              <div class="card card-chart">
-                  <div class="card-header card-header-success">
-                      <div class="ct-chart" id="dailySalesChart"></div>
-                  </div>
-                  <div class="card-body">
-                      <h4 class="card-title">Daily Sales</h4>
-                      <p class="card-category">
-                          <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
-                  </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons">access_time</i> updated 4 minutes ago
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4">
-              <div class="card card-chart">
-                  <div class="card-header card-header-warning">
-                      <div class="ct-chart" id="websiteViewsChart"></div>
-                  </div>
-                  <div class="card-body">
-                      <h4 class="card-title">Email Subscriptions</h4>
-                      <p class="card-category">Last Campaign Performance</p>
-                  </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons">access_time</i> campaign sent 2 days ago
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4">
-              <div class="card card-chart">
-                  <div class="card-header card-header-danger">
-                      <div class="ct-chart" id="completedTasksChart"></div>
-                  </div>
-                  <div class="card-body">
-                      <h4 class="card-title">Completed Tasks</h4>
-                      <p class="card-category">Last Campaign Performance</p>
-                  </div>
-                  <div class="card-footer">
-                      <div class="stats">
-                          <i class="material-icons">access_time</i> campaign sent 2 days ago
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-  </div>
+        <div class="mt-5">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="card card-chart">
+                        <div class="card-header card-header-success">
+                            <div class="ct-chart" id="dailySalesChart"></div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Recovered Patients</h4>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">access_time</i> By Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="card card-chart">
+                        <div class="card-header card-header-danger">
+                            <div class="ct-chart" id="completedTasksChart"></div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title">Died Patients</h4>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="material-icons">access_time</i> By Month
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -80,57 +80,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getDashboardData();
 
-
-
-
-      /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
-
-      const dataDailySalesChart: any = {
-          labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-          series: [
-              [12, 17, 7, 17, 23, 18, 38]
-          ]
-      };
-
-     const optionsDailySalesChart: any = {
-          lineSmooth: Chartist.Interpolation.cardinal({
-              tension: 0
-          }),
-          low: 0,
-          high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
-      }
-
-      var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
-
-      this.startAnimationForLineChart(dailySalesChart);
-
-
-      /* ----------==========     Completed Tasks Chart initialization    ==========---------- */
-
-      const dataCompletedTasksChart: any = {
-          labels: ['12p', '3p', '6p', '9p', '12p', '3a', '6a', '9a'],
-          series: [
-              [230, 750, 450, 300, 280, 240, 200, 190]
-          ]
-      };
-
-     const optionsCompletedTasksChart: any = {
-          lineSmooth: Chartist.Interpolation.cardinal({
-              tension: 0
-          }),
-          low: 0,
-          high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-          chartPadding: { top: 0, right: 0, bottom: 0, left: 0}
-      }
-
-      var completedTasksChart = new Chartist.Line('#completedTasksChart', dataCompletedTasksChart, optionsCompletedTasksChart);
-
-      // start animation for the Completed Tasks Chart - Line Chart
-      this.startAnimationForLineChart(completedTasksChart);
-
-
-
       /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
       var datawebsiteViewsChart = {
@@ -169,13 +118,101 @@ export class DashboardComponent implements OnInit {
       .getDashboardData()
       .subscribe(
         res =>{
-          console.log(res);
           this.data = res;
+          this.getRecoveredChartData();
+          this.getDiedChartData();
+          console.log(this.data);
         },
         err => {
           alert(err.message);
         }
       )
+  }
+
+  getDiedChartData(){
+    let group_month_rec = this.data.group_died;
+    const monthNames = ["1", "2", "3", "4", "5", "6",
+        "7", "8", "9", "10", "11", "12"];
+
+    let rec_month_label = [];
+    let rec_month_series = [];
+
+    for (var key in group_month_rec) {
+      if (group_month_rec.hasOwnProperty(key)) {
+        let get_month = new Date(group_month_rec[key][0].created_at);
+        const month = monthNames[get_month.getMonth()];
+        const year = get_month.getFullYear().toString().substr(-2);
+
+        rec_month_label.push(month + '/' + year);
+        rec_month_series.push(group_month_rec[key].length);
+      }
+    }
+    this.createDiedChart(rec_month_label, rec_month_series)
+    console.log(rec_month_label);
+    console.log(rec_month_series);
+  }
+
+  createDiedChart(l, s){
+    const dataDailySalesChart: any = {
+      labels: l,
+      series: [s]
+    };
+
+    const optionsDailySalesChart: any = {
+      lineSmooth: Chartist.Interpolation.cardinal({
+        tension: 0
+      }),
+      low: 0,
+      high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
+    }
+
+    var dailySalesChart = new Chartist.Line('#completedTasksChart', dataDailySalesChart, optionsDailySalesChart);
+
+    this.startAnimationForLineChart(dailySalesChart);
+  }
+
+  getRecoveredChartData(){
+    let group_month_rec = this.data.group_recovered;
+    const monthNames = ["1", "2", "3", "4", "5", "6",
+        "7", "8", "9", "10", "11", "12"];
+
+    let rec_month_label = [];
+    let rec_month_series = [];
+
+    for (var key in group_month_rec) {
+      if (group_month_rec.hasOwnProperty(key)) {
+        let get_month = new Date(group_month_rec[key][0].created_at);
+        const month = monthNames[get_month.getMonth()];
+        const year = get_month.getFullYear();
+
+        rec_month_label.push(month + '/' + year);
+        rec_month_series.push(group_month_rec[key].length);
+      }
+    }
+    this.createRecoveredChart(rec_month_label, rec_month_series)
+    console.log(rec_month_label);
+    console.log(rec_month_series);
+  }
+
+  createRecoveredChart(l, s){
+    const dataDailySalesChart: any = {
+      labels: l,
+      series: [s]
+    };
+
+    const optionsDailySalesChart: any = {
+      lineSmooth: Chartist.Interpolation.cardinal({
+        tension: 0
+      }),
+      low: 0,
+      high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+      chartPadding: { top: 0, right: 0, bottom: 0, left: 0 },
+    }
+
+    var dailySalesChart = new Chartist.Line('#dailySalesChart', dataDailySalesChart, optionsDailySalesChart);
+
+    this.startAnimationForLineChart(dailySalesChart);
   }
 
   showPatientLists(){
