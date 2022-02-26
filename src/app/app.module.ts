@@ -31,17 +31,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { ClinicalRecordComponent } from './clinical-record/clinical-record.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatRadioModule } from '@angular/material/radio';
 import { MatIconModule } from '@angular/material/icon';
-import { OutpatientRecordComponent } from './outpatient-record/outpatient-record.component';
-import { CreateAccountComponent } from './create-account/create-account.component';
-import { ClinicalListComponent } from './clinical-list/clinical-list.component';
-import { NurseListComponent } from './nurse-list/nurse-list.component';
-import { DoctorListComponent } from './doctor-list/doctor-list.component';
-import { AdminListComponent } from './admin-list/admin-list.component';
-// import { UserComponent } from './user/user.component';
 
 
 const materialModules = [
@@ -77,16 +68,7 @@ const materialModules = [
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    LoginComponent,
-    // AdminListComponent,
-    // DoctorListComponent,
-    // NurseListComponent,
-    // ClinicalListComponent,
-    // CreateAccountComponent,
-    // OutpatientRecordComponent,
-    // ClinicalRecordComponent
-    // UserComponent,
-
+    LoginComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

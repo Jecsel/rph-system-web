@@ -33,6 +33,7 @@ import { ClinicalListComponent } from 'app/clinical-list/clinical-list.component
 import { NurseListComponent } from 'app/nurse-list/nurse-list.component';
 import { DoctorListComponent } from 'app/doctor-list/doctor-list.component';
 import { AdminListComponent } from 'app/admin-list/admin-list.component';
+import { AboutUsComponent } from 'app/about-us/about-us.component';
 
 @NgModule({
   imports: [
@@ -72,7 +73,8 @@ import { AdminListComponent } from 'app/admin-list/admin-list.component';
     ClinicalListComponent,
     NurseListComponent,
     DoctorListComponent,
-    AdminListComponent
+    AdminListComponent,
+    AboutUsComponent
   ]
 })
 

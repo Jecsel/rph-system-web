@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
   show_admins: any = false;
   show_recovereds: any = false;
   show_deaths: any = false;
+  show_chart_rec: any = false;
+  show_chart_death: any = false;
   constructor(private apiService: ApiServiceService) { }
 
   //Default Codes
@@ -148,8 +150,6 @@ export class DashboardComponent implements OnInit {
       }
     }
     this.createDiedChart(rec_month_label, rec_month_series)
-    console.log(rec_month_label);
-    console.log(rec_month_series);
   }
 
   createDiedChart(l, s){
@@ -184,7 +184,7 @@ export class DashboardComponent implements OnInit {
       if (group_month_rec.hasOwnProperty(key)) {
         let get_month = new Date(group_month_rec[key][0].created_at);
         const month = monthNames[get_month.getMonth()];
-        const year = get_month.getFullYear();
+        const year = get_month.getFullYear().toString().substr(-2);
 
         rec_month_label.push(month + '/' + year);
         rec_month_series.push(group_month_rec[key].length);

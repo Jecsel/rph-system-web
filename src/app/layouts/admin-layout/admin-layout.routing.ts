@@ -13,6 +13,7 @@ import { ClinicalListComponent } from 'app/clinical-list/clinical-list.component
 import { NurseListComponent } from '../../nurse-list/nurse-list.component';
 import { DoctorListComponent } from 'app/doctor-list/doctor-list.component';
 import { AdminListComponent } from 'app/admin-list/admin-list.component';
+import { AboutUsComponent } from 'app/about-us/about-us.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -70,4 +71,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'nurse-list',        component: NurseListComponent },
     { path: 'doctor-list',        component: DoctorListComponent },
     { path: 'admin-list',        component: AdminListComponent },
+    { path: 'about-us',        component: AboutUsComponent },
 ];
