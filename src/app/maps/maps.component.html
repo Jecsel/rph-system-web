@@ -11,7 +11,7 @@
                           <div class="card-body">
                             <div id="table" class="table-editable">
                               <div class="d-flex justify-content-between">
-                                <!-- <div class="row">
+                                <div class="row">
                                   <div class="col-sm-12 col-md-4">
                                     <form class="navbar-form" (click)="search()">
                                       <div class="input-group no-border">
@@ -20,15 +20,12 @@
                                     </form>
                                   </div>
                                   <div class="col-sm-12 col-md-3">
-                                    <mat-checkbox class="mx-1 mt-3" [(ngModel)]="building_1" >Building 1</mat-checkbox>
+                                    <mat-checkbox class="mx-1 mt-3" (change)="filter()" [(ngModel)]="building_1" >Building 1</mat-checkbox>
                                   </div>
                                   <div class="col-sm-12 col-md-3">
-                                    <mat-checkbox class="mr-1 mt-3" [(ngModel)]="building_2">Building 2</mat-checkbox>
+                                    <mat-checkbox class="mr-1 mt-3" (change)="filter()" [(ngModel)]="building_2">Building 2</mat-checkbox>
                                   </div>
-                                  <div class="col-sm-12 col-md-2" style="padding: 11px 0;">
-                                    <button style="padding: 5px 10px; max-height: 40px;" type="button" rounded="true" size="sm" class="btn btn-primary my-0" (click)="filter()">FILTER</button>
-                                  </div>
-                                </div> -->
+                                </div>
                                 <span class="table-add float-right mb-3 mr-2">
                                   <a class="text-success" (click)="addPatient('patient')">
                                     <i class="material-icons" style="cursor: pointer; font-size: 35px;">add</i>

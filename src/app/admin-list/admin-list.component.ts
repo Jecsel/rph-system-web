@@ -78,7 +78,7 @@ export class AdminListComponent implements OnInit {
     }
 
     this.apiService
-      .filterPatients({"building_id": building_id})
+      .filterAdmins({"building_id": building_id})
       .subscribe(
         (res: any) => {
           this.all_patients = res.patients;
@@ -93,7 +93,7 @@ export class AdminListComponent implements OnInit {
   search() {
     console.log(this.search_key);
     this.apiService
-      .search_patient({ "search_key": this.search_key })
+      .search_admin({ "search_key": this.search_key })
       .subscribe(
         (res: any) => {
           console.log(res);

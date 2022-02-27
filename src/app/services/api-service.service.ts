@@ -508,6 +508,51 @@ export class ApiServiceService {
       }));
   }
 
+  filterAdmins(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+    return this.httpClient
+      .post(this.baseUrl + 'patient/1/filter_admin', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  filterNurses(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+    return this.httpClient
+      .post(this.baseUrl + 'patient/1/filter_nurse', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  filterDoctors(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+    return this.httpClient
+      .post(this.baseUrl + 'patient/1/filter_doctor', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
   filterClinical(data: any): Observable<void>{
     this.httpOptions = {
       headers: new HttpHeaders({
@@ -535,6 +580,54 @@ export class ApiServiceService {
 
     return this.httpClient
       .post(this.baseUrl + '/patient/1/patient_search', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  search_admin(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .post(this.baseUrl + '/patient/1/admin_search', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  search_nurse(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .post(this.baseUrl + '/patient/1/nurse_search', data, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
+  search_doctor(data: any): Observable<void>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+
+    return this.httpClient
+      .post(this.baseUrl + '/patient/1/doctor_search', data, this.httpOptions)
       .pipe(map((response: any) => {
         return response;
       }));
