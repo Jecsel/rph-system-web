@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiServiceService } from 'app/services/api-service.service';
 
 @Component({
@@ -10,7 +11,9 @@ export class IconsComponent implements OnInit {
   outpatient_records: any = [];
   show_modal: boolean = false;
   outpatient_result: any = [];
-  constructor(private apiService: ApiServiceService) { }
+  id_to_delete: any = 0;
+
+  constructor(private apiService: ApiServiceService, private router: Router) { }
 
   ngOnInit() {
     this.outpatient_result = '';
@@ -51,6 +54,24 @@ export class IconsComponent implements OnInit {
         }
       )
       
+  }
+
+  setIdToDelete(id){
+    this.id_to_delete = id;
+  }
+
+  deleteRecord(){
+    this.apiService
+      .deleteOutpatientRecord(this.id_to_delete)
+      .subscribe(
+        res =>{
+          console.log(res);
+          alert('Record Deleted!')
+          this.router.navigate(['dashboard']);
+        },err => {
+          alert(err.message);
+        }
+      )
   }
 
 }
