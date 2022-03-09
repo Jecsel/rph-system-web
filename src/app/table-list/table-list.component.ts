@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiServiceService } from 'app/services/api-service.service';
 
 @Component({
@@ -8,11 +9,12 @@ import { ApiServiceService } from 'app/services/api-service.service';
 })
 export class TableListComponent implements OnInit {
   clinical_records: any;
-  constructor(private apiService: ApiServiceService) { }
+  constructor(private apiService: ApiServiceService, private router: Router) { }
   show_clinical_modal: any;
   selected_clinical_id: any;
   building_1: any = true;
   building_2: any = true;
+  id_to_delete: any = 0;
   
   ngOnInit() {
     this.show_clinical_modal = false;
@@ -61,6 +63,23 @@ export class TableListComponent implements OnInit {
         res =>{
           console.log(res);
           this.clinical_records = res.clinical_records;
+        },err => {
+          alert(err.message);
+        }
+      )
+  }
+  setIdToDelete(id){
+    this.id_to_delete = id;
+  }
+
+  deleteRecord() {
+    this.apiService
+      .deleteClinicalRecord(this.id_to_delete)
+      .subscribe(
+        res =>{
+          console.log(res);
+          alert('Record Deleted!')
+          this.router.navigate(['dashboard']);
         },err => {
           alert(err.message);
         }

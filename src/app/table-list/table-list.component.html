@@ -21,6 +21,9 @@
                                       ID
                                   </th>
                                   <th>
+                                    Name
+                                </th>
+                                  <th>
                                       Admitted Date
                                   </th>
                                   <th>
@@ -32,25 +35,54 @@
                                   <th>
                                       Building No
                                   </th>
+                                  <th class="d-flex justify-content-center">
+                                      Actions
+                                  </th>
                               </thead>
                               <tbody *ngFor="let c of clinical_records; let id = index">
-                                  <tr style="cursor: pointer;" (click)="view(c.id)">
+                                  <tr style="cursor: pointer;">
                                       <td>
-                                          {{c.id}}
+                                          {{c.record.id}}
                                       </td>
                                       <td>
-                                          {{c.admitted_datetime | date}}
+                                        {{c.profile.first_name + ' ' + c.profile.surname}}
+                                    </td>
+                                      <td>
+                                          {{c.record.admitted_datetime | date}}
                                       </td>
                                       <td>
-                                          {{c.admitting_diagnosis}}
+                                          {{c.record.admitting_diagnosis}}
                                       </td>
                                       <td>
-                                          {{c.transferred_from}}
+                                          {{c.record.transferred_from}}
                                       </td>
                                       <td class="text-primary">
-                                          {{c.building_id == 1 ? 'Building 1' : 'Buidling 2'}}
+                                          {{c.record.building_id == 1 ? 'Building 1' : 'Buidling 2'}}
+                                      </td>
+                                      <td class="d-flex justify-content-center">
+                                        <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-success my-0" (click)="view(c.record.id)">View</button>
+                                        <button style="padding: 6px 15px;" type="button" rounded="true" size="sm" class="btn btn-danger my-0" data-toggle="modal" data-target="#exampleModal" (click)="setIdToDelete(c.record.id)">Delete</button>
                                       </td>
                                   </tr>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Delete this clinical record?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="deleteRecord()">Confirm</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                               </tbody>
                           </table>
                       </div>

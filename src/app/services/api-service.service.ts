@@ -20,6 +20,25 @@ export class ApiServiceService {
     }),
   };
 
+
+  // ----------- DELETE REQUEST --------------//
+
+  deleteClinicalRecord(id:any): Observable<any>{
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': '*/*',
+        'Content-Type': 'application/json',
+        'x-rph-token': localStorage.getItem('token')
+      }),
+    };
+    
+    return this.httpClient
+      .delete(this.baseUrl + 'clinical_record/'+id, this.httpOptions)
+      .pipe(map((response: any) => {
+        return response;
+      }));
+  }
+
   // ----------- GET REQUEST --------------//
 
   // getAllDoctors(): Observable<any>{
