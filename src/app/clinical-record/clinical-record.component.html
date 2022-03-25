@@ -19,7 +19,7 @@
         <h5><b>CLINICAL CASE RECORD</b></h5><br>
     </div>
     <div class="card-body">
-        <form [formGroup]="clinicalFormGroup" (ngSubmit)="onSubmit()">
+        <form [formGroup]="clinicalFormGroup">
             <div class="row">
                 <div class="col-md-6">
                     <div class="row">
@@ -232,7 +232,11 @@
             <div class="d-flex justify-content-end">
                 <p>APPROVED BY: <br><br> DR BENEDICT G. ANATALIO<br> Chief of Hospital II</p>
             </div>
-            <button *ngIf="user_role != 1" mat-raised-button type="submit" class="btn btn-danger pull-right">Submit</button>
+            <button 
+                *ngIf="user_role != 1" 
+                mat-raised-button type="button" 
+                class="btn btn-danger pull-right" 
+                (click)="onSubmit()">Submit</button>
             <div class="clearfix"></div>
         </form>
     </div>
