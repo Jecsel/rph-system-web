@@ -33,7 +33,7 @@ export class ApiServiceService {
     };
     
     return this.httpClient
-      .delete(this.baseUrl + 'clinical_record/'+id, this.httpOptions)
+      .post(this.baseUrl + 'clinical_record/'+id+'/destroy_clinic', {'id':id}, this.httpOptions)
       .pipe(map((response: any) => {
         return response;
       }));
@@ -49,7 +49,7 @@ export class ApiServiceService {
     };
     
     return this.httpClient
-      .delete(this.baseUrl + 'outpatient_record/'+id, this.httpOptions)
+      .post(this.baseUrl + 'outpatient_record/'+id+'/destroy_outpatient', {'id':id}, this.httpOptions)
       .pipe(map((response: any) => {
         return response;
       }));
