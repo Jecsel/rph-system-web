@@ -17,7 +17,7 @@ export class ClinicalRecordComponent implements OnInit {
   selected_user_profile_id: any;
   doctors: any = {doctors:[]};
   user_role: any;
-  physician_id: any = 1;
+  physician_id: any = 0;
 
   @Input()
   clinicalResultId: any;
@@ -128,7 +128,12 @@ export class ClinicalRecordComponent implements OnInit {
 
   setData() {
     let attending_physician_id = this.selected_data_record.clinical_record.attending_physician_id;
-    let doctor = this.doctors[attending_physician_id];
+    for(var i = 0; i < this.doctors.length; i++){
+      if(this.doctors[i].id == attending_physician_id){
+        this.physician_id = i;
+      }
+    }
+    let doctor = this.doctors[this.physician_id];
     
     this.clinicalFormGroup.setValue({
       clinical_record_id: this.selected_data_record.clinical_record.id,
@@ -393,11 +398,7 @@ export class ClinicalRecordComponent implements OnInit {
   }
 
   changePhysician(physician) {
-    for(var i = 0; i < this.doctors.length; i++){
-      if(this.doctors[i].id == physician.id){
-        this.physician_id = i;
-      }
-    }
+    this.physician_id = physician.id;
   }
 
   createNewClinical() {
@@ -449,6 +450,8 @@ export class ClinicalRecordComponent implements OnInit {
       {"disposition_id":4, "is_selected":c.d_dismissed, "desc": c.d_dismissed_desc},
       {"disposition_id":5, "is_selected":c.d_transferred, "desc": c.d_transferred_desc}
     ]
+
+    console.log(c);
 
     this.apiService
       .createClinicalRecord({clinical_record: c})
