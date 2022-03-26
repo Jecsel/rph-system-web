@@ -111,7 +111,7 @@
                     </mat-form-field> -->
                     <mat-form-field class="login-full-width" appearance="outline">
                         <mat-label>Attending Physician</mat-label>
-                        <mat-select formControlName="attending_physician_id">
+                        <mat-select formControlName="attending_physician_id" (selectionChange)="changePhysician($event.value)">
                             <mat-option *ngFor="let doc of doctors" [value]="doc">
                               {{doc.first_name + ' ' +  doc.surname}}
                             </mat-option>

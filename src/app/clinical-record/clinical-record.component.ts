@@ -17,6 +17,7 @@ export class ClinicalRecordComponent implements OnInit {
   selected_user_profile_id: any;
   doctors: any = {doctors:[]};
   user_role: any;
+  physician_id: any = 1;
 
   @Input()
   clinicalResultId: any;
@@ -30,7 +31,6 @@ export class ClinicalRecordComponent implements OnInit {
     if(this.clinicalResultId > 0){
       this.getRecord();
     }else{
-      console.log('selected_user_profile_id: ', this.selected_user_profile_id);
       this.getProfile(this.selected_user_profile_id)
     }
   }
@@ -40,7 +40,6 @@ export class ClinicalRecordComponent implements OnInit {
     .getAllDoctors()
     .subscribe(
       res => {
-        console.log(res)
         this.doctors = res.patients;
         this.setData();
       },
@@ -51,12 +50,10 @@ export class ClinicalRecordComponent implements OnInit {
   }
 
   getRecord() {
-    console.log("Selected ID: ", this.clinicalResultId);
     this.apiService
       .getOneClinicalRecords(this.clinicalResultId)
       .subscribe(
         res => {
-          console.log(res)
           this.selected_data_record = res;
           this.setData();
         },
@@ -114,13 +111,10 @@ export class ClinicalRecordComponent implements OnInit {
       {"id": s.dispositions[4].id, "disposition_id":5, "is_selected":this.req.d_transferred, "desc": this.req.d_transferred_desc}
     ]
 
-    console.log('Request Payload: ', this.req);
-
     this.apiService
     .updateClinicalRecord({clinical_record: this.req})
     .subscribe(
       res => {
-        console.log(res)
         this.selected_data_record = res;
         this.setData();
         alert("Successully updated.");
@@ -290,12 +284,10 @@ export class ClinicalRecordComponent implements OnInit {
   }
 
   getProfile(id): void{
-    console.log("user id:", id);
     this.apiService
       .showProfile(id)
       .subscribe(
         res => {
-          console.log("showing profile:", res);
           this.selected_data_record = res;
           this.setProfileData();
         },
@@ -400,9 +392,17 @@ export class ClinicalRecordComponent implements OnInit {
     })
   }
 
+  changePhysician(physician) {
+    for(var i = 0; i < this.doctors.length; i++){
+      if(this.doctors[i].id == physician.id){
+        this.physician_id = i;
+      }
+    }
+  }
+
   createNewClinical() {
     let c = this.clinicalFormGroup.value;
-    c.attending_physician_id = parseInt(c.attending_physician_id);
+    c.attending_physician_id = this.physician_id;
     c.patient_id = this.selected_data_record.user_id;
     c.profile_id = this.selected_user_profile_id;
     c.departments = [
@@ -449,13 +449,11 @@ export class ClinicalRecordComponent implements OnInit {
       {"disposition_id":4, "is_selected":c.d_dismissed, "desc": c.d_dismissed_desc},
       {"disposition_id":5, "is_selected":c.d_transferred, "desc": c.d_transferred_desc}
     ]
-    console.log(c);
 
     this.apiService
       .createClinicalRecord({clinical_record: c})
       .subscribe(
         res => {
-          console.log(res);
           this.selected_data_record = res;
           this.clinicalResultId = this.selected_data_record.clinical_record.id;
           this.getRecord();
