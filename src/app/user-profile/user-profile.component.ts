@@ -138,7 +138,7 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res);
-          if(res.profile.length > 0){
+          if(res.profile && res.profile.length > 0){
             this.user_profile = res.profiles[0];
           }else{
             this.user_profile = res.profile;
@@ -158,7 +158,7 @@ export class UserProfileComponent implements OnInit {
       .subscribe(
         res => {
           console.log("showing profile:", res);
-          if(res.profile.length > 0){
+          if(res.profile && res.profile.length > 0){
             this.user_profile = res.profiles[0];
           }else{
             this.user_profile = res.profile;

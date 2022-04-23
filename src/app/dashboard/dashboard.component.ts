@@ -18,6 +18,8 @@ export class DashboardComponent implements OnInit {
   show_deaths: any = false;
   show_chart_rec: any = false;
   show_chart_death: any = false;
+  show_chart: any = false;
+  chartData: any = { };
   constructor(private apiService: ApiServiceService) { }
 
   //Default Codes
@@ -80,9 +82,49 @@ export class DashboardComponent implements OnInit {
 
   
   ngOnInit() {
+    this.chartData =  {
+      type: 'LineChart',
+      data: [
+        ["Jan",  0, 0],
+        ["Feb",  0, 0],
+        ["Mar",  0, 0],
+        ["Apr",  0, 0],
+        ["May",  0, 0],
+        ["Jun",  0, 0],
+        ["Jul",  0, 0],
+        ["Aug",  0, 0],
+        ["Sep",  0, 0],
+        ["Oct",  0, 0],
+        ["Nov",  0, 0],
+        ["Dec",  0, 0]
+    ],
+    datas: [
+      ["Jan",  [], []],
+      ["Feb",  [], []],
+      ["Mar",  [], []],
+      ["Apr",  [], []],
+      ["May",  [], []],
+      ["Jun",  [], []],
+      ["Jul",  [], []],
+      ["Aug",  [], []],
+      ["Sep",  [], []],
+      ["Oct",  [], []],
+      ["Nov",  [], []],
+      ["Dec",  [], []]
+    ],
+    columnNames: ["Month", "Recovered", "Died"],
+    options: {
+    hAxis: {
+          title: 'Month'
+        },
+        vAxis:{
+          title: 'Number of Patients'
+        },
+    },
+    width: 1000,
+    height: 400
+  }
     this.getDashboardData();
-
-      /* ----------==========     Emails Subscription Chart initialization    ==========---------- */
 
       var datawebsiteViewsChart = {
         labels: ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'],
@@ -121,9 +163,10 @@ export class DashboardComponent implements OnInit {
       .subscribe(
         res =>{
           this.data = res;
+          console.log(this.data);
           this.getRecoveredChartData();
           this.getDiedChartData();
-          console.log(this.data);
+          this.show_chart = true;
         },
         err => {
           alert(err.message);
@@ -142,13 +185,21 @@ export class DashboardComponent implements OnInit {
     for (var key in group_month_rec) {
       if (group_month_rec.hasOwnProperty(key)) {
         let get_month = new Date(group_month_rec[key][0].created_at);
-        const month = monthNames[get_month.getMonth()];
-        const year = get_month.getFullYear().toString().substr(-2);
+        var month = monthNames[get_month.getMonth()];
+        var year = get_month.getFullYear().toString().substr(-2);
+        var date_now = new Date();
+        var year_now = date_now.getFullYear().toString();
 
         rec_month_label.push(month + '/' + year);
         rec_month_series.push(group_month_rec[key].length);
+
+        if(year_now == get_month.getFullYear().toString()){
+          this.chartData.data[ parseInt(month) - 1][2] = group_month_rec[key].length;
+          this.chartData.datas[ parseInt(month) - 1][2] = group_month_rec[key];
+        }
       }
     }
+    console.log("chartData", this.chartData);
     this.createDiedChart(rec_month_label, rec_month_series)
   }
 
@@ -179,7 +230,7 @@ export class DashboardComponent implements OnInit {
 
     let rec_month_label = [];
     let rec_month_series = [];
-
+    console.log(group_month_rec);
     for (var key in group_month_rec) {
       if (group_month_rec.hasOwnProperty(key)) {
         let get_month = new Date(group_month_rec[key][0].created_at);
@@ -188,11 +239,35 @@ export class DashboardComponent implements OnInit {
 
         rec_month_label.push(month + '/' + year);
         rec_month_series.push(group_month_rec[key].length);
+
+        var date_now = new Date();
+        var year_now = date_now.getFullYear().toString();
+
+        if(year_now == get_month.getFullYear().toString()){
+          this.chartData.data[parseInt(month) - 1 ][1] = group_month_rec[key].length;
+          this.chartData.datas[parseInt(month) - 1 ][1] = group_month_rec[key];
+        }
       }
     }
     this.createRecoveredChart(rec_month_label, rec_month_series)
-    console.log(rec_month_label);
-    console.log(rec_month_series);
+    console.log("chartData", this.chartData);
+  }
+
+  onSelectChartData(event){
+    console.log(event);
+    console.log(this.chartData);
+
+    var slctd_rep = event.selection[0];
+    if(slctd_rep.column == 1){
+      this.data.recovered.list = this.chartData.datas[slctd_rep.row][1]
+      this.showRecoveredList();
+    }
+    
+    if(slctd_rep.column == 2){
+      this.data.died.list = this.chartData.datas[slctd_rep.row][2]
+      this.showDiedList();
+    }
+
   }
 
   createRecoveredChart(l, s){

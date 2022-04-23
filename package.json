@@ -30,6 +30,7 @@
     "@angular/platform-server": "12.1.2",
     "@angular/router": "12.1.2",
     "ajv": "8.6.1",
+    "angular-google-charts": "^2.2.2",
     "arrive": "2.4.1",
     "bootstrap": "4.5.2",
     "bootstrap-material-design": "4.1.3",

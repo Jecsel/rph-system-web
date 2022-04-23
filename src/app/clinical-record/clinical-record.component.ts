@@ -127,7 +127,7 @@ export class ClinicalRecordComponent implements OnInit {
    }
 
   setData() {
-    let attending_physician_id = this.selected_data_record.clinical_record.attending_physician_id;
+    let attending_physician_id = this.selected_data_record && this.selected_data_record.clinical_record ? this.selected_data_record.clinical_record.attending_physician_id : [];
     for(var i = 0; i < this.doctors.length; i++){
       if(this.doctors[i].id == attending_physician_id){
         this.physician_id = i;
