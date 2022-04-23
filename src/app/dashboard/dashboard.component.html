@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats" (click)="showRecoveredList()">
+                <div class="card card-stats" (click)="showRecovered()">
                     <div class="card-header card-header-success card-header-icon">
                         <div class="card-icon">
                             <i class="material-icons">mood</i>
@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats" (click)="showDiedList()">
+                <div class="card card-stats" (click)="showDied()">
                     <div class="card-header card-header-danger card-header-icon">
                         <div class="card-icon">
                             <i class="material-icons">mood_bad</i>
@@ -121,7 +121,7 @@
                                 <th>Hospital No</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let patient of data.recovered.list; let id = index">
+                                <tr *ngFor="let patient of data.recovered_list; let id = index">
                                     <td>{{patient.profile.first_name}}</td>
                                     <td>{{patient.profile.last_name}}</td>
                                     <td>{{patient.records.admitted_datetime | date}}</td>
@@ -157,7 +157,7 @@
                                 <th>Hospital No</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let patient of data.died.list; let id = index">
+                                <tr *ngFor="let patient of data.died_list; let id = index">
                                     <td>{{patient.profile.first_name}}</td>
                                     <td>{{patient.profile.last_name}}</td>
                                     <td>{{patient.records.admitted_datetime | date}}</td>

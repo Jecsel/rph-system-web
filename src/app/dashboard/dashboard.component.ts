@@ -167,6 +167,8 @@ export class DashboardComponent implements OnInit {
           this.getRecoveredChartData();
           this.getDiedChartData();
           this.show_chart = true;
+          this.data.recovered_list = this.data.recovered.list;
+          this.data.died_list = this.data.died.list;
         },
         err => {
           alert(err.message);
@@ -192,6 +194,7 @@ export class DashboardComponent implements OnInit {
 
         rec_month_label.push(month + '/' + year);
         rec_month_series.push(group_month_rec[key].length);
+        console.log(group_month_rec[key]);
 
         if(year_now == get_month.getFullYear().toString()){
           this.chartData.data[ parseInt(month) - 1][2] = group_month_rec[key].length;
@@ -255,16 +258,17 @@ export class DashboardComponent implements OnInit {
 
   onSelectChartData(event){
     console.log(event);
-    console.log(this.chartData);
 
     var slctd_rep = event.selection[0];
     if(slctd_rep.column == 1){
-      this.data.recovered.list = this.chartData.datas[slctd_rep.row][1]
+      this.data.recovered_list = this.chartData.datas[slctd_rep.row][1]
+      console.log(this.data.recovered_list);
       this.showRecoveredList();
     }
     
     if(slctd_rep.column == 2){
-      this.data.died.list = this.chartData.datas[slctd_rep.row][2]
+
+      this.data.died_list = this.chartData.datas[slctd_rep.row][2]
       this.showDiedList();
     }
 
@@ -324,6 +328,16 @@ export class DashboardComponent implements OnInit {
     this.show_nurses = false;
     this.show_recovereds = false;
     this.show_deaths = false;
+  }
+
+  showRecovered() {
+    this.data.recovered_list = this.data.recovered.list;
+    this.showRecoveredList();
+  }
+
+  showDied() {
+    this.data.died_list = this.data.died.list;
+    this.showDiedList();
   }
 
   showRecoveredList() {
