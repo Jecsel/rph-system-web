@@ -20,6 +20,8 @@ export class DashboardComponent implements OnInit {
   show_chart_death: any = false;
   show_chart: any = false;
   chartData: any = { };
+  options: any = { };
+  chart_data: any = [];
   constructor(private apiService: ApiServiceService) { }
 
   //Default Codes
@@ -123,7 +125,30 @@ export class DashboardComponent implements OnInit {
     },
     width: 1000,
     height: 400
-  }
+    }
+
+    this.options = {
+      fieldSeparator: ',',
+      quoteStrings: '"',
+      decimalseparator: '.',
+      showLabels: true,
+      headers: ['First Name', 'Middle Name', 'Last Name', 'Birth of Date', 'Age', 'Birth Place',
+        'Gender', 'Civil Status', 'Occupation', 'Religion', 'Nationality',
+        'Phone Number', 'Employed By', 'Person To Notify', 'Address', 'Phone Number', 'Relationship', 'Patient Address',
+        'Prepared By', 'Fiscal Year', 'Hospital No', 'Admitted DateTime',
+        'Transferred From', 'Admitting Diagnosis', 'Final Diagnosis', 'Management Operations'],
+      showTitle: true,
+      title: 'RPH Exported File',
+      useBom: false,
+      removeNewLines: true,
+      keys: ['first_name','middle_name','surname', 'dob', 'age', 'birth_place',
+       'gender_id', 'civil_status_id', 'occupation', 'religion', 'nationality',
+       'cp_no', 'employed_by', 'person_to_notify', 'person_to_notify_address',
+        'person_to_notify_no', 'person_to_notify_cp_relationship', 'address', 
+        'prepared_by_id', 'fiscal_year', 'hospital_no', 'admitted_datetime',
+        'transferred_from', 'admitting_diagnosis', 'final_diagnosis', 'management_operations']
+    };
+
     this.getDashboardData();
 
       var datawebsiteViewsChart = {
@@ -174,6 +199,17 @@ export class DashboardComponent implements OnInit {
           alert(err.message);
         }
       )
+  }
+
+  formatExportData(c_data){
+    let profile_datas = [];
+
+    c_data.forEach(el => {
+      var p_data = { ...el.profile, ...el.records };
+      profile_datas.push(p_data);
+    });
+    console.log(profile_datas);
+    this.chart_data = profile_datas;
   }
 
   getDiedChartData(){
@@ -257,19 +293,20 @@ export class DashboardComponent implements OnInit {
   }
 
   onSelectChartData(event){
-    console.log(event);
 
     var slctd_rep = event.selection[0];
     if(slctd_rep.column == 1){
       this.data.recovered_list = this.chartData.datas[slctd_rep.row][1]
-      console.log(this.data.recovered_list);
       this.showRecoveredList();
+      this.formatExportData(this.data.recovered_list);
+
+      console.log(this.data.recovered_list);
     }
     
     if(slctd_rep.column == 2){
-
       this.data.died_list = this.chartData.datas[slctd_rep.row][2]
       this.showDiedList();
+      this.formatExportData(this.data.recovered_list);
     }
 
   }
@@ -333,11 +370,13 @@ export class DashboardComponent implements OnInit {
   showRecovered() {
     this.data.recovered_list = this.data.recovered.list;
     this.showRecoveredList();
+    this.formatExportData(this.data.recovered.list);
   }
 
   showDied() {
     this.data.died_list = this.data.died.list;
     this.showDiedList();
+    this.formatExportData(this.data.died.list);
   }
 
   showRecoveredList() {

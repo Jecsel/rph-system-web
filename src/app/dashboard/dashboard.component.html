@@ -106,7 +106,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-success">
-                        <h4 class="card-title">Recovered Patients</h4>
+                        <div class="d-flex justify-content-between">
+                            <h4 class="card-title"><b>Recovered Patients</b></h4>
+                            <angular2csv [data]="chart_data" filename="export_file" [options]="options"></angular2csv>
+                        </div>
                     </div>
                     <div class="card-body table-responsive">
                         <table class="table table-hover">
@@ -123,7 +126,7 @@
                             <tbody>
                                 <tr *ngFor="let patient of data.recovered_list; let id = index">
                                     <td>{{patient.profile.first_name}}</td>
-                                    <td>{{patient.profile.last_name}}</td>
+                                    <td>{{patient.profile.surname}}</td>
                                     <td>{{patient.records.admitted_datetime | date}}</td>
                                     <td>{{patient.records.admitting_diagnosis}}</td>
                                     <td>{{patient.records.final_diagnosis}}</td>
@@ -142,7 +145,10 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header card-header-danger">
-                        <h4 class="card-title">Died Patients</h4>
+                        <div class="d-flex justify-content-between">
+                            <h4 class="card-title"><b>Died Patients</b></h4>
+                            <angular2csv [data]="chart_data" filename="export_file" [options]="options"></angular2csv>
+                        </div>
                     </div>
                     <div class="card-body table-responsive">
                         <table class="table table-hover">
@@ -159,7 +165,7 @@
                             <tbody>
                                 <tr *ngFor="let patient of data.died_list; let id = index">
                                     <td>{{patient.profile.first_name}}</td>
-                                    <td>{{patient.profile.last_name}}</td>
+                                    <td>{{patient.profile.surname}}</td>
                                     <td>{{patient.records.admitted_datetime | date}}</td>
                                     <td>{{patient.records.admitting_diagnosis}}</td>
                                     <td>{{patient.records.final_diagnosis}}</td>
@@ -175,15 +181,17 @@
         </div>
 
         <div *ngIf="show_chart">
-            <google-chart 
-                [type]="chartData.type" 
-                [data]="chartData.data" 
-                [columns]="chartData.columnNames" 
-                [options]="chartData.options" 
-                [width]="chartData.width"
-                [height]="chartData.height"
-                (select)="onSelectChartData($event)">
-            </google-chart>
+            <div class="google_chart">
+                <google-chart 
+                    [type]="chartData.type" 
+                    [data]="chartData.data" 
+                    [columns]="chartData.columnNames" 
+                    [options]="chartData.options" 
+                    [width]="chartData.width"
+                    [height]="chartData.height"
+                    (select)="onSelectChartData($event)">
+                </google-chart>
+            </div>
         </div>
 
         <!-- Showing The Patient List -->

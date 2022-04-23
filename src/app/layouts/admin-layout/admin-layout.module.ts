@@ -35,6 +35,7 @@ import { DoctorListComponent } from 'app/doctor-list/doctor-list.component';
 import { AdminListComponent } from 'app/admin-list/admin-list.component';
 import { AboutUsComponent } from 'app/about-us/about-us.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { Angular2CsvModule } from 'angular2-csv';
 
 @NgModule({
   imports: [
@@ -57,7 +58,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     NgxPrintModule,
     MatCardModule,
     MatSelectSearchModule,
-    GoogleChartsModule
+    GoogleChartsModule,
+    Angular2CsvModule
   ],
   declarations: [
     DashboardComponent,
