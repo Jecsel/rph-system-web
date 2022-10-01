@@ -114,13 +114,13 @@ export class DashboardComponent implements OnInit {
       ["Nov",  [], []],
       ["Dec",  [], []]
     ],
-    columnNames: ["Month", "Recovered", "Died"],
+    columnNames: ["Month", "Active", "InActive"],
     options: {
     hAxis: {
           title: 'Month'
         },
         vAxis:{
-          title: 'Number of Patients'
+          title: 'Number of Reports'
         },
     },
     width: 1000,
